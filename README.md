@@ -18,31 +18,45 @@ Add/Remove Items:
     
     Sean Kim - 30149196
     
+    Bheesha ????
     
-Johnathan Richardson - 30045434
+Pay & Print Receipt:
 
-Adrian Ponce - 30073569
+    Saher Raouf - 30115442
+    
+    Arun Sharma - 30124252
+    
+    Deepinder
+    
+Login/Logout:
+    
+    Johnathan Richardson - 30045434
 
-Arun Sharma - 30124252
+    Gillian Sharp - 30142574
 
-Gillian Sharp - 30142574
+Membership:
+    
+    Quinn Leonard - 30145315
+    
+    Daniel Park - 30144081
 
-Zhangqi Wang - 30163220
+Bagging:
 
-Quinn Leonard - 30145315
+    Adrian Ponce - 30073569
 
+    Zhangqi Wang - 30163220
+
+Attendant/Customer GUI:
+    
+    Abhiroop Kaur - 30153829
+    
+    Heba
 
 
 David Escarcia - 30131519
 
 Nusyba Shifa - 30162709
 
-Saher Raouf - 30115442
-
-Abhiroop Kaur - 30153829
-
 Rian Tapang - 30123901
-
-Daniel Park - 30144081
 
 Brendan Baker - 10066529
