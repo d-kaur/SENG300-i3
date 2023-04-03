@@ -10,7 +10,7 @@ UML/UI :
 
 Code Reviews:
 
-    Victor Han
+    Victor Han - 30112492
     
 Add/Remove Items:
     
@@ -26,7 +26,7 @@ Pay & Print Receipt:
     
     Arun Sharma - 30124252
     
-    Deepinder
+    Deepinder Kaur - 30184454
     
 Login/Logout:
     
@@ -50,7 +50,7 @@ Attendant/Customer GUI:
     
     Abhiroop Kaur - 30153829
     
-    Heba
+    Heba Barahim - 30073523
 
 
 David Escarcia - 30131519
