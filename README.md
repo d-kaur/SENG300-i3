@@ -1,18 +1,29 @@
 # SENG-i3
 
-Victor Han - 30112492
+UML/UI :
 
-Heba Barahim - 30073523
+    Victor Han - 30112492
 
+    Heba Barahim - 30073523
+    
+    Deepinder Kaur - 30184454
+
+Code Reviews:
+
+    Victor Han
+    
+Add/Remove Items:
+    
+    Wasay Siddiqi - 30063008
+    
+    Sean Kim - 30149196
+    
+    
 Johnathan Richardson - 30045434
-
-Wasay Siddiqi - 30063008
 
 Adrian Ponce - 30073569
 
 Arun Sharma - 30124252
-
-Deepinder Kaur - 30184454
 
 Gillian Sharp - 30142574
 
@@ -20,7 +31,7 @@ Zhangqi Wang - 30163220
 
 Quinn Leonard - 30145315
 
-Sean Kim - 30149196
+
 
 David Escarcia - 30131519
 
