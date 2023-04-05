@@ -46,6 +46,12 @@ Bagging:
 
     Zhangqi Wang - 30163220
 
+Weight Discrepancy & dont place item in bagging area: 
+
+    David Escarcia - 30131519
+    
+    Giovanni Rapisarda - 30141339
+
 Attendant/Customer GUI:
     
     Abhiroop Kaur - 30153829
@@ -53,7 +59,6 @@ Attendant/Customer GUI:
     Heba Barahim - 30073523
 
 
-David Escarcia - 30131519
 
 Nusyba Shifa - 30162709
 
