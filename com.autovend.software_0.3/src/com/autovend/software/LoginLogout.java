@@ -55,4 +55,30 @@ public class LoginLogout {
 			}
 		}
 	}
+	
+	public class AttendantIO {
+   		private boolean loggedIn;
+
+   		// Constructor to set initial state
+   		public AttendantIO() {
+      	loggedIn = true;
+   }
+
+   	// Method to handle logout functionality
+   	public void logout() {
+      		if (loggedIn) {
+        	  // Perform cleanup actions here
+         	  // ...
+
+         	  // Set the loggedIn flag to false to indicate logout
+        	  loggedIn = false;
+
+        	  System.out.println("Successfully logged out.");
+      }
+      	 else {
+         	  System.out.println("You are not currently logged in.");
+      		}
+      	 }
+   }
+
 }
