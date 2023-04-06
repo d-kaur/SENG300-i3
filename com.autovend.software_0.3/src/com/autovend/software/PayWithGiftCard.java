@@ -83,7 +83,7 @@ difference from credit and debit payment:
 
     @Override
     public void reactToCardDataReadEvent(CardReader reader, Card.CardData data) {
-        int holdNumber = giftCard.aut
+        int holdNumber = giftCard;
     }
 
 }
