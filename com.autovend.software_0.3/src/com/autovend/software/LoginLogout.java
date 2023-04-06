@@ -1,5 +1,5 @@
 /**Johnathan Richardson
- * 
+ * Gillian Sharp 30142574
  */
 package com.autovend.software;
 
