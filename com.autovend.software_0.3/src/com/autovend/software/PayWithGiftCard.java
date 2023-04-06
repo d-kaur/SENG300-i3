@@ -1,7 +1,18 @@
 package com.autovend.software;
 
-public class PayWithGiftCard {
-/*
+import com.autovend.Card;
+import com.autovend.GiftCard;
+import com.autovend.devices.AbstractDevice;
+import com.autovend.devices.CardReader;
+import com.autovend.devices.SelfCheckoutStation;
+import com.autovend.devices.SimulationException;
+import com.autovend.devices.observers.AbstractDeviceObserver;
+import com.autovend.devices.observers.CardReaderObserver;
+
+import java.math.BigDecimal;
+
+public class PayWithGiftCard extends Pay implements CardReaderObserver{
+    /*
 1. Customer I/O: Signals to System that a gift card payment is to be made, and the amount of this.
 2. System:EnablesCardReader.
 3. CardReader:Receivesthecard.
@@ -23,5 +34,56 @@ difference from credit and debit payment:
       - no pin and no verification of pin
 
  */
+    private BigDecimal amountToPay;
+    private GiftCard giftCard;
+    public PayWithGiftCard(SelfCheckoutStation station, GiftCard giftCard) {
+
+        super(station);
+        BigDecimal amountToPay = PurchasedItems.getAmountLeftToPay();
+
+        if(giftCard == null){
+            throw new SimulationException(new NullPointerException("No arguments may be null."));
+        }
+
+        if (amountToPay.compareTo(super.getAmountDue().subtract(PurchasedItems.getAmountPaid())) > 0) {
+            this.amountToPay = super.getAmountDue().subtract(PurchasedItems.getAmountPaid());
+        } else this.amountToPay = amountToPay;
+        this.giftCard = giftCard;
+    }
+
+    @Override
+    public void reactToEnabledEvent(AbstractDevice<? extends AbstractDeviceObserver> device) {
+
+    }
+
+    @Override
+    public void reactToDisabledEvent(AbstractDevice<? extends AbstractDeviceObserver> device) {
+
+    }
+
+    @Override
+    public void reactToCardInsertedEvent(CardReader reader) {
+
+    }
+
+    @Override
+    public void reactToCardRemovedEvent(CardReader reader) {
+
+    }
+
+    @Override
+    public void reactToCardTappedEvent(CardReader reader) {
+
+    }
+
+    @Override
+    public void reactToCardSwipedEvent(CardReader reader) {
+
+    }
+
+    @Override
+    public void reactToCardDataReadEvent(CardReader reader, Card.CardData data) {
+        int holdNumber = giftCard.aut
+    }
 
 }
