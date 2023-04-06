@@ -8,6 +8,7 @@ import com.autovend.devices.SelfCheckoutStation;
 import com.autovend.devices.SimulationException;
 import com.autovend.devices.observers.AbstractDeviceObserver;
 import com.autovend.devices.observers.CardReaderObserver;
+import com.autovend.external.CardIssuer;
 
 import java.math.BigDecimal;
 
@@ -31,11 +32,12 @@ reduced.
 13.Continue with super use case.
 
 difference from credit and debit payment:
-      - no pin and no verification of pin
+      - only insert
 
  */
     private BigDecimal amountToPay;
     private GiftCard giftCard;
+    private CardIssuer cardIssuer;
     public PayWithGiftCard(SelfCheckoutStation station, GiftCard giftCard) {
 
         super(station);
@@ -83,7 +85,10 @@ difference from credit and debit payment:
 
     @Override
     public void reactToCardDataReadEvent(CardReader reader, Card.CardData data) {
-        int holdNumber = giftCard;
+        int holdNumber = cardIssuer.authorizeHold(data.getNumber(), PurchasedItems.getAmountLeftToPay()); 						  	// Contact card issuer and attempt to place a hold
+        if (holdNumber == -1) return; 																		// Return if hold is unable to be placed
+        boolean transactionPosted = cardIssuer.postTransaction(data.getNumber(), holdNumber, PurchasedItems.getAmountLeftToPay()); 	// Contact card issuer to attempt to post transaction
+        if (transactionPosted) super.pay(PurchasedItems.getAmountLeftToPay());
     }
 
 }
