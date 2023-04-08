@@ -1,9 +1,10 @@
-/**Johnathan Richardson
+/**Johnathan Richardson 30045434
  * Gillian Sharp 30142574
  */
 package com.autovend.software;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class LoginLogout {
 
@@ -21,8 +22,8 @@ public class LoginLogout {
 	 */
 	public boolean verifyLogin(String username, String password){
 		if (accountDatabase.containsKey(username)) {
-			String userpassword = accountDatabase.get(password);
-			if (userpassword == password) {
+			String userpassword = accountDatabase.get(username);
+			if (Objects.equals(password, userpassword)) {
 				return true;
 			}
 		}
@@ -50,7 +51,7 @@ public class LoginLogout {
 	public void removeAccount(String username, String password) {
 		if (accountDatabase.containsKey(username)) {
 			String userpassword = accountDatabase.get(password);
-			if (userpassword == password) {
+			if (Objects.equals(password, userpassword)) {
 				accountDatabase.remove(password, userpassword);
 			}
 		}

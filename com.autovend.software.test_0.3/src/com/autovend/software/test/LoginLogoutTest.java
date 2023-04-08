@@ -1,5 +1,7 @@
-//Gillian Sharp 30142574
-//Johnathan 
+/**Johnathan Richardson 30045434
+ * Gillian Sharp 30142574
+ */
+
 
 package com.autovend.software.test;
 

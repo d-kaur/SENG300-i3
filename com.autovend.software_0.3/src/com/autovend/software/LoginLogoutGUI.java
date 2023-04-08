@@ -1,4 +1,10 @@
+/**Johnathan Richardson 30045434
+ * Gillian Sharp 30142574
+ */
+
 package com.autovend.software;
+
+import com.autovend.software.*;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -12,11 +18,13 @@ import javax.swing.*;
 	    private JButton loginButton;
 	    private JButton errorButton;
 	    
-	    private LoginLogoutGUI loginLogout;
+	    private LoginLogout loginLogout;
 
 	    public LoginLogoutGUI() {
 	        super("Login");
-	        this.loginLogout = loginLogout;
+	        loginLogout = new LoginLogout();
+	        
+	        loginLogout.createAccount("username", "password");
 
 	        // create components
 	        JLabel usernameLabel = new JLabel("Username:");
@@ -54,33 +62,21 @@ import javax.swing.*;
 
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
+	    	
 	        String username = usernameField.getText();
 	        String password = new String(passwordField.getPassword());
 
-	        if (( loginLogout).verifyLogin(username, password)) {
+	        if (loginLogout.verifyLogin(username, password) == true) {
 	            JOptionPane.showMessageDialog(this, "Login successful.");
 	            dispose(); // close the login window
-	        } else {
+	        } 
+	        else {
 	            JOptionPane.showMessageDialog(this, "Invalid username or password.");
 	        }
-	    
-	        if (e.getSource() == errorButton) verifyLogin(username, password) {
-			// TODO Auto-generated method stub
-			return;
-	        }
+	        
 	    }
-		
-	    private boolean verifyLogin(String username, String password) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-		{
-	            // hide the error button
-	            errorButton.setVisible(false);
-	        }
 	    
 	    public static void main(String[] args) {
-	        LoginLogoutGUI loginLogout = new LoginLogoutGUI();
 	        LoginLogoutGUI loginGUI = new LoginLogoutGUI();
 	    }
 	}
