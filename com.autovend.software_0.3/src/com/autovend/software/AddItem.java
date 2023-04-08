@@ -14,6 +14,7 @@
  */
 package com.autovend.software;
 
+import com.autovend.ReusableBag;
 import com.autovend.devices.SelfCheckoutStation;
 import com.autovend.products.BarcodedProduct;
 import com.autovend.software.observers.AddItemObserver;
@@ -27,7 +28,7 @@ public abstract class AddItem {
 		this.check = scs;
 	}
 
-	protected void addBag(Bag bag) {
+	protected void addBag(ReusableBag bag) {
 		PurchasedItems.addBag(bag);
 	}
 

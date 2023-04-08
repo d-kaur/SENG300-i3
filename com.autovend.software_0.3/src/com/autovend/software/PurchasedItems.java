@@ -14,6 +14,7 @@
  */
 package com.autovend.software;
 
+import com.autovend.ReusableBag;
 import com.autovend.products.BarcodedProduct;
 import com.autovend.products.Product;
 
@@ -24,12 +25,13 @@ import java.util.ArrayList;
 public class PurchasedItems{
 
     private static ArrayList<BarcodedProduct> listOfProducts;
-    private static ArrayList<Product> listOfBags;
+    private static ArrayList<ReusableBag> listOfBags;
     private static BigDecimal totalPrice;
     private static double totalExpectedWeight;
     private static BigDecimal change;
     private static BigDecimal amountPaid;
     private static boolean isPaid;
+    private static BigDecimal idealBagPriceInUSD = BigDecimal.valueOf(0.1);
 
     static {
         listOfProducts = new ArrayList<>();
@@ -50,9 +52,9 @@ public class PurchasedItems{
         }
     }
 
-    public static void addBag(Bag bag){
+    public static void addBag(ReusableBag bag){
         listOfBags.add(bag);
-        totalPrice = totalPrice.add(bag.getPrice());
+        totalPrice = totalPrice.add(idealBagPriceInUSD);
         totalExpectedWeight += bag.getWeight();
         if (totalPrice.compareTo(amountPaid) >= 0) {
             isPaid = false;
@@ -63,7 +65,7 @@ public class PurchasedItems{
         return listOfProducts;
     }
 
-    public static ArrayList<Product> getListOfBags(){
+    public static ArrayList<ReusableBag> getListOfBags(){
         return listOfBags;
     }
 
