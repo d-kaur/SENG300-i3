@@ -1,9 +1,10 @@
 package com.autovend.software;
 
+import com.autovend.software.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.jar.JarEntry;
+
 public class AttendantMainGUI extends JFrame implements ActionListener {
 
     //Setting up button for each self check out station
@@ -29,13 +30,21 @@ public class AttendantMainGUI extends JFrame implements ActionListener {
 
     private JButton addInkPaperButton;
 
+    public JLabel alert;
+
     public AttendantMainGUI() {
         JFrame frame = new JFrame("Attendant Self Checkout Station");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //Setting up Self Checkout Panel Layout
         JPanel StationPanel = new JPanel();
-        setMinimumSize(new Dimension(950,800));
+        JPanel StartPermitPanel = new JPanel();
+        JPanel StopPreventPanel = new JPanel();
+        JPanel MiddleButtonsPanel = new JPanel();
+        JPanel mainPanel = new JPanel();
+        JPanel alertPanel = new JPanel();
+        
+        setMinimumSize(new Dimension(600,400));
         
 
         //Setting up contents of Panel
@@ -64,29 +73,89 @@ public class AttendantMainGUI extends JFrame implements ActionListener {
         premitButton = new JButton("Permit");
         premitButton.addActionListener(this);
 
+        stopButton = new JButton("Stop");
+        stopButton.addActionListener(this);
+
+        preventButton = new JButton("Prevent");
+        preventButton.addActionListener(this);
+
+        removeItemButton = new JButton("Remove Item");
+        removeItemButton.addActionListener(this);
+
+        addItemBySearchButton = new JButton("Add Item By Search");
+        addItemBySearchButton.addActionListener(this);
+
+        adjustCoinsBillsButton = new JButton("Adjust Coins/Bills");
+        adjustCoinsBillsButton.addActionListener(this);
+
+        allowPersonalBagButton = new JButton("Allow Personal Bag");
+        allowPersonalBagButton.addActionListener(this);
+
+        approveExceptionButton = new JButton("Approve");
+        approveExceptionButton.addActionListener(this);
+
+        addInkPaperButton = new JButton("Add Ink/Paper");
+        addInkPaperButton.addActionListener(this);
+
+        //Adding contents to Panel 
+
+        //Self Checkout Buttons
         StationPanel.add(station1Button);
         StationPanel.add(station2Button);
         StationPanel.add(station3Button);
         StationPanel.add(station4Button);
         StationPanel.add(station5Button);
-        StationPanel.add(startButton);
-        StationPanel.add(premitButton);
-        
-        frame.add(StationPanel, BorderLayout.NORTH);
-        //frame.add(startButton, BorderLayout.WEST);
-        
-        
-        // private JButton startButton;
-        // private JButton stopButton;
-        // private JButton premitButton;
-        // private JButton preventButton;
-        // private JButton removeItemButton;
-        // private JButton addItemBySearchButton;
 
+        //Left side buttons
+        StartPermitPanel.setLayout(new BoxLayout(StartPermitPanel, BoxLayout.Y_AXIS));
+        StartPermitPanel.add(startButton);
+        StartPermitPanel.add(premitButton);
+
+        //Right side buttons
+        StopPreventPanel.setLayout(new BoxLayout(StopPreventPanel, BoxLayout.Y_AXIS));
+        StopPreventPanel.add(stopButton);
+        StopPreventPanel.add(preventButton);
+        
+        //Middle Buttons
+        MiddleButtonsPanel.setLayout(new BoxLayout(MiddleButtonsPanel, BoxLayout.Y_AXIS));
+        MiddleButtonsPanel.add(Box.createVerticalGlue());
+        removeItemButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        MiddleButtonsPanel.add(removeItemButton);
+        addItemBySearchButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        MiddleButtonsPanel.add(addItemBySearchButton);
+        adjustCoinsBillsButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        MiddleButtonsPanel.add(adjustCoinsBillsButton);
+        allowPersonalBagButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        MiddleButtonsPanel.add(allowPersonalBagButton);
+        approveExceptionButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        MiddleButtonsPanel.add(approveExceptionButton);
+        addInkPaperButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        MiddleButtonsPanel.add(addInkPaperButton);
+        MiddleButtonsPanel.add(Box.createVerticalGlue());
+
+        //Alter notifire lable 
+        //alertPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 3)); // set the height to 50 pixels
+
+        // Create the alert label
+        String message = "weight";
+        JLabel alert = new JLabel("Alert: " + message);
+        
+        // Add the alert label to the alertPanel
+        alertPanel.add(alert);
+        
+        //Orienting contents layout
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(StationPanel, BorderLayout.NORTH);
+        mainPanel.add(StartPermitPanel, BorderLayout.WEST);
+        mainPanel.add(StopPreventPanel, BorderLayout.EAST);
+        mainPanel.add(MiddleButtonsPanel, BorderLayout.CENTER);
+        mainPanel.add(alertPanel, BorderLayout.SOUTH);
+        
+        frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        setContentPane(StationPanel);
+        setContentPane(mainPanel);
         pack();
     }
 
