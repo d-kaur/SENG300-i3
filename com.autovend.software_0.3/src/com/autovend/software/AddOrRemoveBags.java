@@ -14,15 +14,14 @@
  */
 package com.autovend.software;
 
-import java.math.*;
-import java.util.ArrayList;
-
 import com.autovend.devices.*;
+import com.autovend.devices.observers.AbstractDeviceObserver;
+import com.autovend.devices.observers.ReusableBagDispenserObserver;
 
 import static com.autovend.software.PurchasedItems.addBag;
 
 // extend the Parent class
-public class AddOrRemoveBags{
+public class AddOrRemoveBags implements ReusableBagDispenserObserver {
 
     private ReusableBagDispenser dispenser;
     private SelfCheckoutStation station;
@@ -40,5 +39,28 @@ public class AddOrRemoveBags{
 
     public void addOwnBag(double bagWeight) {
 
+    }
+    @Override
+    public void bagDispensed(ReusableBagDispenser dispenser) {
+    }
+
+    @Override
+    public void outOfBags(ReusableBagDispenser dispenser) {
+        System.out.println("Sorry, the bags at the current site are sold out");
+    }
+
+    @Override
+    public void bagsLoaded(ReusableBagDispenser dispenser, int count) {
+
+    }
+
+    @Override
+    public void reactToEnabledEvent(AbstractDevice<? extends AbstractDeviceObserver> device) {
+        this.dispenser.enable();
+    }
+
+    @Override
+    public void reactToDisabledEvent(AbstractDevice<? extends AbstractDeviceObserver> device) {
+        this.dispenser.disable();
     }
 }

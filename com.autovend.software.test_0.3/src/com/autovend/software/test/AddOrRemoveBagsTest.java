@@ -64,8 +64,8 @@ public class AddOrRemoveBagsTest {
     //tests if a bag is added correctly
     @Test
     public void PurchaseFewBag() throws EmptyException {
-        addBags.purchaseBag(3);
-        assertEquals(3, PurchasedItems.getListOfBags().size());
+        addBags.purchaseBag(5);
+        assertEquals(5, PurchasedItems.getListOfBags().size());
     }
 
     @Test
