@@ -18,31 +18,33 @@ package com.autovend.software.test;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
+import java.util.Currency;
 
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.autovend.devices.SelfCheckoutStation;
 import com.autovend.software.Membership;
 import com.autovend.software.PurchasedItems;
 
 public class MembershipTests {
 
-	
-	Membership mem = new Membership();
+	Currency currency = Currency.getInstance("CAD");
+	int[] billDenominations = {1};
+	BigDecimal[] coinDenominations = {BigDecimal.valueOf(1)};
+	SelfCheckoutStation selfCheckoutStation = new SelfCheckoutStation(currency, billDenominations, coinDenominations, 1, 1);
 	
 	
 @Before
 public void setup() {
 	
-	Membership mem = new Membership();
-	
 }
 
 @After
 public void teardown() {
-	mem = null;
+
 }
 
 /*
@@ -51,7 +53,7 @@ public void teardown() {
 @Test
 public void testMembershipisValid() throws Exception {
 	String numberETen = "1234567890";
-	mem.isValid(numberETen);		
+	Membership.isValid(numberETen);		
 	
 }
 /*
@@ -60,7 +62,7 @@ public void testMembershipisValid() throws Exception {
 @Test (expected = Exception.class)
 public void testMembershipinValidLessthan10() throws Exception {
 	String numberLTTen = "123456789";
-	mem.isValid(numberLTTen);		
+	Membership.isValid(numberLTTen);		
 	
 }
 /*
@@ -69,7 +71,7 @@ public void testMembershipinValidLessthan10() throws Exception {
 @Test (expected = Exception.class)
 public void testMembershipinValidGreaterthan10() throws Exception {
 	String numberGTTen = "12345678900";
-	mem.isValid(numberGTTen);		
+	Membership.isValid(numberGTTen);		
 	
 }
 /*
@@ -78,7 +80,7 @@ public void testMembershipinValidGreaterthan10() throws Exception {
 @Test (expected = Exception.class)
 public void testMembershipinValidOnlydigitAbove9() throws Exception {
 	String numberGTTen = "-123456789";
-	mem.isValid(numberGTTen);		
+	Membership.isValid(numberGTTen);		
 	
 }
 /*
@@ -87,7 +89,7 @@ public void testMembershipinValidOnlydigitAbove9() throws Exception {
 @Test (expected = Exception.class)
 public void testMembershipinValidOnlydigitBelow0() throws Exception {
 	String numberGTTen = "0123456 19";
-	mem.isValid(numberGTTen);		
+	Membership.isValid(numberGTTen);		
 	
 }
 
