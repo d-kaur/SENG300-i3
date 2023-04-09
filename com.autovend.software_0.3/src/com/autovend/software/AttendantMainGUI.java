@@ -1,6 +1,3 @@
-package com.autovend.software;
-
-import com.autovend.software.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -29,10 +26,12 @@ public class AttendantMainGUI extends JFrame implements ActionListener {
     private JButton approveExceptionButton;
 
     private JButton addInkPaperButton;
-
     public JLabel alert;
-
-    public AttendantMainGUI() {
+    private boolean[] open = {false,false,false,false,false};
+    private boolean[] permitted = {false,false,false,false,false};
+    private AttendantIO parent;
+    public AttendantMainGUI(AttendantIO parent) {
+        this.parent = parent;
         JFrame frame = new JFrame("Attendant Self Checkout Station");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
@@ -166,9 +165,8 @@ public class AttendantMainGUI extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args){
-       new AttendantMainGUI();
+       //new AttendantMainGUI();
     }
 
     
 }
-

@@ -7,4 +7,12 @@ public class MainController {
         attendantIO = new AttendantIO(this);
     }
     // add methods that the customer IO needs to change the attendant screen, and vice versa
+    public void preventCustomer()
+    {
+
+    }
+    public void permitCustomer()
+    {
+        
+    }
 }
