@@ -19,13 +19,16 @@ import java.util.ArrayList;
 
 import com.autovend.devices.*;
 
+import static com.autovend.software.PurchasedItems.addBag;
+
 // extend the Parent class
-public class AddOrRemoveBags extends AddItem{
+public class AddOrRemoveBags{
 
     private ReusableBagDispenser dispenser;
+    private SelfCheckoutStation station;
 
     public AddOrRemoveBags(SelfCheckoutStation scs, ReusableBagDispenser dispenser) {
-        super(scs);
+        this.station = station;
         this.dispenser = dispenser;
     }
 

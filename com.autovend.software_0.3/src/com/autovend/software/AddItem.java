@@ -28,10 +28,6 @@ public abstract class AddItem {
 		this.check = scs;
 	}
 
-	protected void addBag(ReusableBag bag) {
-		PurchasedItems.addBag(bag);
-	}
-
 	protected void addBarcodedProduct(BarcodedProduct unit) {
 		PurchasedItems.addProduct(unit);
 	}
