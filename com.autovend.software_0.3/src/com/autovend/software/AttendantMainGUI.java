@@ -47,7 +47,7 @@ public class AttendantMainGUI extends JFrame {
         JPanel StopPreventPanel = new JPanel();
         JPanel MiddleButtonsPanel = new JPanel();
         JPanel mainPanel = new JPanel();
-        JPanel alertPanel = new JPanel();
+      //   JPanel alertPanel = new JPanel();
         
         setMinimumSize(new Dimension(600,400));
         
@@ -193,8 +193,13 @@ public class AttendantMainGUI extends JFrame {
         // Add the alert label to the alertPanel
        // alertPanel.add(alert);
         
-       JLabel setText = new JLabel("Alert message");
-       alertPanel.add(setText);
+         
+            JPanel alertPanel = new JPanel();
+            JLabel newalert = new JLabel();
+            alertPanel.add(newalert);
+            mainPanel.add(alertPanel, BorderLayout.SOUTH);
+         
+         
 
         //Orienting contents layout
         mainPanel.setLayout(new BorderLayout());
@@ -202,7 +207,7 @@ public class AttendantMainGUI extends JFrame {
         mainPanel.add(StartPermitPanel, BorderLayout.WEST);
         mainPanel.add(StopPreventPanel, BorderLayout.EAST);
         mainPanel.add(MiddleButtonsPanel, BorderLayout.CENTER);
-        mainPanel.add(alertPanel, BorderLayout.SOUTH);
+        //mainPanel.add(alertPanel, BorderLayout.SOUTH);
         
         frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
 
@@ -212,9 +217,7 @@ public class AttendantMainGUI extends JFrame {
         pack();
     }
 
-    public void showAlert(String message){
-        JOptionPane.showMessageDialog(this, message, "Alert", JOptionPane.INFORMATION_MESSAGE);
-    }
+    
 
     public static void main(String[] args){
       new AttendantMainGUI(parent);
