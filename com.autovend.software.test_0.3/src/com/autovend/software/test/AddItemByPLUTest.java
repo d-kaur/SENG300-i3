@@ -19,14 +19,13 @@ import com.autovend.software.AddItemByPLU;
 import com.autovend.software.AddItemPLUGUI;
 
 /**
- * @author wasay
+ * Wasay Siddiqi
  */
 public class AddItemByPLUTest {
 
 	private SelfCheckoutStation station;
 	private Numeral[] num = {Numeral.one, Numeral.two, Numeral.three, Numeral.four};
 	private PriceLookUpCode pluCode;
-	Robot bot;
 	@Before
 	public void setup() {
 		Currency cad = Currency.getInstance("CAD");
@@ -42,12 +41,6 @@ public class AddItemByPLUTest {
 		String desc = "A_Test_Item";
 		PLUCodedProduct pluProduct = new PLUCodedProduct(pluCode, desc, BigDecimal.valueOf(2.99));
 		ProductDatabases.PLU_PRODUCT_DATABASE.put(pluCode, pluProduct);
-		try {
-			bot = new Robot();
-		} catch (AWTException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	
