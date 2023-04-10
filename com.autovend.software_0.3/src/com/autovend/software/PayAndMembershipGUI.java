@@ -10,7 +10,8 @@ public class PayAndMembershipGUI extends JFrame {
     private JButton giftCard;
     private JButton cash;
     private JButton enterMembership;
-    private JLabel payLabel;
+    private JButton back;
+    //private JLabel payLabel;
 
 
     public PayAndMembershipGUI(){
@@ -24,7 +25,7 @@ public class PayAndMembershipGUI extends JFrame {
 
         setMinimumSize(new Dimension(600, 400));
 
-        payLabel = new JLabel("Choose payment Option:");
+        //payLabel = new JLabel("Choose payment Option:");
 
         card = new JButton("Debit/Credit");
         card.addActionListener(e -> {
@@ -46,12 +47,18 @@ public class PayAndMembershipGUI extends JFrame {
 
         });
 
+        back = new JButton("Back");
+        back.addActionListener(e -> {
+
+        });
+
        JPanel content = new JPanel(new GridLayout(3,2));
         content.add(enterMembership);
-        content.add("\n", payLabel);
+        //content.add(payLabel);
         content.add(card);
         content.add(giftCard);
         content.add(cash);
+        content.add(back);
 
         setContentPane(content);
         pack();
