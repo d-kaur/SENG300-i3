@@ -44,9 +44,20 @@ public class PayAndMembershipGUI extends JFrame {
         });
 
        JPanel content = new JPanel(new GridLayout(3,2));
-       content.add(cardPanel);
-       content.add(giftCardPanel);
-       content.add(cashPanel);
-       content.add(membershipPanel);
+        content.add(enterMembership);
+        content.add(card);
+        content.add(giftCard);
+        content.add(cash);
+
+        setContentPane(content);
+        pack();
+
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     } //PayAndMembershipGUI end
+
+    public static void main(String[] args) {
+        PayAndMembershipGUI huhAndMembershipGUI = new PayAndMembershipGUI();
+    }
 } //class end
