@@ -38,6 +38,9 @@ public class AddOrRemoveBags implements ReusableBagDispenserObserver {
     }
 
     public static boolean addOwnBag(double bagWeight) {
+    	if (bagWeight <= 0) {
+    		return false;
+    	}
 		return true;
 
     }
