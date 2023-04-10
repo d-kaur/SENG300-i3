@@ -165,9 +165,9 @@ public class AttendantMainGUI extends JFrame implements ActionListener {
        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
 
-    public static void main(String[] args){
-       new AttendantMainGUI();
-    }
+    // public static void main(String[] args){
+    //    new AttendantMainGUI();
+    // }
 
     
 }
