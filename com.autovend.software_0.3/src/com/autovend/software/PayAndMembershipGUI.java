@@ -1,10 +1,9 @@
-package GUI;
+package com.autovend.software;
 
 import javax.swing.*;
 
-public class Pay extends JPanel {
+public class PayAndMembershipGUI extends JFrame {
 
-    private JPanel payAndMember;
     private JButton membershipButton;
     private JLabel payTypeLabel;
     private JButton payCardButton;
