@@ -1,3 +1,4 @@
+package com.autovend.software;
 public class AttendantIO {
     private MainController parent;
     private AttendantMainGUI attendantMainGUI;
@@ -11,25 +12,25 @@ public class AttendantIO {
     }
     public void displayAddItem()
     {
-    	setAllInvisble();
+    	setAllInvisible();
     }
     public void displayRemoveItem()
     {
-    	setAllInvisble();
+    	setAllInvisible();
     }
     public void displayInkPaper()
     {
-    	setAllInvisble();
+    	setAllInvisible();
     }
-    public attendantApprove() 
+    public void attendantApprove() 
     {
     	
     }
-    public approveBag()
+    public void approveBag()
     {
     	
     }
-    public displayBankNotes()
+    public void displayBankNotes()
     {
     	
     }

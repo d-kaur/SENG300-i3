@@ -1,3 +1,5 @@
+package com.autovend.software;
+
 public class CustomerIO {
     private MainController parent;
     

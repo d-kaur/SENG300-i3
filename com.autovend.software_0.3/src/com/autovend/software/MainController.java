@@ -1,3 +1,5 @@
+package com.autovend.software;
+
 public class MainController {
     private AttendantIO attendantIO;
     private CustomerIO customerIO;
