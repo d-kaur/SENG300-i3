@@ -1,3 +1,4 @@
+package com.autovend.software;
 public class AttendantIO {
     private MainController parent;
     private AttendantMainGUI attendantMainGUI;
