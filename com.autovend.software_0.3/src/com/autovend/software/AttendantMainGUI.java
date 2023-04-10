@@ -3,18 +3,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import com.autovend.software.*;
 
 public class AttendantMainGUI extends JFrame {
 
     //Setting up button for each self check out station
     private int stationSelected;
     private JButton stationButton;
-    // private JButton station1Button;
-    // private JButton station2Button;
-    // private JButton station3Button;
-    // private JButton station4Button;
-    // private JButton station5Button;
 
     //Setting up attendant action buttons 
 
@@ -47,7 +41,6 @@ public class AttendantMainGUI extends JFrame {
         JPanel StopPreventPanel = new JPanel();
         JPanel MiddleButtonsPanel = new JPanel();
         JPanel mainPanel = new JPanel();
-      //   JPanel alertPanel = new JPanel();
         
         setMinimumSize(new Dimension(600,400));
         
@@ -57,7 +50,7 @@ public class AttendantMainGUI extends JFrame {
         //Adding station buttons to panel and including action listener to buttons 
         for (int i = 0; i < 5; i++) {
             JButton stationButton = new JButton(String.valueOf(i + 1));
-            final int index = i; // We need to make a final copy of i to use in the lambda expression
+            final int index = i; 
             stationButton.addActionListener(e -> {
                 stationSelected = index;
             });
@@ -183,31 +176,12 @@ public class AttendantMainGUI extends JFrame {
         MiddleButtonsPanel.add(addInkPaperButton);
         MiddleButtonsPanel.add(Box.createVerticalGlue());
 
-        //Alter notifire lable 
-        //alertPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 3)); // set the height to 50 pixels
-
-        // Create the alert label
-        // String message = "weight";
-        // JLabel alert = new JLabel("Alert: " + message);
-        
-        // Add the alert label to the alertPanel
-       // alertPanel.add(alert);
-        
-         
-            // JPanel alertPanel = new JPanel();
-            // JLabel newalert = new JLabel();
-            // alertPanel.add(newalert);
-            // mainPanel.add(alertPanel, BorderLayout.SOUTH);
-         
-         
-
         //Orienting contents layout
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(StationPanel, BorderLayout.NORTH);
         mainPanel.add(StartPermitPanel, BorderLayout.WEST);
         mainPanel.add(StopPreventPanel, BorderLayout.EAST);
         mainPanel.add(MiddleButtonsPanel, BorderLayout.CENTER);
-        //mainPanel.add(alertPanel, BorderLayout.SOUTH);
         
         frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
 
@@ -219,9 +193,6 @@ public class AttendantMainGUI extends JFrame {
     public void showAlert(String message) {
       JOptionPane.showMessageDialog(this, message, "Alert", JOptionPane.INFORMATION_MESSAGE);
   }
-
-
-    
 
     public static void main(String[] args){
       new AttendantMainGUI(parent);

@@ -114,13 +114,10 @@ public class CustomerMainGUI extends JFrame implements ActionListener{
 
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-
-
-
-        
+        setVisible(true);   
         
     }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
