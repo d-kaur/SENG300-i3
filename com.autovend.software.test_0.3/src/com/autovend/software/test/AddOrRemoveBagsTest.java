@@ -12,8 +12,8 @@
  * Sara Dhuka (30124117)
  * Robert (William) Engel (30119608)
  */
-package com.autovend.software.test;
 
+package com.autovend.software.test;
 
 import static org.junit.Assert.*;
 import java.math.BigDecimal;
@@ -34,6 +34,7 @@ public class AddOrRemoveBagsTest {
     Bag disposableBagSmall;
     Bag disposableBagMedium;
     Bag disposableBagLarge;
+    PurchasedItems itemsBought;
     //sets up for testing
 
     @Before
@@ -51,11 +52,12 @@ public class AddOrRemoveBagsTest {
         disposableBagLarge = new Bag("Large Disposable Bag", new BigDecimal("1"), 0.3);
         listOfStoreBags.add(disposableBagLarge);
         addBags = new AddOrRemoveBags(scs);
+        itemsBought = new PurchasedItems();
     }
     @After
     public void tearDown() {
         addBags = null;
-        PurchasedItems.reset();
+        itemsBought.reset();
     }
     //tests if the class is constructed correctly
     @Test
@@ -77,15 +79,16 @@ public class AddOrRemoveBagsTest {
         addBags.purchaseBag(reusableBagMedium);
         addBags.purchaseBag(reusableBagLarge);
 
-        assertEquals(3, PurchasedItems.getListOfBags().size());
+        assertEquals(3, itemsBought.getListOfBags().size());
     }
     @Test
     public void AddValidStoreBag2() {
+    	//itemsBought.
         addBags.purchaseBag(disposableBagSmall);
         addBags.purchaseBag(disposableBagMedium);
         addBags.purchaseBag(disposableBagLarge);
 
-        assertEquals(3, PurchasedItems.getListOfBags().size());
+        assertEquals(3, itemsBought.getListOfBags().size());
     }
 
     //tests if an invalid bag is added
@@ -108,7 +111,7 @@ public class AddOrRemoveBagsTest {
         addBags.addOwnBag(0.2);
         addBags.addOwnBag(0.3);
 
-        assertEquals(3, PurchasedItems.getListOfBags().size());
+        assertEquals(3, itemsBought.getListOfBags().size());
     }
 
 

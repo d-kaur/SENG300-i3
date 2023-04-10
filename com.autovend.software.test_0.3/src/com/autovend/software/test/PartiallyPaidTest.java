@@ -14,18 +14,8 @@
  * Robert (William) Engel (30119608)
  */
 
-/*
- * Testing for PayWithCredit and PayWithDebit, specifically, when paying with tap, insert and swipe
- * the test can all pass, but because of the hardwares randomize fail feature, such as magnetic strip
- * not working the test will fail, but all test are able to pass. if running the tests for the first time
- * and all of them do not pass, please keep running them until all of them pass, this mainly due to the given
- * hardwares randomness as mentioned above.
- *
- * The testing for insufficient balance or credit the asserts are to assure that nothing changes and the card provider
- * should negate the request
- */
-
 package com.autovend.software.test;
+
 import static org.junit.Assert.*;
 
 
@@ -88,12 +78,13 @@ public class PartiallyPaidTest {
 	Barcode b1 = new Barcode(n);
 	Barcode b2 = new Barcode(m);
 	Barcode b3 = new Barcode(k);
+	private PurchasedItems itemsBought;
 	// initializing some barcodes to use during tests
 
 @Before
 public void setUp() {
 
-
+	itemsBought = new PurchasedItems();
 	Currency currency = Currency.getInstance("CAD");
 	int[] billDom = {5,10,20};
 	BigDecimal[] coinDom = {BigDecimal.valueOf(0.05), BigDecimal.valueOf(0.10),BigDecimal.valueOf(0.25)};
@@ -149,7 +140,7 @@ public void setUp() {
 
 	// initialize constructor and add each product to the list of products being scanned
 	scanItems = new ScanItems(scs);
-	weightDiscrepancy = new WeightDiscrepancy(scs);
+	weightDiscrepancy = new WeightDiscrepancy(scs, itemsBought);
 
 
 
@@ -170,13 +161,13 @@ public void setUp() {
 	@After
 	public void tearDown() {
 
-		PurchasedItems.reset();
+		itemsBought.reset();
 	}
 
 
 	@Test
 	public void testPartiallyWithCard() {
-		PayWithCard PayWithCredit = new PayWithCard(scs,company);
+		PayWithCard PayWithCredit = new PayWithCard(scs,company, itemsBought);
 		scs.cardReader.register(PayWithCredit);
 		scs.mainScanner.scan(unitItem1);
 		scs.baggingArea.add(unitItem1);
@@ -192,17 +183,17 @@ public void setUp() {
 			throw new RuntimeException(e);
 		}
 
-		assertTrue(PurchasedItems.isPaid());
+		assertTrue(itemsBought.isPaid());
 
 		scs.mainScanner.scan(unitItem2);
 		scs.baggingArea.add(unitItem2);
 
-		assertFalse(PurchasedItems.isPaid());
+		assertFalse(itemsBought.isPaid());
 	}
 
 	@Test
 	public void testPartiallyWithCard2() {
-		PayWithCard PayWithCredit2 = new PayWithCard(scs,company);
+		PayWithCard PayWithCredit2 = new PayWithCard(scs,company, itemsBought);
 		scs.cardReader.register(PayWithCredit2);
 		scs.mainScanner.scan(unitItem1);
 		scs.baggingArea.add(unitItem1);
@@ -218,12 +209,12 @@ public void setUp() {
 			throw new RuntimeException(e);
 		}
 
-		assertTrue(PurchasedItems.isPaid());
+		assertTrue(itemsBought.isPaid());
 
 		scs.mainScanner.scan(unitItem2);
 		scs.baggingArea.add(unitItem2);
 
-		assertFalse(PurchasedItems.isPaid());
+		assertFalse(itemsBought.isPaid());
 
 		try {
 			scs.cardReader.tap(CreditTap2);
@@ -233,7 +224,7 @@ public void setUp() {
 			throw new RuntimeException(e);
 		}
 
-		assertTrue(PurchasedItems.isPaid());
+		assertTrue(itemsBought.isPaid());
 	}
 
 

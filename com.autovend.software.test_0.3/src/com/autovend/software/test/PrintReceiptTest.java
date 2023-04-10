@@ -12,8 +12,8 @@
  * Sara Dhuka (30124117)
  * Robert (William) Engel (30119608)
  */
-package com.autovend.software.test;
 
+package com.autovend.software.test;
 import com.autovend.Barcode;
 import com.autovend.BarcodedUnit;
 import com.autovend.Numeral;
@@ -23,7 +23,11 @@ import com.autovend.devices.OverloadException;
 import com.autovend.devices.SelfCheckoutStation;
 import com.autovend.external.ProductDatabases;
 import com.autovend.products.BarcodedProduct;
+import com.autovend.products.PLUCodedProduct;
+import com.autovend.products.Product;
 import com.autovend.software.*;
+import com.autovend.software.observers.ReceiptPrinterObserverStub;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,7 +56,7 @@ public class PrintReceiptTest {
     private ScanItems scanItems;
     private WeightDiscrepancy weightDiscrepancy;
     private ReceiptPrinterObserverStub observer;
-    private PurchasedItems itemsPurchased;
+    private PurchasedItems itemsBought;
 
     // initializing some barcodes to use during tests
     Numeral[] n = {Numeral.one, Numeral.two, Numeral.three};
@@ -111,7 +115,7 @@ public class PrintReceiptTest {
 
         // initialize constructor and add each product to the list of products being scanned
         scanItems = new ScanItems(station);
-        weightDiscrepancy = new WeightDiscrepancy(station);
+        weightDiscrepancy = new WeightDiscrepancy(station, itemsBought);
 
         //register the observer and enable scanners
         observer = new ReceiptPrinterObserverStub();
@@ -123,7 +127,7 @@ public class PrintReceiptTest {
 
         station.baggingArea.register(weightDiscrepancy);
 
-        receiptController = new PrinterController(station);
+        receiptController = new PrinterController(station, itemsBought);
     }
 
     @After
@@ -131,7 +135,7 @@ public class PrintReceiptTest {
         receiptController = null;
         observer = null;
         station = null;
-        PurchasedItems.reset();
+        itemsBought.reset();
     }
 
     @Test
@@ -157,14 +161,18 @@ public class PrintReceiptTest {
         }
         station.baggingArea.add(unitItem3);
 
-        for (BarcodedProduct item : scanItems.getPurchasedItems().getListOfProducts()){
+        for (Product item : scanItems.getPurchasedItems().getListOfProducts()){
             String price = item.getPrice().toString();
-            String description = item.getDescription();
+            String description = null;
+            if(item instanceof BarcodedProduct)
+            	description = ((BarcodedProduct) item).getDescription();
+            else
+            	description = ((PLUCodedProduct) item).getDescription();
             expectedReceipt.append(String.format("%-10s %18s$\n", description, price));
         }
 
-        expectedReceipt.append(String.format("\n%-10s %18s$\n", "TOTAL:",itemsPurchased.getTotalPrice().toString()));
-        expectedReceipt.append(String.format("%-10s %17s$", "Change Due:", itemsPurchased.getChange().toString()));
+        expectedReceipt.append(String.format("\n%-10s %18s$\n", "TOTAL:",itemsBought.getTotalPrice().toString()));
+        expectedReceipt.append(String.format("%-10s %17s$", "Change Due:", itemsBought.getChange().toString()));
         String expectedReceiptString = expectedReceipt.toString();
 
         receiptController.printReceipt();

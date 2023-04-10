@@ -12,8 +12,8 @@
  * Sara Dhuka (30124117)
  * Robert (William) Engel (30119608)
  */
-package com.autovend.software.test;
 
+package com.autovend.software.test;
 import static org.junit.Assert.*;
 import java.math.BigDecimal;
 import org.junit.*;
@@ -28,6 +28,7 @@ public class BagTest {
     Bag disposableBagSmall;
     Bag disposableBagMedium;
     Bag disposableBagLarge;
+    PurchasedItems itemsBought;
 	//sets up a Bag for testing
 	@Before
 	public void setup() {
@@ -38,6 +39,7 @@ public class BagTest {
         disposableBagSmall = new Bag("Small Disposable Bag", new BigDecimal("0.25"), 0.1);
         disposableBagMedium = new Bag("Medium Disposable Bag", new BigDecimal("0.50"), 0.2);
         disposableBagLarge = new Bag("Large Disposable Bag", new BigDecimal("1"), 0.3);
+        itemsBought = new PurchasedItems();
 	}
 	@After
 	public void tearDown() {
@@ -48,7 +50,7 @@ public class BagTest {
 		disposableBagLarge = null;
 		disposableBagMedium = null;
 		disposableBagSmall = null;
-		PurchasedItems.reset();
+		itemsBought.reset();
 	}
 //	tests if the bag was constructed correctly
 	@Test
