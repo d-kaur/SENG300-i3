@@ -19,7 +19,7 @@ import com.autovend.software.observers.ElectronicScaleObserverStub;
 import com.autovend.software.observers.KeyBoardObserverStub;
 
 /**
- * @author wasay
+ * Wasay Siddiqi
  *
  */
 public class AddItemByPLU extends AddItem{

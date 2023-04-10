@@ -3,16 +3,14 @@
  */
 package com.autovend.software;
 
-import java.awt.BorderLayout;
+
 import java.awt.Button;
-import java.awt.Dimension;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.PointerInfo;
+
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+
+
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -28,7 +26,7 @@ import com.autovend.software.observers.ElectronicScaleObserverStub;
 import com.autovend.software.observers.KeyBoardObserverStub;
 
 /**
- * @author wasay
+ * Wasay Siddiqi
  *
  */
 public class AddItemPLUGUI extends AddItem{
@@ -50,7 +48,7 @@ public class AddItemPLUGUI extends AddItem{
 		super(scs);
 		success = false;
 		check.screen.enable();
-		check.screen.register(null);// touchScrObs
+		
 		frame = new JFrame("Add Item by PLU");
 		frame.setSize(1280,800);
 		PLU = "";
