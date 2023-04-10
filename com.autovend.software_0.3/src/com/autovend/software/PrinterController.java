@@ -15,8 +15,8 @@
 
 package com.autovend.software;
 import com.autovend.devices.*;
-import com.autovend.products.BarcodedProduct;
-import com.autovend.software.test.ReceiptPrinterObserverStub;
+import com.autovend.products.*;
+import com.autovend.software.observers.ReceiptPrinterObserverStub;
 
 import java.util.ArrayList;
 
@@ -30,20 +30,22 @@ public class PrinterController {
     int inkUsed;
     int paperUsed;
     boolean canPrint;
+    private PurchasedItems itemsBought;
 
 
-    public PrinterController(SelfCheckoutStation station) {
+    public PrinterController(SelfCheckoutStation station, PurchasedItems list) {
         printer = station.printer;
         rpo = new ReceiptPrinterObserverStub();
         inkAdded = 0;
         paperAdded = 0;
         inkUsed = 0;
         paperUsed = 0;
+        itemsBought = list;
     }
 
 
     public void printReceipt() throws OverloadException, InsufficientResourcesException {
-        ArrayList<BarcodedProduct> items = PurchasedItems.getListOfProducts();
+        ArrayList<Product> items = itemsBought.getListOfProducts();
 
         // Give the receipt a title
         String receiptTitle = String.format("%23s\n", "-----RECEIPT-----") + String.format("%-9s %20s\n", "ITEMS", "PRICE");
@@ -52,15 +54,20 @@ public class PrinterController {
         StringBuilder receiptItems = new StringBuilder();
 
         // Iterates through the ArrayList and adds the items and their price to the receipt
-        for (BarcodedProduct item : items){
+        for (Product item : items){
             String price = item.getPrice().toString();
-            String description = item.getDescription();
+            String description = null;
+            if(item instanceof BarcodedProduct)
+            	description = ((BarcodedProduct) item).getDescription();
+            else
+            	description = ((PLUCodedProduct) item).getDescription();
+            
             receiptItems.append(String.format("%-10s %18s$\n", description, price));
         }
 
         // End of the receipt, includes the total and change
-        String receiptChangeAndTotal = String.format("\n%-10s %18s$\n", "TOTAL:", PurchasedItems.getTotalPrice().toString()) +
-                String.format("%-10s %17s$", "Change Due:", PurchasedItems.getChange().toString());
+        String receiptChangeAndTotal = String.format("\n%-10s %18s$\n", "TOTAL:", itemsBought.getTotalPrice().toString()) +
+                String.format("%-10s %17s$", "Change Due:", itemsBought.getChange().toString());
 
         StringBuilder finalReceipt = new StringBuilder();
         finalReceipt.append(receiptTitle).append(receiptItems).append(receiptChangeAndTotal);

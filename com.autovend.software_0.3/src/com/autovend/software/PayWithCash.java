@@ -54,8 +54,8 @@ public class PayWithCash extends Pay implements BillDispenserObserver, BillValid
 	// paid == due -> Disable/sth
 
 
-    public PayWithCash(SelfCheckoutStation station) {
-        super(station);
+    public PayWithCash(SelfCheckoutStation station, PurchasedItems list) {
+        super(station, list);
         this.billDenominations = station.billDenominations;
         this.billDispensers = station.billDispensers;
         this.coinDenominations = station.coinDenominations;
@@ -164,11 +164,11 @@ public class PayWithCash extends Pay implements BillDispenserObserver, BillValid
     @Override
     public void reactToValidBillDetectedEvent(BillValidator validator, Currency currency, int value) {
     	
-		PurchasedItems.addAmountPaid(new BigDecimal(value));
+		itemsBought.addAmountPaid(new BigDecimal(value));
 
 		// If the AmountLeftToPay < 0 => There is a change need to be returned => call PassChange
-    	if (PurchasedItems.getAmountLeftToPay().compareTo(new BigDecimal(0)) < 0) {
-    		BigDecimal change = PurchasedItems.getAmountLeftToPay().abs();
+    	if (itemsBought.getAmountLeftToPay().compareTo(new BigDecimal(0)) < 0) {
+    		BigDecimal change = itemsBought.getAmountLeftToPay().abs();
     		PassChange(change);
     	}
     	
@@ -183,11 +183,11 @@ public class PayWithCash extends Pay implements BillDispenserObserver, BillValid
 	@Override
 	public void reactToValidCoinDetectedEvent(CoinValidator validator, BigDecimal value) {
 		// TODO Auto-generated method stub
-		PurchasedItems.addAmountPaid(value);
+		itemsBought.addAmountPaid(value);
 
 		// If the AmountLeftToPay < 0 => There is a change need to be returned => call PassChange
-    	if (PurchasedItems.getAmountLeftToPay().compareTo(new BigDecimal(0)) < 0) {
-    		BigDecimal change = PurchasedItems.getAmountLeftToPay().abs();
+    	if (itemsBought.getAmountLeftToPay().compareTo(new BigDecimal(0)) < 0) {
+    		BigDecimal change = itemsBought.getAmountLeftToPay().abs();
     		PassChange(change);
     	}
     	

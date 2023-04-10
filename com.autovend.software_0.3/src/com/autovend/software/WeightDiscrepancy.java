@@ -34,17 +34,19 @@ import com.autovend.devices.SelfCheckoutStation;
 
 public class WeightDiscrepancy implements ElectronicScaleObserver{
     private SelfCheckoutStation selfCheckoutStation;
-
-    public WeightDiscrepancy(SelfCheckoutStation selfCheckoutStation)
+    private PurchasedItems itemsBought;
+    
+    public WeightDiscrepancy(SelfCheckoutStation selfCheckoutStation, PurchasedItems list)
     {
         this.selfCheckoutStation = selfCheckoutStation;
         selfCheckoutStation.baggingArea.register(this);
+        itemsBought = list;
     }
     @Override
     public void reactToWeightChangedEvent(ElectronicScale scale, double weightInGrams) {
         // Exception 1. Weight Discrepancy
         // stays disabled if the weight of the bagging area does not match the expected weight
-            if(PurchasedItems.getTotalExpectedWeight() == weightInGrams) {
+            if(itemsBought.getTotalExpectedWeight() == weightInGrams) {
                 selfCheckoutStation.handheldScanner.enable();
                 selfCheckoutStation.mainScanner.enable();
             }

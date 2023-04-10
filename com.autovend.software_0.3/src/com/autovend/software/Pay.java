@@ -26,19 +26,20 @@ import com.autovend.software.observers.PayObserver;
 public abstract class Pay extends AbstractDevice<PayObserver> {
     protected SelfCheckoutStation station;
     protected BigDecimal amountDue;
+    protected PurchasedItems itemsBought;
 
-
-    public Pay(SelfCheckoutStation station) {
+    public Pay(SelfCheckoutStation station, PurchasedItems list) {
         if (station == null) {
             throw new SimulationException(new NullPointerException("Station cannot be null."));
         }
         this.station = station;
-        amountDue = PurchasedItems.getAmountLeftToPay();
+        itemsBought = list;
+        amountDue = itemsBought.getAmountLeftToPay();
     }
 
     protected void pay(BigDecimal amountToPay) {
-        PurchasedItems.addAmountPaid(amountToPay);
-        BigDecimal amountPaid = PurchasedItems.getAmountPaid();
+        itemsBought.addAmountPaid(amountToPay);
+        BigDecimal amountPaid = itemsBought.getAmountPaid();
     	if (amountPaid.equals(amountDue)) {
     		for (PayObserver observer : observers) {
     			observer.reactToSufficientPaymentEvent(this);
@@ -47,6 +48,6 @@ public abstract class Pay extends AbstractDevice<PayObserver> {
     }
 
     public BigDecimal getAmountDue() {
-        return PurchasedItems.getAmountLeftToPay();
+        return itemsBought.getAmountLeftToPay();
     }
 }

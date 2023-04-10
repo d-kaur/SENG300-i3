@@ -27,7 +27,7 @@ import com.autovend.devices.observers.BarcodeScannerObserver;
 import com.autovend.devices.observers.ElectronicScaleObserver;
 import com.autovend.external.ProductDatabases;
 import com.autovend.products.BarcodedProduct;
-import com.autovend.software.test.CustomerIOStub;
+import com.autovend.software.observers.CustomerIOStub;
 
 public class ScanItems extends AddItem implements BarcodeScannerObserver{
 
