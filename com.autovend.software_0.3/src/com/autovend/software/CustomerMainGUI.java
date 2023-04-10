@@ -1,5 +1,6 @@
 //NAME abhiroop kaur
 //UCID 30152829
+
 package com.autovend.software;
 import javax.swing.*;
 import java.awt.*;
@@ -38,13 +39,8 @@ public class CustomerMainGUI extends JFrame implements ActionListener{
 
         add(buttonPanel, BorderLayout.EAST);
         add(payPanel, BorderLayout.SOUTH);
-        // add(payButton, BorderLayout.SOUTHWEST);
-        // add(useBag, BorderLayout.SOUTHEAST);
-
-        //setContentPane(buttonPanel);
-        // pack();
-        //setLocationRelativeTo(null);
-        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         
     }
