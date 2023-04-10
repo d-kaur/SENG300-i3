@@ -76,7 +76,7 @@ public class CustomerMainGUI extends JFrame implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
-                alert.newalert.setText("Alert:Use Personal Bag");
+                alert.showAlert("Alert:Use Personal Bag");
                 
             }
         });

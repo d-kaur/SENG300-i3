@@ -194,10 +194,10 @@ public class AttendantMainGUI extends JFrame {
        // alertPanel.add(alert);
         
          
-            JPanel alertPanel = new JPanel();
-            JLabel newalert = new JLabel();
-            alertPanel.add(newalert);
-            mainPanel.add(alertPanel, BorderLayout.SOUTH);
+            // JPanel alertPanel = new JPanel();
+            // JLabel newalert = new JLabel();
+            // alertPanel.add(newalert);
+            // mainPanel.add(alertPanel, BorderLayout.SOUTH);
          
          
 
@@ -216,6 +216,10 @@ public class AttendantMainGUI extends JFrame {
         setContentPane(mainPanel);
         pack();
     }
+    public void showAlert(String message) {
+      JOptionPane.showMessageDialog(this, message, "Alert", JOptionPane.INFORMATION_MESSAGE);
+  }
+
 
     
 
