@@ -1,16 +1,20 @@
 package com.autovend.software;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import com.autovend.software.*;
 
-public class AttendantMainGUI extends JFrame implements ActionListener {
+public class AttendantMainGUI extends JFrame {
 
     //Setting up button for each self check out station
-    private JButton station1Button;
-    private JButton station2Button;
-    private JButton station3Button;
-    private JButton station4Button;
-    private JButton station5Button;
+    private int stationSelected;
+    private JButton stationButton;
+    // private JButton station1Button;
+    // private JButton station2Button;
+    // private JButton station3Button;
+    // private JButton station4Button;
+    // private JButton station5Button;
 
     //Setting up attendant action buttons 
 
@@ -30,7 +34,8 @@ public class AttendantMainGUI extends JFrame implements ActionListener {
     public JLabel alert;
     private boolean[] open = {false,false,false,false,false};
     private boolean[] permitted = {false,false,false,false,false};
-    private AttendantIO parent;
+    private static AttendantIO parent;
+    
     public AttendantMainGUI(AttendantIO parent) {
         this.parent = parent;
         JFrame frame = new JFrame("Attendant Self Checkout Station");
@@ -48,63 +53,108 @@ public class AttendantMainGUI extends JFrame implements ActionListener {
         
 
         //Setting up contents of Panel
-        station1Button = new JButton("1");
-        //station1Button.setBounds(10, 20, 80,25);
-        station1Button.addActionListener(this);
 
-        station2Button = new JButton("2");
-        //station2Button.setBounds(100, 20, 85 ,25);
-        station2Button.addActionListener(this);
-
-        station3Button = new JButton("3");
-        //station3Button.setBounds(190, 20, 85 ,25);
-        station3Button.addActionListener(this);
-
-        station4Button = new JButton("4");
-        //station4Button.setBounds(280, 20, 85 ,25);
-        station4Button.addActionListener(this);
-
-        station5Button = new JButton("5");
-        station5Button.addActionListener(this);
+        //Adding station buttons to panel and including action listener to buttons 
+        for (int i = 0; i < 5; i++) {
+            JButton stationButton = new JButton(String.valueOf(i + 1));
+            final int index = i; // We need to make a final copy of i to use in the lambda expression
+            stationButton.addActionListener(e -> {
+                stationSelected = index;
+            });
+            StationPanel.add(stationButton);
+        }
 
         startButton = new JButton("Start");
-        startButton.addActionListener(this);
+        startButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //removeItemFrame removeItem = new removeItemFrame();
+                //removeItemframe.display();
+             }
+            
+        });
 
         premitButton = new JButton("Permit");
-        premitButton.addActionListener(this);
+        premitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //removeItemFrame removeItem = new removeItemFrame();
+                //removeItemframe.display();
+             }
+            
+        });
 
         stopButton = new JButton("Stop");
-        stopButton.addActionListener(this);
+        stopButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //removeItemFrame removeItem = new removeItemFrame();
+                //removeItemframe.display();
+             }
+            
+        });
 
         preventButton = new JButton("Prevent");
-        preventButton.addActionListener(this);
+        preventButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //removeItemFrame removeItem = new removeItemFrame();
+                //removeItemframe.display();
+             }
+            
+        });
 
         removeItemButton = new JButton("Remove Item");
-        removeItemButton.addActionListener(this);
+        removeItemButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //removeItemFrame removeItem = new removeItemFrame();
+                //removeItemframe.display();
+             }
+            
+        });
 
         addItemBySearchButton = new JButton("Add Item By Search");
-        addItemBySearchButton.addActionListener(this);
+        addItemBySearchButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //removeItemFrame removeItem = new removeItemFrame();
+                //removeItemframe.display();
+             }
+            
+        });
 
         adjustCoinsBillsButton = new JButton("Adjust Coins/Bills");
-        adjustCoinsBillsButton.addActionListener(this);
+        adjustCoinsBillsButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //removeItemFrame removeItem = new removeItemFrame();
+                //removeItemframe.display();
+             }
+            
+        });
 
         allowPersonalBagButton = new JButton("Allow Personal Bag");
-        allowPersonalBagButton.addActionListener(this);
+        allowPersonalBagButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //removeItemFrame removeItem = new removeItemFrame();
+                //removeItemframe.display();
+             }
+            
+        });
 
         approveExceptionButton = new JButton("Approve");
-        approveExceptionButton.addActionListener(this);
+        approveExceptionButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //removeItemFrame removeItem = new removeItemFrame();
+                //removeItemframe.display();
+             }
+            
+        });
 
         addInkPaperButton = new JButton("Add Ink/Paper");
-        addInkPaperButton.addActionListener(this);
+        addInkPaperButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //removeItemFrame removeItem = new removeItemFrame();
+                //removeItemframe.display();
+             }
+            
+        });
 
         //Adding contents to Panel 
-
-        //Self Checkout Buttons
-        StationPanel.add(station1Button);
-        StationPanel.add(station2Button);
-        StationPanel.add(station3Button);
-        StationPanel.add(station4Button);
-        StationPanel.add(station5Button);
 
         //Left side buttons
         StartPermitPanel.setLayout(new BoxLayout(StartPermitPanel, BoxLayout.Y_AXIS));
@@ -137,11 +187,11 @@ public class AttendantMainGUI extends JFrame implements ActionListener {
         //alertPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 3)); // set the height to 50 pixels
 
         // Create the alert label
-        String message = "weight";
-        JLabel alert = new JLabel("Alert: " + message);
+        // String message = "weight";
+        // JLabel alert = new JLabel("Alert: " + message);
         
         // Add the alert label to the alertPanel
-        alertPanel.add(alert);
+       // alertPanel.add(alert);
         
         //Orienting contents layout
         mainPanel.setLayout(new BorderLayout());
@@ -159,15 +209,14 @@ public class AttendantMainGUI extends JFrame implements ActionListener {
         pack();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-       // TODO Auto-generated method stub
-       throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+    public void showAlert(String message){
+        JOptionPane.showMessageDialog(this, message, "Alert", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    //public static void main(String[] args){
-      // new AttendantMainGUI();
-   // }
+    public static void main(String[] args){
+      new AttendantMainGUI(parent);
+   }
+
 
     
 }
