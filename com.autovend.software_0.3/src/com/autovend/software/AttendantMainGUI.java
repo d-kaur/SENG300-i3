@@ -193,6 +193,9 @@ public class AttendantMainGUI extends JFrame {
         // Add the alert label to the alertPanel
        // alertPanel.add(alert);
         
+       JLabel setText = new JLabel("Alert message");
+       alertPanel.add(setText);
+
         //Orienting contents layout
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(StationPanel, BorderLayout.NORTH);

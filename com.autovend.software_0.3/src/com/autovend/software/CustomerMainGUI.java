@@ -8,23 +8,82 @@ import java.awt.event.*;
 import javax.swing.JFrame;
 
 
+
+
 public class CustomerMainGUI extends JFrame implements ActionListener{
+
+
     public CustomerMainGUI(){
         JPanel buttonPanel = new JPanel();
         JPanel payPanel = new JPanel();
-        setMinimumSize(new Dimension(800, 800)); //set the size of the frame
+        JPanel displayPanel = new JPanel();
+        setMinimumSize(new Dimension(650, 700)); //set the size of the frame
 
-        JButton scanButton = new JButton("Add by Scanning");//add action listener to this button            
+
+        //set up the buttons
+        JButton scanButton = new JButton("Add by Scanning");//add action listener to this button
+        scanButton.addActionListener(new ActionListener() {    
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                //new ScanGUI();
+            }
+        });        
         JButton pluButton = new JButton("Add by PLU Number");
+        pluButton.addActionListener(new ActionListener() {    
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                
+            }
+        });
         JButton searchButton = new JButton("Add by Search");
+        searchButton.addActionListener(new ActionListener() {    
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                
+            }
+        });
         JButton browseButton = new JButton("Add by Browsing Purchase Bags");
+        browseButton.addActionListener(new ActionListener() {    
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                
+            }
+        });
         JButton purchaseButton = new JButton("Purchase Bags");
+        purchaseButton.addActionListener(new ActionListener() {    
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                
+            }
+        });
         JButton payButton = new JButton("Pay");
+        payButton.addActionListener(new ActionListener() {    
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                
+            }
+        });
         //payButton.setBounds();
+        AttendantMainGUI alert = new AttendantMainGUI(null);
         JButton useBag = new JButton("Use Personal Bag");
+        useBag.addActionListener(new ActionListener() {    
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                alert.setText("Alert:Use Personal Bag");
+                
+            }
+        });
 
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         payPanel.setLayout(new BoxLayout(payPanel, BoxLayout.X_AXIS));
+        displayPanel.setLayout(new BoxLayout(displayPanel, BoxLayout.Y_AXIS));
 
         buttonPanel.add(scanButton);
         buttonPanel.add(pluButton);
@@ -39,9 +98,27 @@ public class CustomerMainGUI extends JFrame implements ActionListener{
 
         add(buttonPanel, BorderLayout.EAST);
         add(payPanel, BorderLayout.SOUTH);
+
+        //setting up the header label
+        JLabel headerLabel = new JLabel("Items in Cart:");
+        int fontSize = 18;
+        headerLabel.setFont(new Font(headerLabel.getFont().getName(), Font.BOLD, fontSize));
+
+        //setting up the jcombobox to display the items in the cart
+        JComboBox<String> comboBox = new JComboBox<>();
+
+        displayPanel.add(headerLabel);
+        displayPanel.add(comboBox);
+
+        add(displayPanel, BorderLayout.WEST);
+
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+
+
+
+        
         
     }
     @Override
