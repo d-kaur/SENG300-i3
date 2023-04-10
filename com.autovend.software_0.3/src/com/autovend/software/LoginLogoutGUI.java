@@ -5,6 +5,7 @@
 package com.autovend.software;
 
 import com.autovend.software.*;
+import java.util.HashMap;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -18,13 +19,11 @@ import javax.swing.*;
 	    private JButton loginButton;
 	    private JButton errorButton;
 	    
-	    private LoginLogout loginLogout;
+	    
 
 	    public LoginLogoutGUI() {
 	        super("Login");
-	        loginLogout = new LoginLogout();
 	        
-	        loginLogout.createAccount("username", "password");
 
 	        // create components
 	        JLabel usernameLabel = new JLabel("Username:");
@@ -63,10 +62,14 @@ import javax.swing.*;
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
 	    	
+	    	HashMap accountDatabase = new HashMap<String, String>();
+	        
+	        LoginLogout.createAccount("username", "password", accountDatabase);
+	    	
 	        String username = usernameField.getText();
 	        String password = new String(passwordField.getPassword());
 
-	        if (loginLogout.verifyLogin(username, password) == true) {
+	        if (LoginLogout.verifyLogin(username, password, accountDatabase) == true) {
 	            JOptionPane.showMessageDialog(this, "Login successful.");
 	            dispose(); // close the login window
 	        } 

@@ -18,32 +18,28 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class LoginLogoutTest {
-
-	private LoginLogout ll;
 	
+	private HashMap accountDatabase;
+
 	@Before
 	public void setUp() {
-		ll = new LoginLogout();
-		ll.createAccount("username", "password");
-		ll.createAccount("user", "1234");
-		ll.createAccount("supervisor", "securepassword");
-		ll.removeAccount("username", "password");
-	}
-	
-	@After
-	public void tearDown() {
-		ll = null;
+		accountDatabase = new HashMap<String, String>();
+        
+        LoginLogout.createAccount("username", "password", accountDatabase);
+		LoginLogout.createAccount("user", "1234", accountDatabase);
+		LoginLogout.createAccount("supervisor", "securepassword", accountDatabase);
+		LoginLogout.removeAccount("username", "password", accountDatabase);
 	}
 	
 	@Test
-    public void validLogin{
-		Boolean actual = ll.verifyLogin("user", "1234");
+    public void validLogin() {
+		Boolean actual = LoginLogout.verifyLogin("user", "1234", accountDatabase);
 		Boolean expected = true;
 		assertEquals(actual, expected);
 	}
 	@Test
-	public void invalidLogin{
-		Boolean actual = ll.verifyLogin("username", "password");
+	public void invalidLogin() {
+		Boolean actual = LoginLogout.verifyLogin("username", "password", accountDatabase);
 		Boolean expected = false;
 		assertEquals(actual, expected);
 	}

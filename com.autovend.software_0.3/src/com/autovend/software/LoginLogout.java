@@ -8,19 +8,8 @@ import java.util.Objects;
 
 public class LoginLogout {
 
-	private HashMap<String, String> accountDatabase;
 	
-	public LoginLogout() {
-		accountDatabase = new HashMap<>();
-	}
-	/**
-	 * Checks if the username and password entered are in the accountDatabase. If so, return true. If not, return false.
-	 * 
-	 * @param username Username entered for login
-	 * @param password Password entered for login
-	 * @return
-	 */
-	public boolean verifyLogin(String username, String password){
+	public static boolean verifyLogin(String username, String password, HashMap<String, String> accountDatabase){
 		if (accountDatabase.containsKey(username)) {
 			String userpassword = accountDatabase.get(username);
 			if (Objects.equals(password, userpassword)) {
@@ -29,13 +18,8 @@ public class LoginLogout {
 		}
 		return false;
 	}
-	/**
-	 * Creates a new account for an attendant working a self checkout station
-	 * 
-	 * @param username Username that the attendant will use for login
-	 * @param password Password that the attendant will use for login
-	 */
-	public void createAccount(String username, String password){
+	
+	public static void createAccount(String username, String password, HashMap<String, String> accountDatabase){
 		if (accountDatabase.containsKey(username)) {
 			System.out.println("An account with this username already exists");
 		}
@@ -43,12 +27,8 @@ public class LoginLogout {
 			accountDatabase.put(username, password);
 		}
 	}
-	/**
-	 * 
-	 * @param username Username of the account that needs to be removed
-	 * @param password Password of the account that needs to be removed
-	 */
-	public void removeAccount(String username, String password) {
+	
+	public static void removeAccount(String username, String password, HashMap<String, String> accountDatabase) {
 		if (accountDatabase.containsKey(username)) {
 			String userpassword = accountDatabase.get(password);
 			if (Objects.equals(password, userpassword)) {
