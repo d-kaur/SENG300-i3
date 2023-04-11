@@ -15,7 +15,9 @@
 
 package com.autovend.software;
 import com.autovend.devices.*;
+
 import com.autovend.products.*;
+
 import com.autovend.software.observers.ReceiptPrinterObserverStub;
 
 import java.util.ArrayList;

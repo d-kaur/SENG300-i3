@@ -13,7 +13,11 @@
  * Robert (William) Engel (30119608)
  */
 
+
 package com.autovend.software.observers;
+
+
+
 import com.autovend.devices.AbstractDevice;
 import com.autovend.devices.ReceiptPrinter;
 import com.autovend.devices.observers.AbstractDeviceObserver;
