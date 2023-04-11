@@ -30,10 +30,10 @@ public class CustomerIO {
         customerMainGUI = new CustomerMainGUI(this,scs, stationNum);
         customerMainGUI.setVisible(false);
         closedGUI = new ClosedGUI(this);
-    	//addItemBrowse = new AddItemBrowseGUI(this,scs);
+    	addItemBrowse = new AddItemBrowseGUI(this,scs);
     	addItemPLU = new AddItemPLUGUI(this,scs);
-    	//addItemText = new AddItemTextCustomer(this,scs);
-        //payIO = new PayIO(itemsbought,scs,this);
+    	addItemText = new AddItemTextCustomer(this,scs);
+        payIO = new PayIO(itemsbought,scs,this);
         this.scs = scs;
         this.stationNum = stationNum;
 
@@ -45,10 +45,10 @@ public class CustomerIO {
 
         preventAccessGUI.setVisible(false);
     	closedGUI.setVisible(false);
-    	//addItemBrowse.setVisible(false);
+    	addItemBrowse.setVisible(false);
     	addItemPLU.setVisible(false);
-    	//addItemText.setVisible(false);
-    	//payIO.setVisible(false);
+    	addItemText.setVisible(false);
+    	payIO.setVisible(false);
 
 
     }
@@ -107,6 +107,10 @@ public class CustomerIO {
     	setAllInvisible();
     	addItemText.setVisible(true);
     }
-    
+    public void showScanItem()
+    {
+        setAllInvisible();
+
+    }
 }
 

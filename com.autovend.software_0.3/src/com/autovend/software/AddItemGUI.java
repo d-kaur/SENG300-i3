@@ -34,7 +34,12 @@ public abstract class AddItemGUI extends JFrame{
 		super(msg);
 		this.parent = parent;
 		this.check = check;
-
+		back.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				back();
+			}
+		});
 	}
 	
 	protected void back() {
