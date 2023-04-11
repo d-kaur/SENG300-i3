@@ -11,14 +11,14 @@ import java.awt.event.ActionListener;
 
 public class PayIO extends JFrame
 {
-	private JFrame mainScreen;
+	private JFrame mainScreen = new JFrame("Pay") ;
 	private PayWithGiftCardIO giftCard;
 	private PayWithDebitIO debitCard;
 	private PayWithCashIO cash;
 	private PurchasedItems itemsbought;
 	private RecieptIO reciept;
 	private CustomerIO parent;
-	
+	private JButton back = new JButton("back");
 	public PayIO(PurchasedItems itemsbought, SelfCheckoutStation scs, CustomerIO parent)
 	{
 		this.itemsbought = itemsbought;
@@ -26,12 +26,18 @@ public class PayIO extends JFrame
 		giftCard = new PayWithGiftCardIO("Pay Gift",scs,itemsbought,this);
 		debitCard = new PayWithDebitIO("Pay Card",scs,itemsbought,this);
 		cash = new PayWithCashIO("Pay Cash",scs,itemsbought,this);
-		
-		add(mainScreen);
-		add(giftCard);
-		add(debitCard);
-		add(cash);
-	
+		back.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				parent.showMainScreen();
+			}
+		});
+		mainScreen.add(back);
+		//add(mainScreen);
+		//add(giftCard);
+		//add(debitCard);
+		//add(cash);
+		showMainScreen();
 		
 	}
 	private void setAllInvisble()

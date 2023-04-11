@@ -27,10 +27,10 @@ public class CustomerIO {
     public CustomerIO(MainController parent, SelfCheckoutStation scs, int stationNum){
         this.parent = parent;
         itemsbought = new PurchasedItems();
-        //preventAccessGUI = new PreventAccessGUI(this);
+        preventAccessGUI = new PreventAccessGUI(this);
         customerMainGUI = new CustomerMainGUI(this,scs, stationNum);
-  
-        closedGUI = new ClosedGUI();
+
+        closedGUI = new ClosedGUI(this);
     	addItemBrowse = new AddItemBrowseGUI(this,scs);
     	addItemPLU = new AddItemPLUGUI(this,scs);
     	addItemText = new AddItemTextCustomer(this,scs);
@@ -70,9 +70,8 @@ public class CustomerIO {
     }
     public void close()
     {
-    	preventAccessGUI.setVisible(false);
-    	customerMainGUI.setVisible(false);
-    	closedGUI.setVisible(true);
+    	//setAllInvisible();
+    	//closedGUI.setVisible(true);
     }
     public void open()
     {

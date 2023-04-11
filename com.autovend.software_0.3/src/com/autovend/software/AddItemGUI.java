@@ -9,9 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
+import javax.swing.*;
 
 import com.autovend.Numeral;
 import com.autovend.PriceLookUpCode;
@@ -31,11 +29,12 @@ public abstract class AddItemGUI extends JFrame{
 	protected CustomerIO parent;
 	protected SelfCheckoutStation check;
 	
-	
+	protected JButton back = new JButton("back");
 	public AddItemGUI(CustomerIO parent,String msg, SelfCheckoutStation check) {
 		super(msg);
 		this.parent = parent;
 		this.check = check;
+
 	}
 	
 	protected void back() {

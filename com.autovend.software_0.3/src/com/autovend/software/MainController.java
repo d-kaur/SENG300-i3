@@ -8,7 +8,7 @@ import com.autovend.devices.SelfCheckoutStation;
 
 public class MainController {
     private AttendantIO attendantIO;
-    private CustomerIO[] customerIO;
+    private CustomerIO[] customerIO = {null,null,null,null,null};
     private Currency currency = Currency.getInstance("CAD");
     private	int[] billDenominations = {5,10,20,50};
     private BigDecimal[] coinDenominations = {new BigDecimal(0.05),new BigDecimal(0.1),
@@ -17,14 +17,17 @@ public class MainController {
     private		int scaleMaximumWeight = 300;
     private		int scaleSensitivity = 1;
     public MainController()
-    {   
-        //for(int x = 0; x < 5; x++)
-        //{
-        //	customerIO[x] = new CustomerIO(this,
-        //	new SelfCheckoutStation(currency,billDenominations,coinDenominations,scaleMaximumWeight,scaleSensitivity), x);
-          //  shutdown(x);
-        //}
+    {
+        int x = 0;
+       // for(int x = 0; x < 0; x++)
+        {
+        customerIO[x] = new CustomerIO(this,
+        new SelfCheckoutStation(currency,billDenominations,coinDenominations,scaleMaximumWeight,scaleSensitivity), x);
+           //shutdown(x);
+        }
+
         attendantIO = new AttendantIO(this);
+
         populateDataBase();
     }
     // add methods that the customer IO needs to change the attendant screen, and vice versa
