@@ -29,6 +29,7 @@ public abstract class AddItemGUI extends JFrame{
 	protected CustomerIO parent;
 	protected SelfCheckoutStation check;
 	
+	
 	protected JButton back = new JButton("back");
 	public AddItemGUI(CustomerIO parent,String msg, SelfCheckoutStation check) {
 		super(msg);

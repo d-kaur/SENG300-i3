@@ -25,6 +25,8 @@ import javax.swing.*;
 	        super("Login");
 	        this.attendantIO = attendantIO;
 
+			setMinimumSize(new Dimension(600,400)); 
+			
 	        // create components
 	        JLabel usernameLabel = new JLabel("Username:");
 	        JLabel passwordLabel = new JLabel("Password:");
