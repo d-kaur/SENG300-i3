@@ -1,0 +1,78 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class MembershipGUI extends JFrame implements ActionListener {
+    private JButton enterMembership = new JButton("Enter Membership");
+    private JButton enterByTyping = new JButton("Enter by Typing");
+    private JButton enterByScanning = new JButton("Enter by Scanning");
+    private JButton enterBySwiping = new JButton("Enter by Swiping");
+    private JButton cancel = new JButton("Cancel");
+    private JLabel nameLabel = new JLabel("");
+    private JPanel cardPanel = new JPanel(new CardLayout());
+    private JPanel mainMenu = new JPanel();
+    private JPanel subMenu = new JPanel();
+
+
+    public MembershipGUI() {
+        initComponents();
+    }
+
+    private void initComponents() {
+        setTitle("Membership Entry");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Card Panel
+        add(cardPanel, BorderLayout.CENTER);
+
+        // Main Panel
+        enterMembership.addActionListener(this);
+        mainMenu.add(enterMembership);
+        cardPanel.add(mainMenu, "main");
+
+        // Submenu Panel
+
+        enterByTyping.addActionListener(this);
+        enterByScanning.addActionListener(this);
+        enterBySwiping.addActionListener(this);
+        cancel.addActionListener(this);
+
+        subMenu.add(enterByTyping);
+        subMenu.add(enterByScanning);
+        subMenu.add(enterBySwiping);
+        subMenu.add(cancel);
+        cardPanel.add(subMenu, "submenu");
+
+        // Name label
+        add(nameLabel, BorderLayout.NORTH);
+
+        // Make the frame visible
+        setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        CardLayout cl = (CardLayout) cardPanel.getLayout();
+        if (e.getSource() == enterMembership) {
+            cl.show(cardPanel, "submenu");
+        } else if (e.getSource() == enterByTyping) {
+            // Handle "Enter by Typing" method
+            String name = JOptionPane.showInputDialog(this, "Enter your name:");
+            if (name != null && !name.trim().isEmpty()) {
+                nameLabel.setText("Member: " + name);
+                cl.show(cardPanel, "main");
+            }
+        }else if (e.getSource() == enterByScanning) {
+            // Handle "Enter by Scanning" method (BarCodeScannerObserver)
+        } else if (e.getSource() == enterBySwiping) {
+            // Handle "Enter by Swiping" method (CardReaderObserver)
+        }else if (e.getSource() == cancel) {
+            cl.show(cardPanel, "main");
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new MembershipGUI());
+    }
+}
