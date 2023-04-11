@@ -18,12 +18,14 @@ public class MainController {
     private		int scaleSensitivity = 1;
     public MainController()
     {   
-        for(int x = 0; x < 5; x++)
-        {
-        	customerIO[x] = new CustomerIO(this, 
-        	new SelfCheckoutStation(currency,billDenominations,coinDenominations,scaleMaximumWeight,scaleSensitivity), x);
-        }
+        //for(int x = 0; x < 5; x++)
+        //{
+        //	customerIO[x] = new CustomerIO(this,
+        //	new SelfCheckoutStation(currency,billDenominations,coinDenominations,scaleMaximumWeight,scaleSensitivity), x);
+          //  shutdown(x);
+        //}
         attendantIO = new AttendantIO(this);
+        populateDataBase();
     }
     // add methods that the customer IO needs to change the attendant screen, and vice versa
  
@@ -54,7 +56,7 @@ public class MainController {
     }
     public void populateDataBase()
     {
-    	
+    	LoginLogout.createAccount("victor","han");
     }
     public static void main(String args[])
     {

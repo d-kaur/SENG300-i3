@@ -19,9 +19,9 @@ import javax.swing.*;
 	    private JButton loginButton;
 	    private JButton errorButton;
 	    private AttendantIO attendantIO;
-	    
+	    private JPanel contentPane;
 
-	    public LoginLogoutGUI(AttendantIO attendantIO) {
+		public LoginLogoutGUI(AttendantIO attendantIO) {
 	        super("Login");
 	        this.attendantIO = attendantIO;
 
@@ -33,26 +33,14 @@ import javax.swing.*;
 	        passwordField = new JPasswordField(20);
 	        
 	        loginButton = new JButton("Login");
-	        loginButton.addActionListener(new ActionListener() {    
-	            @Override
-	            public void actionPerformed(ActionEvent e) {
-	                if(LoginLogout.verifyLogin(new String(usernameField.getText()), new String(passwordField.getPassword())))
-	                {
-	                	attendantIO.displayMainScreen();
-	                }
-	                else {
-	                	 //JOptionPane.showMessageDialog(this, "Invalid username or password.");
-	    	        }
-	              }
-	           }
-	        );
+
 	      
 	        errorButton = new JButton("Error");
 	        //errorButton.addActionListener(this);
 	        errorButton.setVisible(false); // hide the error button initially
 
 	        // create layout and add components
-	        JPanel contentPane = new JPanel(new GridLayout(3, 2));
+	         contentPane = new JPanel(new GridLayout(3, 2));
 	        contentPane.add(usernameLabel);
 	        contentPane.add(usernameField);
 	        
@@ -61,11 +49,20 @@ import javax.swing.*;
 	        
 	        contentPane.add(errorButton);
 	        contentPane.add(loginButton);
-
+			loginButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if (LoginLogout.verifyLogin(new String(usernameField.getText()), new String(passwordField.getPassword()))) {
+						attendantIO.displayMainScreen();
+					} else {
+						errorButton.setVisible(true);
+					}
+				}}
+			);
 	        // set frame properties
 	        // setContentPane(contentPane);
 	        pack();
-	        
+	        add(contentPane);
 	        setLocationRelativeTo(null);
 	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        setVisible(true);
