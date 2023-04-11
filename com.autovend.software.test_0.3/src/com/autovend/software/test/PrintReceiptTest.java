@@ -24,6 +24,8 @@ import com.autovend.devices.SelfCheckoutStation;
 import com.autovend.external.ProductDatabases;
 import com.autovend.products.BarcodedProduct;
 import com.autovend.software.*;
+import com.autovend.software.observers.ReceiptPrinterObserverStub;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
