@@ -3,10 +3,11 @@ package com.autovend.software;
 
 public class MainController {
     private AttendantIO attendantIO;
-    private CustomerIO customerIO;
+    private CustomerIO[] customerIO;
     public MainController()
     {   
-        customerIO = new CustomerIO(this);
+        customerIO = {new CustomerIO(this),new CustomerIO(this),
+        		new CustomerIO(this),new CustomerIO(this),new CustomerIO(this)};
         attendantIO = new AttendantIO(this);
     }
     // add methods that the customer IO needs to change the attendant screen, and vice versa
@@ -16,14 +17,27 @@ public class MainController {
     	
 
     }
-    public void permitCustomer()
+    public void approve(int station)
     {
-        customerIO.showPermitScreen();
+    	customerIO[station].approve();
     }
-    public void Approve(int station)
+    public void open(int station)
     {
-    	
+    	customerIO[station].open();
     }
+    public void permit(int station)
+    {
+    	customerIO[station].permit();
+    }
+    public void prevent(int station)
+    {
+    	customerIO[station].prevent();
+    }
+    public void shutdown(int station)
+    {
+    	customerIO[station].shutdown();
+    }
+    
     public static void main(String args[])
     {
     	MainController main = new MainController();

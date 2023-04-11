@@ -26,10 +26,12 @@ public class CustomerMainGUI extends JFrame implements ActionListener{
 	private JPanel payPanel;
 	private JPanel displayPanel;
 	private CustomerIO parent;
-	//private 
-
+	private AddItemBrowseGUI addItemBrowse;
+	private AddItemPLUGUI addItemPLU;
+	private AddItemTextCustomer addItemText;
+	
 	public CustomerMainGUI(CustomerIO customerIO){
-        parent s= customerIO;
+        parent = customerIO;
         buttonPanel = new JPanel();
         payPanel = new JPanel();
         displayPanel = new JPanel();

@@ -87,7 +87,7 @@ public class AttendantMainGUI extends JFrame {
         preventButton = new JButton("Prevent");
         preventButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                parent.disable(stationSelected);
+                parent.prevent(stationSelected);
              }
             
         });

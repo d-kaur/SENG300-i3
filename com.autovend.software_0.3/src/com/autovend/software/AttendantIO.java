@@ -68,7 +68,7 @@ public class AttendantIO {
     {
     	parent.startup(station);
     }
-    public void disable(int station)
+    public void prevent(int station)
     {
     	parent.disable(station);
     }
