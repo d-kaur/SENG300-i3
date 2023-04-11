@@ -23,17 +23,15 @@ import static com.autovend.software.PurchasedItems.addBag;
 // extend the Parent class
 public class AddOrRemoveBags implements ReusableBagDispenserObserver {
 
-    private ReusableBagDispenser dispenser;
     private SelfCheckoutStation station;
 
-    public AddOrRemoveBags(SelfCheckoutStation scs, ReusableBagDispenser dispenser) {
-        this.station = station;
-        this.dispenser = dispenser;
+    public AddOrRemoveBags(SelfCheckoutStation scs) {
+        this.station = scs;
     }
 
     public void purchaseBag(int BagNum) throws EmptyException {
         for (int i = 0; i < BagNum; i++) {
-            addBag(dispenser.dispense());
+            addBag(this.station.bagDispenser.dispense());
         }
     }
 
@@ -60,11 +58,11 @@ public class AddOrRemoveBags implements ReusableBagDispenserObserver {
 
     @Override
     public void reactToEnabledEvent(AbstractDevice<? extends AbstractDeviceObserver> device) {
-        this.dispenser.enable();
+        this.station.bagDispenser.enable();
     }
 
     @Override
     public void reactToDisabledEvent(AbstractDevice<? extends AbstractDeviceObserver> device) {
-        this.dispenser.disable();
+        this.station.bagDispenser.disable();
     }
 }
