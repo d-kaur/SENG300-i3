@@ -47,13 +47,13 @@ public class AddItemPLUGUI extends AddItemGUI{
 	
 	public AddItemPLUGUI(CustomerIO parent,SelfCheckoutStation scs) {
 		super(parent,"Add Item by PLU",scs);
+
 		success = false;
 		check.screen.enable();
-		
-		frame = new JFrame("Add Item by PLU");
-		frame.setSize(1280,800);
+
+
+		setSize(1280,800);
 		PLU = "";
-		frame.enable();
 		check.scale.enable();
 		
 		box = new JComboBox<String>(new String[] {""});
@@ -72,7 +72,7 @@ public class AddItemPLUGUI extends AddItemGUI{
 		
 		});
 		
-		frame.add(box);
+		add(box);
 		
 		
 		backButton = new Button("BACK");
@@ -80,19 +80,16 @@ public class AddItemPLUGUI extends AddItemGUI{
 
 			public void actionPerformed(ActionEvent e) {
 				
-				check.scale.disable();
-				box.disable();
-				frame.removeAll();
-				frame.disable();
-				System.exit(0);
+				parent.showMainScreen();
 			}
 			
 		});
 		backButton.setBounds(x,y+25, 30,15);
 		check.screen.setVisible(true);
-		frame.add(backButton);
-		frame.setVisible(false);
-		frame.setLayout(null);
+		add(backButton);
+		setVisible(false);
+		setLayout(null);
+
 	}
 	
 	/**
