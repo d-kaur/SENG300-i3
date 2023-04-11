@@ -23,7 +23,7 @@ public class MainController {
         {
            customerIO[x] = new CustomerIO(this,
             new SelfCheckoutStation(currency,billDenominations,coinDenominations,scaleMaximumWeight,scaleSensitivity), x);
-           //shutdown(x);
+           shutdown(x);
         }
 
         attendantIO = new AttendantIO(this);

@@ -26,12 +26,12 @@ public class CustomerIO {
 
         this.parent = parent;
         itemsbought = new PurchasedItems();
-        //preventAccessGUI = new PreventAccessGUI(this);
+        preventAccessGUI = new PreventAccessGUI(this);
         customerMainGUI = new CustomerMainGUI(this,scs, stationNum);
         customerMainGUI.setVisible(false);
         closedGUI = new ClosedGUI(this);
     	//addItemBrowse = new AddItemBrowseGUI(this,scs);
-    	//addItemPLU = new AddItemPLUGUI(this,scs);
+    	addItemPLU = new AddItemPLUGUI(this,scs);
     	//addItemText = new AddItemTextCustomer(this,scs);
         //payIO = new PayIO(itemsbought,scs,this);
         this.scs = scs;
@@ -42,18 +42,15 @@ public class CustomerIO {
     private void setAllInvisible()
     {
     	customerMainGUI.setVisible(false);
-    	/*
+
         preventAccessGUI.setVisible(false);
     	closedGUI.setVisible(false);
-    	addItemBrowse.setVisible(false);
+    	//addItemBrowse.setVisible(false);
     	addItemPLU.setVisible(false);
-    	addItemText.setVisible(false);
-    	payIO.setVisible(false);
+    	//addItemText.setVisible(false);
+    	//payIO.setVisible(false);
 
-    	 */
-    }
-    private void restore() {
-    	
+
     }
 //    shows an screen indicating that the station is not working
     public void prevent()
@@ -65,8 +62,7 @@ public class CustomerIO {
     }
     public void permit()
     {
-    	
-    	preventAccessGUI.setVisible(false);
+    	setAllInvisible();
     	
     	customerMainGUI.setVisible(true);
     	
