@@ -12,18 +12,18 @@ import java.awt.event.*;
 import javax.swing.*;
 
 	//using jframe
-	public class LoginLogoutGUI extends JFrame implements ActionListener {
+	public class LoginLogoutGUI extends JFrame {
 	    private JTextField usernameField;
 	    private JPasswordField passwordField;
 	    
 	    private JButton loginButton;
 	    private JButton errorButton;
-	    
+	    private AttendantIO attendantIO;
 	    
 
-	    public LoginLogoutGUI() {
+	    public LoginLogoutGUI(AttendantIO attendantIO) {
 	        super("Login");
-	        
+	        this.attendantIO = attendantIO;
 
 	        // create components
 	        JLabel usernameLabel = new JLabel("Username:");
@@ -33,7 +33,19 @@ import javax.swing.*;
 	        passwordField = new JPasswordField(20);
 	        
 	        loginButton = new JButton("Login");
-	        loginButton.addActionListener(this);
+	        loginButton.addActionListener(new ActionListener() {    
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                if(LoginLogout.verifyLogin(usernameField.getText();, passwordField.getPassword()))
+	                {
+	                	attendantIO.loginSuccess();
+	                }
+	                else {
+	                	 JOptionPane.showMessageDialog(this, "Invalid username or password.");
+	    	        }
+	              }
+	           }
+	        });
 	      
 	        errorButton = new JButton("Error");
 	        errorButton.addActionListener(this);
@@ -59,27 +71,8 @@ import javax.swing.*;
 	        setVisible(true);
 	    }
 
-	    @Override
-	    public void actionPerformed(ActionEvent e) {
-	    	
-	    	HashMap accountDatabase = new HashMap<String, String>();
-	        
-	        LoginLogout.createAccount("username", "password", accountDatabase);
-	    	
-	        String username = usernameField.getText();
-	        String password = new String(passwordField.getPassword());
-
-	        if (LoginLogout.verifyLogin(username, password, accountDatabase) == true) {
-	            JOptionPane.showMessageDialog(this, "Login successful.");
-	            dispose(); // close the login window
-	        } 
-	        else {
-	            JOptionPane.showMessageDialog(this, "Invalid username or password.");
-	        }
-	        
-	    }
 	    
-	    public static void main(String[] args) {
-	        LoginLogoutGUI loginGUI = new LoginLogoutGUI();
-	    }
+	    //public static void main(String[] args) {
+	      //  LoginLogoutGUI loginGUI = new LoginLogoutGUI();
+	    //}
 	}

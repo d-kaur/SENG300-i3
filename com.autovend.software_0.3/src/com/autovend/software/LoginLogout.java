@@ -7,9 +7,13 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class LoginLogout {
-
+	private static HashMap<String, String> accountDatabase;
+	static
+	{
+		accountDatabase = new HashMap<String, String>();
+	}
 	
-	public static boolean verifyLogin(String username, String password, HashMap<String, String> accountDatabase){
+	public static boolean verifyLogin(String username, String password){
 		if (accountDatabase.containsKey(username)) {
 			String userpassword = accountDatabase.get(username);
 			if (Objects.equals(password, userpassword)) {
@@ -19,7 +23,7 @@ public class LoginLogout {
 		return false;
 	}
 	
-	public static void createAccount(String username, String password, HashMap<String, String> accountDatabase){
+	public static void createAccount(String username, String password){
 		if (accountDatabase.containsKey(username)) {
 			System.out.println("An account with this username already exists");
 		}
@@ -28,7 +32,7 @@ public class LoginLogout {
 		}
 	}
 	
-	public static void removeAccount(String username, String password, HashMap<String, String> accountDatabase) {
+	public static void removeAccount(String username, String password) {
 		if (accountDatabase.containsKey(username)) {
 			String userpassword = accountDatabase.get(password);
 			if (Objects.equals(password, userpassword)) {
@@ -36,7 +40,7 @@ public class LoginLogout {
 			}
 		}
 	}
-	
+	/*
 	public class AttendantIO {
    		private boolean loggedIn;
 
@@ -60,6 +64,6 @@ public class LoginLogout {
          	  System.out.println("You are not currently logged in.");
       		}
       	 }
-   }
+   }*/
 
 }

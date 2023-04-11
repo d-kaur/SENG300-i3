@@ -17,9 +17,14 @@ public class MainController {
     {
         
     }
+    public void Approve(int station)
+    {
+    	
+    }
     public static void main(String args[])
     {
     	MainController main = new MainController();
  
     }
+    
 }
