@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.swing.JLabel;
+
 import com.autovend.Bill;
 import com.autovend.Coin;
 import com.autovend.devices.*;
@@ -34,10 +36,14 @@ import com.autovend.devices.SelfCheckoutStation;
 
 public class WeightDiscrepancy implements ElectronicScaleObserver{
     private SelfCheckoutStation selfCheckoutStation;
+    private AttendantMainGUI Agui;
+    private CustomerMainGUI Cgui;
 
-    public WeightDiscrepancy(SelfCheckoutStation selfCheckoutStation)
+    public WeightDiscrepancy(SelfCheckoutStation selfCheckoutStation, AttendantMainGUI Agui, CustomerMainGUI Cgui)
     {
         this.selfCheckoutStation = selfCheckoutStation;
+        this.Agui = Agui;
+        this.Cgui = Cgui;
         selfCheckoutStation.baggingArea.register(this);
     }
     @Override
@@ -52,6 +58,10 @@ public class WeightDiscrepancy implements ElectronicScaleObserver{
             {
                 selfCheckoutStation.handheldScanner.disable();
                 selfCheckoutStation.mainScanner.disable();
+                //Needs to disable gui
+                //needs to specify which station?
+                Agui.showAlert("Weight discrepancy");
+                	
                 // throw exception to IO?
             }
 
