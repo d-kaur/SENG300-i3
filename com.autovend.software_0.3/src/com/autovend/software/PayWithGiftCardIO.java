@@ -13,5 +13,11 @@ public class PayWithGiftCardIO extends  PayGUI
 	private JButton back = new JButton("back");
 	 public PayWithGiftCardIO(String msg, SelfCheckoutStation station, PurchasedItems list, PayIO parent) {
 			super(msg,station,list,parent);
+			back.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+
+				}
+			});
 		}
 }
