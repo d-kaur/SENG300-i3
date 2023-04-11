@@ -55,16 +55,21 @@ public class WeightDiscrepancy implements ElectronicScaleObserver{
                 selfCheckoutStation.mainScanner.enable();
             }
             else
-            {
+            {	
+            	//Block System
                 selfCheckoutStation.handheldScanner.disable();
                 selfCheckoutStation.mainScanner.disable();
-                //Needs to disable gui
-                //needs to specify which station?
+                //Needs to disable gui **except for DoNotPlaceItemInBaggingArea option
                 Agui.showAlert("Weight discrepancy");
                 	
-                // throw exception to IO?
             }
 
+    }
+    
+    public void accept() {
+    	selfCheckoutStation.handheldScanner.enable();
+        selfCheckoutStation.mainScanner.enable();
+        Agui.showAlert("");
     }
 
     @Override
