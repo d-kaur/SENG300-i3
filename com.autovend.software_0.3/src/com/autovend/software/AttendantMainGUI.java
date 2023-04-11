@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 public class AttendantMainGUI extends JFrame {
 
     //Setting up button for each self check out station
-    private int stationSelected;
+    private int stationSelected = 0;
     private JButton stationButton;
 
     //Setting up attendant action buttons 
@@ -30,7 +30,16 @@ public class AttendantMainGUI extends JFrame {
     private boolean[] permitted = {false,false,false,false,false};
     private static AttendantIO parent;
     
+    private CustomerMainGUI station1 = null;
+    private CustomerMainGUI station2 = null;
+    private CustomerMainGUI station3 = null;
+    private CustomerMainGUI station4 = null;
+    private CustomerMainGUI station5 = null;
+    
+    private CustomerMainGUI[] stations  = {station1, station2, station3, station4, station5};
+    
     public AttendantMainGUI(AttendantIO parent) {
+    	//System.out.println(stationSelected);
         this.parent = parent;
         JFrame frame = new JFrame("Attendant Self Checkout Station");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,13 +55,26 @@ public class AttendantMainGUI extends JFrame {
         
 
         //Setting up contents of Panel
-
         //Adding station buttons to panel and including action listener to buttons 
         for (int i = 0; i < 5; i++) {
             JButton stationButton = new JButton(String.valueOf(i + 1));
             final int index = i; 
             stationButton.addActionListener(e -> {
-                stationSelected = index;
+                stationSelected = index + 1;
+                System.out.println(stationSelected);
+                if (stations[stationSelected - 1] != null)
+                {
+                	for (CustomerMainGUI station: stations)
+                	{
+                		if (station != null)
+                		{
+                			station.setVisible(false);
+                		}	
+                	}
+                	stations[stationSelected - 1].setVisible(true);
+                }
+               
+                
             });
             StationPanel.add(stationButton);
         }
@@ -62,6 +84,94 @@ public class AttendantMainGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //removeItemFrame removeItem = new removeItemFrame();
                 //removeItemframe.display();
+            	switch (stationSelected)
+            	{
+            	case 0:      
+            		System.out.println("Please select a station first");
+            		break;
+            	
+            	case 1:            		           		
+            		if (station1 == null)
+            		{
+            			//System.out.println("Starting 1");
+            			for (CustomerMainGUI station: stations)
+                    	{
+                    		if (station != null)
+                    		{
+                    			station.setVisible(false);
+                    		}	
+                    	}
+            			stations[0] = new CustomerMainGUI("Station 1");
+            			
+            		}
+            		break;
+            	
+            	case 2:
+            	
+            		if (station2 == null)
+            		{
+            			//System.out.println("Starting 2");
+            			for (CustomerMainGUI station: stations)
+                    	{
+                    		if (station != null)
+                    		{
+                    			station.setVisible(false);
+                    		}	
+                    	}
+            			stations[1] = new CustomerMainGUI("Station 2");
+            		}
+            		break;
+            	
+            	case 3:
+            	
+            		if (station3 == null)
+            		{
+            			//System.out.println("Starting 3");
+            			for (CustomerMainGUI station: stations)
+                    	{
+                    		if (station != null)
+                    		{
+                    			station.setVisible(false);
+                    		}	
+                    	}
+            			stations[2] = new CustomerMainGUI("Station 3");
+            		}
+            		break;
+            	
+            	case 4:
+            	
+            		if (station4 == null)
+            		{
+            			//System.out.println("Starting 4");
+            			for (CustomerMainGUI station: stations)
+                    	{
+                    		if (station != null)
+                    		{
+                    			station.setVisible(false);
+                    		}	
+                    	}
+            			stations[3] = new CustomerMainGUI("Station 4");
+            		}
+            		break;
+            	
+            	case 5:
+            	
+            		if (station5 == null)
+            		{
+            			//System.out.println("Starting 5");
+            			for (CustomerMainGUI station: stations)
+                    	{
+                    		if (station != null)
+                    		{
+                    			station.setVisible(false);         
+                    		}	
+                    	}
+            			stations[4] = new CustomerMainGUI("Station 5");
+            		}
+            		break;
+            	
+            	default:
+            	}
              }
             
         });
@@ -80,6 +190,7 @@ public class AttendantMainGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //removeItemFrame removeItem = new removeItemFrame();
                 //removeItemframe.display();
+    
              }
             
         });
