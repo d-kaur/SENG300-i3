@@ -1,4 +1,6 @@
 
+
+
 package com.autovend.software;
 import javax.swing.*;
 import java.awt.*;
@@ -26,10 +28,10 @@ public class AttendantMainGUI extends JFrame {
     private JButton approveExceptionButton;
 
     private JButton addInkPaperButton;
-    public JLabel alert;
+    private JLabel alert;
     private boolean[] open = {false,false,false,false,false};
     private boolean[] permitted = {false,false,false,false,false};
-    private static AttendantIO parent;
+    private AttendantIO parent;
     
     public AttendantMainGUI(AttendantIO parent) {
         this.parent = parent;
@@ -188,12 +190,5 @@ public class AttendantMainGUI extends JFrame {
       JOptionPane.showMessageDialog(this, message, "Alert", JOptionPane.INFORMATION_MESSAGE);
   }
 
-   // public static void main(String[] args){
-   //   new AttendantMainGUI(parent);
-   //}
-
-
-    
 }
-
 
