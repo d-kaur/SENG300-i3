@@ -13,7 +13,8 @@ import javax.swing.JFrame;
 public class CustomerMainGUI extends JFrame implements ActionListener{
 
 
-    public CustomerMainGUI(){
+    public CustomerMainGUI(String title){
+    	this.setTitle(title);
         JPanel buttonPanel = new JPanel();
         JPanel payPanel = new JPanel();
         JPanel displayPanel = new JPanel();
@@ -70,13 +71,13 @@ public class CustomerMainGUI extends JFrame implements ActionListener{
             }
         });
         //payButton.setBounds();
-        AttendantMainGUI alert = new AttendantMainGUI(null);
+        //AttendantMainGUI alert = new AttendantMainGUI(null);
         JButton useBag = new JButton("Use Personal Bag");
         useBag.addActionListener(new ActionListener() {    
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
-                alert.showAlert("Alert:Use Personal Bag");
+                //alert.showAlert("Alert:Use Personal Bag");
                 
             }
         });
@@ -125,10 +126,11 @@ public class CustomerMainGUI extends JFrame implements ActionListener{
     }
         
   
-
+/*
     public static void main(String[] args){
         new CustomerMainGUI();
         }
+*/
 
    
 }
