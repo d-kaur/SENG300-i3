@@ -1,8 +1,6 @@
 
 package com.autovend.software;
-
 import java.awt.Font;
-
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
