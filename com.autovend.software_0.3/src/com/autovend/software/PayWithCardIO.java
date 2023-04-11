@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 public class PayWithCardIO extends JFrame
 {
     private PayIO parent;
+    private JButton back = new JButton("back");
     public PayWithCardIO(PayIO parent,String msg)
     {
         super(msg);
