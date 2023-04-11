@@ -54,7 +54,7 @@ public abstract class PayGUI extends JFrame{
     }
     protected void back()
     {
-    	
+    	parent.showMainScreen();
     }
     public void done() {
     	parent.done();
