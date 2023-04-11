@@ -29,7 +29,7 @@ import com.autovend.software.observers.KeyBoardObserverStub;
  * Wasay Siddiqi
  *
  */
-public class AddItemPLUGUI extends AddItem{
+public class AddItemPLUGUI extends AddItem, AddItemGUI{
 	private JComboBox<String> box;
 	private Button addButton, backButton;
 	private Keyboard keyboard;
