@@ -1,8 +1,12 @@
+//NAME abhiroop kaur
+//UCID 30152829
+
 package com.autovend.software;
-<<<<<<< Updated upstream
+
+
 public class CustomerMainGUI {
     
-=======
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -21,10 +25,11 @@ public class CustomerMainGUI extends JFrame implements ActionListener{
     private JPanel buttonPanel;
 	private JPanel payPanel;
 	private JPanel displayPanel;
+  private CustomerIO parent;
 
 
-
-	public CustomerMainGUI(){
+	public CustomerMainGUI(CustomerIO customerIO){
+        parent s= customerIO;
         buttonPanel = new JPanel();
         payPanel = new JPanel();
         displayPanel = new JPanel();
@@ -131,7 +136,7 @@ public class CustomerMainGUI extends JFrame implements ActionListener{
     
 //	shows that the selfcheckout is not available for use
     public static void preventScreen(CustomerMainGUI mainGui) {
-        mainGui.buttonPanel.setVisible(false);
+        parent.preventScreesetVisible(false);
         mainGui.displayPanel.setVisible(false);
         mainGui.payPanel.setVisible(false);
         
@@ -142,25 +147,4 @@ public class CustomerMainGUI extends JFrame implements ActionListener{
         
     }
     
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
-    }
-        
-  
-    
 
-    public static void main(String[] args){
-        CustomerMainGUI mainGui = new CustomerMainGUI();
-        
-        preventScreen(mainGui);
-
-//        mainGui.buttonPanel.setVisible(false);
-//        mainGui.displayPanel.setVisible(false);
-//        mainGui.payPanel.setVisible(false);
-        }
-
-   
->>>>>>> Stashed changes
-}

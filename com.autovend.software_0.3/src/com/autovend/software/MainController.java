@@ -1,4 +1,6 @@
+
 package com.autovend.software;
+
 public class MainController {
     private AttendantIO attendantIO;
     private CustomerIO customerIO;
@@ -18,4 +20,15 @@ public class MainController {
     {
         customerIO.showPermitScreen();
     }
+    public void Approve(int station)
+    {
+    	
+    }
+    public static void main(String args[])
+    {
+    	MainController main = new MainController();
+ 
+    }
+    
 }
+

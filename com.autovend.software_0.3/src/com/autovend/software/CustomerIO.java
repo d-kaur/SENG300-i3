@@ -1,3 +1,4 @@
+
 package com.autovend.software;
 
 import java.awt.Font;
@@ -18,6 +19,9 @@ public class CustomerIO {
 
     public CustomerIO(MainController parent){
         this.parent = parent;
+        preventAccessGUI = new PreventAccessGUI();
+        customerMainGUI = new CustomerMainGUI(this);
+        
     }
 //    shows an screen indicating that the station is not working
     public void showPreventScreen()
@@ -41,3 +45,4 @@ public class CustomerIO {
 		PreventAccessGUI gui = new PreventAccessGUI();
 	}
 }
+
