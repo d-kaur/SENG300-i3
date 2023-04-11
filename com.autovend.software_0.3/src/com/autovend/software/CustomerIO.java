@@ -16,13 +16,13 @@ public class CustomerIO {
     // we might need this to restore the correct screen
     // private String state;
 	private SelfCheckoutStation scs;
-
-    public CustomerIO(MainController parent, SelfCheckoutStation scs){
+	int stationNum;
+    public CustomerIO(MainController parent, SelfCheckoutStation scs, int stationNum){
         this.parent = parent;
         preventAccessGUI = new PreventAccessGUI();
-        customerMainGUI = new CustomerMainGUI(this);
+        customerMainGUI = new CustomerMainGUI(this,scs, stationNum);
         this.scs = scs;
-        
+        this.stationNum = stationNum;
     }
 //    shows an screen indicating that the station is not working
     public void prevent()
@@ -52,8 +52,9 @@ public class CustomerIO {
     	ClosedGUI.setVisible(false);
     	prevent();
     }
-    public static void main(String[] args) {
-		PreventAccessGUI gui = new PreventAccessGUI();
-	}
+    public void done()
+    {
+    	parent.finish(stationNum);
+    }
 }
 

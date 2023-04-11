@@ -23,17 +23,19 @@ import com.autovend.devices.SimulationException;
 import com.autovend.software.observers.PayObserver;
 
 
-public abstract class Pay extends AbstractDevice<PayObserver> {
+public abstract class Pay{
     protected SelfCheckoutStation station;
     protected BigDecimal amountDue;
     protected PurchasedItems itemsBought;
-
+    protected BigDecimal amountPaid;
+    protected PayIO parent;
     public Pay(SelfCheckoutStation station, PurchasedItems list) {
         if (station == null) {
             throw new SimulationException(new NullPointerException("Station cannot be null."));
         }
         this.station = station;
         itemsBought = list;
+        amountPaid = new BigDecimal(0);
         amountDue = itemsBought.getAmountLeftToPay();
     }
 

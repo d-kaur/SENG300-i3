@@ -6,8 +6,10 @@ public class MainController {
     private CustomerIO[] customerIO;
     public MainController()
     {   
-        customerIO = {new CustomerIO(this),new CustomerIO(this),
-        		new CustomerIO(this),new CustomerIO(this),new CustomerIO(this)};
+        for(int x = 0; x < 5; x++)
+        {
+        	customerIO[x] = new CustomerIO(this, new SelfCheckoutStation(), x);
+        }
         attendantIO = new AttendantIO(this);
     }
     // add methods that the customer IO needs to change the attendant screen, and vice versa
@@ -37,7 +39,10 @@ public class MainController {
     {
     	customerIO[station].shutdown();
     }
-    
+    public void finish(int station)
+    {
+    	customerIO[station] = new CustomerIO(this, new SelfCheckoutStation(), station);
+    }
     public static void main(String args[])
     {
     	MainController main = new MainController();

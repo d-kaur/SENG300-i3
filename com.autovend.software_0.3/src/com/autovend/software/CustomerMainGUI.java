@@ -19,7 +19,7 @@ import javax.swing.JFrame;
  * @author turec
  *
  */
-public class CustomerMainGUI extends JFrame implements ActionListener{
+public class CustomerMainGUI extends JFrame{
 
 
     private JPanel buttonPanel;
@@ -29,14 +29,18 @@ public class CustomerMainGUI extends JFrame implements ActionListener{
 	private AddItemBrowseGUI addItemBrowse;
 	private AddItemPLUGUI addItemPLU;
 	private AddItemTextCustomer addItemText;
+	private PayIO payIO;
+	private PurchasedItems itemsbought;
 	
-	public CustomerMainGUI(CustomerIO customerIO){
+	public CustomerMainGUI(CustomerIO customerIO , SelfCheckoutStation scs, int stationNum){
         parent = customerIO;
+        itemsbought = new PurchasedItems();
+        this.stationNum = stationNum;
         buttonPanel = new JPanel();
         payPanel = new JPanel();
         displayPanel = new JPanel();
         setMinimumSize(new Dimension(650, 700)); //set the size of the frame
-
+       
 
         //set up the buttons
         JButton scanButton = new JButton("Add by Scanning");//add action listener to this button
@@ -135,7 +139,7 @@ public class CustomerMainGUI extends JFrame implements ActionListener{
         setVisible(true);   
         
     }
-    
+    /*
 //	shows that the selfcheckout is not available for use
     public static void preventScreen(CustomerMainGUI mainGui) {
         parent.preventScreesetVisible(false);
@@ -149,4 +153,11 @@ public class CustomerMainGUI extends JFrame implements ActionListener{
         
     }
     
+	*/
+	public done()
+	{
+		parent.done();
+	}
+}	
+	
 
