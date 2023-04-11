@@ -59,6 +59,6 @@ public class AddOrRemoveBags extends AddItem{
     public void addOwnBag(double bagWeight) {
         Bag ownBag = new Bag("Own Bag", new BigDecimal(0.000001), bagWeight);
         addBag(ownBag);
-        PurchasedItems.addAmountPaid(ownBag.getPrice()); // This is done to avoid the exception thrown by the addBag method as the price cannot be zero
+        itemsBought.addAmountPaid(ownBag.getPrice()); // This is done to avoid the exception thrown by the addBag method as the price cannot be zero
     }
 }

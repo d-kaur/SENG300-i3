@@ -12,7 +12,11 @@
  * Sara Dhuka (30124117)
  * Robert (William) Engel (30119608)
  */
+
+
 package com.autovend.software.observers;
+
+
 
 import com.autovend.devices.AbstractDevice;
 import com.autovend.devices.ReceiptPrinter;

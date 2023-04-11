@@ -14,7 +14,6 @@
  */
 
 package com.autovend.software.test;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -59,7 +58,7 @@ public class ScanItemsTest {
 	private WeightDiscrepancy weightDiscrepancy;
 	private ArrayList<BarcodedProduct> itemList;
 	private boolean scanFailed1, scanFailed2, scanFailed3;
-	
+	private PurchasedItems itemsBought;
 	// initializing some barcodes to use during tests
 	Numeral[] n = {Numeral.one, Numeral.two, Numeral.three};
 	Numeral[] m = {Numeral.two, Numeral.three, Numeral.one};
@@ -117,7 +116,7 @@ public class ScanItemsTest {
 		
 		// initialize constructor and add each product to the list of products being scanned
 		scanItems = new ScanItems(selfCheckoutStation);
-		weightDiscrepancy = new WeightDiscrepancy(selfCheckoutStation);
+		weightDiscrepancy = new WeightDiscrepancy(selfCheckoutStation, itemsBought);
 		
 		//register the observer and enable scanners
 		selfCheckoutStation.mainScanner.enable();
@@ -132,7 +131,7 @@ public class ScanItemsTest {
 	@After
 	public void tearDown() {
 		selfCheckoutStation = null;
-		PurchasedItems.reset();
+		itemsBought.reset();
 	}
 	
 	@Test
@@ -154,7 +153,7 @@ public class ScanItemsTest {
 		expectedCartPrice = expectedCartPrice.add(itemProduct2.getPrice());
 		selfCheckoutStation.baggingArea.add(unitItem2);
 		
-		Assert.assertEquals(expectedCartPrice, PurchasedItems.getTotalPrice());
+		Assert.assertEquals(expectedCartPrice, itemsBought.getTotalPrice());
 	}
 	
 	// make sure the baggingArea total weight matches the expected weight
@@ -256,8 +255,8 @@ public class ScanItemsTest {
 		scanFailed2 = selfCheckoutStation.mainScanner.scan(unitItem2);
 		}
 		selfCheckoutStation.baggingArea.add(unitItem2);
-		Assert.assertEquals(itemProduct1, PurchasedItems.getListOfProducts().get(0));
-		Assert.assertEquals(itemProduct2, PurchasedItems.getListOfProducts().get(1));
+		Assert.assertEquals(itemProduct1, itemsBought.getListOfProducts().get(0));
+		Assert.assertEquals(itemProduct2, itemsBought.getListOfProducts().get(1));
 	}
 	
 	@Test
