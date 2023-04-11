@@ -14,11 +14,41 @@
  */
 package com.autovend.software;
 
-import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.autovend.devices.SelfCheckoutStation;
+import com.autovend.devices.SimulationException;
 
 
-public class Membership {
+public abstract class Membership {
 
+	protected SelfCheckoutStation selfCheckoutStation;
+	private static Map<String, MemberData> members = new HashMap<>();
+	
+	public Membership(SelfCheckoutStation selfCheckoutStation) {
+		if (selfCheckoutStation == null) {
+            throw new SimulationException(new NullPointerException("Station cannot be null"));
+        }
+		this.selfCheckoutStation = selfCheckoutStation;
+	}
+	
+	public static void addMember(String memberName, String memberNumber) throws Exception {
+		if (memberName == null || memberNumber == null) {
+            throw new SimulationException(new NullPointerException("Membership info cannot be null"));
+        }
+		isValid(memberNumber);
+		MemberData newMember = new MemberData(memberName, memberNumber);
+		members.put(memberNumber, newMember);
+	}
+	
+	public static MemberData lookupMember(String memberNumber) throws Exception {
+		isValid(memberNumber);
+		if (members.containsKey(memberNumber)) {
+			return members.get(memberNumber);
+		} else throw new Exception("Member number not linked to existing member");
+	}
+	
     //Membership number needs to be a string of length 10 and should only have digits from 0 to 9
     //this is the criteria for membership number to be considered valid
     public static void isValid(String membershipNumber) throws Exception {
