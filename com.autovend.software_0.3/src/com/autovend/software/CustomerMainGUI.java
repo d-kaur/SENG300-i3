@@ -26,10 +26,6 @@ public class CustomerMainGUI extends JFrame{
 	private JPanel payPanel;
 	private JPanel displayPanel;
 	private CustomerIO parent;
-	private AddItemBrowseGUI addItemBrowse;
-	private AddItemPLUGUI addItemPLU;
-	private AddItemTextCustomer addItemText;
-	private PayIO payIO;
 	private PurchasedItems itemsbought;
 	
 	public CustomerMainGUI(CustomerIO customerIO , SelfCheckoutStation scs, int stationNum){

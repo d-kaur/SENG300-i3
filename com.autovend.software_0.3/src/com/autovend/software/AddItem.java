@@ -24,7 +24,6 @@ public abstract class AddItem {
 	
 	protected SelfCheckoutStation check;
 	protected PurchasedItems itemsBought;
-	
 	public AddItem(SelfCheckoutStation scs) {
 		this.check = scs;
 		itemsBought = new PurchasedItems();

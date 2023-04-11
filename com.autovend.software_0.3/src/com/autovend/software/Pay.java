@@ -29,11 +29,12 @@ public abstract class Pay{
     protected PurchasedItems itemsBought;
     protected BigDecimal amountPaid;
     protected PayIO parent;
-    public Pay(SelfCheckoutStation station, PurchasedItems list) {
+    public Pay(SelfCheckoutStation station, PurchasedItems list, PayIO parent) {
         if (station == null) {
             throw new SimulationException(new NullPointerException("Station cannot be null."));
         }
         this.station = station;
+        this.parent = parent;
         itemsBought = list;
         amountPaid = new BigDecimal(0);
         amountDue = itemsBought.getAmountLeftToPay();
@@ -48,7 +49,10 @@ public abstract class Pay{
     		}
     	}
     }
-
+    protected void back()
+    {
+    	
+    }
     public BigDecimal getAmountDue() {
         return itemsBought.getAmountLeftToPay();
     }

@@ -14,6 +14,8 @@ public class PayIO extends JFrame
 	private PayCashIO cash;
 	private PurchasedItems itemsbought;
 	private RecieptIO reciept;
+	private CustomerIO parent;
+	
 	public PayIO(PurchasedItems itemsbought)
 	{
 		this.itemsbought = itemsbought;
@@ -64,6 +66,9 @@ public class PayIO extends JFrame
 	{
 		parent.done()
 	}
-	
+	private back()
+	{
+		parent.showMainScreen();
+	}
 	
 }

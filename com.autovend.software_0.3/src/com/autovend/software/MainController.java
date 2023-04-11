@@ -43,6 +43,10 @@ public class MainController {
     {
     	customerIO[station] = new CustomerIO(this, new SelfCheckoutStation(), station);
     }
+    public void populateDataBase()
+    {
+    	
+    }
     public static void main(String args[])
     {
     	MainController main = new MainController();

@@ -37,7 +37,7 @@ public class AddItemPLUGUI extends AddItem{
 	private int x,y;
 	private String PLU;
 	private boolean success;
-	
+	private CustomerIO parent;
 	/**
 	 * Constructor for adding an item using PLU
 	 * GUI is utilized 
@@ -150,7 +150,10 @@ public class AddItemPLUGUI extends AddItem{
 		frame.add(addButton);
 		frame.setVisible(true);
 	}
-	
+	private void back()
+	{
+		parent.showMainScreen();
+	}
 	public boolean getState() {
 		return success;
 	}
