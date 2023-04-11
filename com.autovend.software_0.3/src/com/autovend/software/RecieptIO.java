@@ -7,13 +7,14 @@ import java.awt.event.ActionListener;
 
 public class RecieptIO extends JFrame
 {
-	private Pay parent;
+	private PayIO parent;
+	private PurchasedItems list;
 	private String recieptMessage;
 	
-	public RecieptIO(String message, Pay parent)
+	public RecieptIO(PurchasedItems list, PayIO parent)
 	{
 		this.parent = parent;
-		recieptMessage = message;
+		this.list = list;
 	}
 	
 	

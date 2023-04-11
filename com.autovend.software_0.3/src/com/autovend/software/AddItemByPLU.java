@@ -30,8 +30,8 @@ public class AddItemByPLU extends AddItem{
 	 * @param scs
 	 */
 	
-	public AddItemByPLU(SelfCheckoutStation scs) {
-		super(scs);
+	public AddItemByPLU(SelfCheckoutStation scs, PurchasedItems list) {
+		super(scs,list);
 		station = scs;
 		station.scale.enable();		
 	}

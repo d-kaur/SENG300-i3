@@ -29,10 +29,14 @@ import com.autovend.software.observers.KeyBoardObserverStub;
  */
 public abstract class AddItemGUI extends JFrame{
 	protected CustomerIO parent;
+	protected SelfCheckoutStation check;
 	
 	
-	
-	
+	public AddItemGUI(CustomerIO parent,String msg, SelfCheckoutStation check) {
+		super(msg);
+		this.parent = parent;
+		this.check = check;
+	}
 	
 	protected void back() {
 		parent.showMainScreen();

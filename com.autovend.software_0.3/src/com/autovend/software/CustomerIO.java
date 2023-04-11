@@ -6,6 +6,8 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import com.autovend.devices.SelfCheckoutStation;
+
 public class CustomerIO {
     private MainController parent;
     
@@ -24,8 +26,15 @@ public class CustomerIO {
 	int stationNum;
     public CustomerIO(MainController parent, SelfCheckoutStation scs, int stationNum){
         this.parent = parent;
-        preventAccessGUI = new PreventAccessGUI();
+        itemsbought = new PurchasedItems();
+        //preventAccessGUI = new PreventAccessGUI(this);
         customerMainGUI = new CustomerMainGUI(this,scs, stationNum);
+  
+        closedGUI = new ClosedGUI();
+    	addItemBrowse = new AddItemBrowseGUI(this,scs);
+    	addItemPLU = new AddItemPLUGUI(this,scs);
+    	addItemText = new AddItemTextCustomer(this,scs);
+        payIO = new PayIO(itemsbought,scs,this);
         this.scs = scs;
         this.stationNum = stationNum;
     }
@@ -47,7 +56,7 @@ public class CustomerIO {
     {
     	setAllInvisible();
     	
-    	preventAccessGUI.setVisble(true);
+    	preventAccessGUI.setVisible(true);
         
     }
     public void permit()
@@ -62,12 +71,12 @@ public class CustomerIO {
     public void close()
     {
     	preventAccessGUI.setVisible(false);
-    	customerMainGUI.setVisble(false);
-    	ClosedGUI.setVisible(true);
+    	customerMainGUI.setVisible(false);
+    	closedGUI.setVisible(true);
     }
     public void open()
     {
-    	ClosedGUI.setVisible(false);
+    	closedGUI.setVisible(false);
     	prevent();
     }
     public void done()

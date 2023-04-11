@@ -2,6 +2,9 @@
 
 package com.autovend.software;
 import javax.swing.*;
+
+import com.autovend.devices.SelfCheckoutStation;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,17 +12,20 @@ import java.awt.event.ActionListener;
 public class PayIO extends JFrame
 {
 	private JFrame mainScreen;
-	private PayGiftCardIO giftCard;
-	private PayDebitIO debitCard;
-	private PayCashIO cash;
+	private PayWithGiftCardIO giftCard;
+	private PayWithDebitIO debitCard;
+	private PayWithCashIO cash;
 	private PurchasedItems itemsbought;
 	private RecieptIO reciept;
 	private CustomerIO parent;
 	
-	public PayIO(PurchasedItems itemsbought)
+	public PayIO(PurchasedItems itemsbought, SelfCheckoutStation scs, CustomerIO parent)
 	{
 		this.itemsbought = itemsbought;
-		
+		this.parent = parent;
+		giftCard = new PayWithGiftCardIO("Pay Gift",scs,itemsbought,this);
+		debitCard = new PayWithDebitIO("Pay Card",scs,itemsbought,this);
+		cash = new PayWithCashIO("Pay Cash",scs,itemsbought,this);
 		
 		add(mainScreen);
 		add(giftCard);
@@ -28,45 +34,45 @@ public class PayIO extends JFrame
 	
 		
 	}
-	private setAllInvisble()
+	private void setAllInvisble()
 	{
 		mainScreen.setVisible(false);
 		giftCard.setVisible(false);
 		debitCard.setVisible(false);
 		cash.setVisible(false);
 	}
-	public showMainScreen()
+	public void showMainScreen()
 	{
 		setAllInvisble();
 		mainScreen.setVisible(true);
 	}
-	public showDebitScreen()
+	public void showDebitScreen()
 	{
 		setAllInvisble();
 		debitCard.setVisible(true);
 	}
-	public showGiftScreen()
+	public void showGiftScreen()
 	{
 		setAllInvisble();
 		giftCard.setVisible(true);
 	}
-	public showCashScreen()
+	public void showCashScreen()
 	{
 		setAllInvisble();
 		cash.setVisible(true);
 	}
-	public showReciept()
+	public void showReciept()
 	{
-		setAllInvsible();
-		reciept = new RecieptIO(this,itemsbought);
+		setAllInvisble();
+		reciept = new RecieptIO(itemsbought,this);
 		add(reciept);
 		reciept.setVisible(true);
 	}
-	public done()
+	public void done()
 	{
-		parent.done()
+		parent.done();
 	}
-	private back()
+	private void back()
 	{
 		parent.showMainScreen();
 	}

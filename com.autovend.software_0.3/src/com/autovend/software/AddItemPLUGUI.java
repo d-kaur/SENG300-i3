@@ -29,7 +29,7 @@ import com.autovend.software.observers.KeyBoardObserverStub;
  * Wasay Siddiqi
  *
  */
-public class AddItemPLUGUI extends AddItem, AddItemGUI{
+public class AddItemPLUGUI extends AddItemGUI{
 	private JComboBox<String> box;
 	private Button addButton, backButton;
 	private Keyboard keyboard;
@@ -38,14 +38,15 @@ public class AddItemPLUGUI extends AddItem, AddItemGUI{
 	private String PLU;
 	private boolean success;
 	private CustomerIO parent;
+	private AddItemByPLU adder;
 	/**
 	 * Constructor for adding an item using PLU
 	 * GUI is utilized 
 	 * @param scs: SelfCheckoutStation
 	 */
 	
-	public AddItemPLUGUI(SelfCheckoutStation scs) {
-		super(scs);
+	public AddItemPLUGUI(CustomerIO parent,SelfCheckoutStation scs) {
+		super(parent,"Add Item by PLU",scs);
 		success = false;
 		check.screen.enable();
 		
@@ -132,7 +133,7 @@ public class AddItemPLUGUI extends AddItem, AddItemGUI{
 						check.scale.add(unit);
 						scaleObs.reactToWeightChangedEvent(check.scale, unit.getWeight());
 						
-						addPLUProduct(p);
+						adder.addPLUProduct(p);
 						check.scale.remove(unit); 
 						check.scale.disable();
 						scaleObs.reactToDisabledEvent(check.scale);
@@ -150,11 +151,8 @@ public class AddItemPLUGUI extends AddItem, AddItemGUI{
 		frame.add(addButton);
 		frame.setVisible(true);
 	}
-	private void back()
-	{
-		parent.showMainScreen();
-	}
-	public boolean getState() {
-		return success;
-	}
+	
+	//public boolean getState() {
+	//	return success;
+	//}
 }

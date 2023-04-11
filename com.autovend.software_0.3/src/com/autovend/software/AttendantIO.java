@@ -1,15 +1,18 @@
 package com.autovend.software;
+import com.autovend.software.*;
 public class AttendantIO {
     private MainController parent;
     private AttendantMainGUI attendantMainGUI;
-    private LoginLogoutIO loginLogoutIO;
+    private LoginLogoutGUI loginLogoutIO;
     private AddInkPaperIO addInkPaperIO;
     private AddItemAttendant addItem;
     private RemoveItem removeItem;
     private ChangeBankNotes changeBankNotes;
+    
     public AttendantIO(MainController parent){
+    	
         this.parent = parent;
-        loginLogoutIO = new LoginLogoutIO(this);
+        loginLogoutIO = new LoginLogoutGUI(this);
         attendantMainGUI = new AttendantMainGUI(this);
         addInkPaperIO = new AddInkPaperIO(this);
         addItem = new AddItemAttendant(this); 
@@ -26,14 +29,14 @@ public class AttendantIO {
         addItem.setVisible(false);
         removeItem.setVisible(false);
     }
-    public displayLogin()
+    public void displayLogin()
     {
-    	setAllInvisble();
+    	setAllInvisible();
     	loginLogoutIO.setVisible(true);
     }
-    public displayMainScreen()
+    public void displayMainScreen()
     {
-    	setAllInvisble();
+    	setAllInvisible();
     	attendantMainGUI.setVisible(true);
     }
     public void displayAddItem()
@@ -47,14 +50,13 @@ public class AttendantIO {
     	removeItem.setVisible(true);
     	
     }
-    public void displayInkPaper()
-    {
+    public void displayInkPaper(){
     	setAllInvisible();
-    	addInkPaperIO.setVisble(true);
+    	addInkPaperIO.setVisible(true);
     }
     public void displayBankNotes()
     {
-    	setAllInvisble();
+    	setAllInvisible();
     	changeBankNotes.setVisible(true);
     }
     public void approve(int station) 
@@ -66,11 +68,11 @@ public class AttendantIO {
     }
     public void startup(int station)
     {
-    	parent.startup(station);
+    	parent.open(station);
     }
     public void prevent(int station)
     {
-    	parent.disable(station);
+    	parent.prevent(station);
     }
     public void attendantApprove(int station)
     {

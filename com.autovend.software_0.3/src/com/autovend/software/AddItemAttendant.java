@@ -1,4 +1,11 @@
 package com.autovend.software;
-public class AddItemAttendant {
-         
+
+import javax.swing.*;
+
+public class AddItemAttendant extends JFrame{
+	public AddItemAttendant(AttendantIO parent)
+	{
+		super("Add I tem By Text");
+	}
+
 }

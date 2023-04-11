@@ -36,19 +36,19 @@ import javax.swing.*;
 	        loginButton.addActionListener(new ActionListener() {    
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
-	                if(LoginLogout.verifyLogin(usernameField.getText();, passwordField.getPassword()))
+	                if(LoginLogout.verifyLogin(new String(usernameField.getText()), new String(passwordField.getPassword())))
 	                {
-	                	attendantIO.loginSuccess();
+	                	attendantIO.displayMainScreen();
 	                }
 	                else {
-	                	 JOptionPane.showMessageDialog(this, "Invalid username or password.");
+	                	 //JOptionPane.showMessageDialog(this, "Invalid username or password.");
 	    	        }
 	              }
 	           }
-	        });
+	        );
 	      
 	        errorButton = new JButton("Error");
-	        errorButton.addActionListener(this);
+	        //errorButton.addActionListener(this);
 	        errorButton.setVisible(false); // hide the error button initially
 
 	        // create layout and add components
@@ -63,7 +63,7 @@ import javax.swing.*;
 	        contentPane.add(loginButton);
 
 	        // set frame properties
-	        setContentPane(contentPane);
+	        // setContentPane(contentPane);
 	        pack();
 	        
 	        setLocationRelativeTo(null);
