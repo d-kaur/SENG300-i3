@@ -33,6 +33,7 @@ public class CustomerMainGUI extends JFrame{
         parent = customerIO;
         itemsbought = new PurchasedItems();
         this.stationNum = stationNum;
+
         buttonPanel = new JPanel();
         payPanel = new JPanel();
         displayPanel = new JPanel();
@@ -45,23 +46,23 @@ public class CustomerMainGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
-                //new ScanGUI();
+                parent.showAddPLU();
             }
         });        
         JButton pluButton = new JButton("Add by PLU Number");
         pluButton.addActionListener(new ActionListener() {    
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
+                parent.showAddPLU();
                 
             }
         });
+
         JButton searchButton = new JButton("Add by Search");
         searchButton.addActionListener(new ActionListener() {    
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-                
+                parent.showAddBrowse();
             }
         });
         JButton browseButton = new JButton("Add by Browsing Purchase Bags");
@@ -69,7 +70,6 @@ public class CustomerMainGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
-                
             }
         });
         JButton purchaseButton = new JButton("Purchase Bags");
@@ -85,17 +85,15 @@ public class CustomerMainGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
-                
+                parent.showPayScreen();
             }
         });
-        //payButton.setBounds();
-        AttendantMainGUI alert = new AttendantMainGUI(null);
         JButton useBag = new JButton("Use Personal Bag");
         useBag.addActionListener(new ActionListener() {    
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
-                alert.showAlert("Alert:Use Personal Bag");
+                //alert.showAlert("Alert:Use Personal Bag");
                 
             }
         });
@@ -131,9 +129,13 @@ public class CustomerMainGUI extends JFrame{
 
         add(displayPanel, BorderLayout.WEST);
 
-        
+
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);   
+
+        setVisible(true);
+
+
         
     }
     /*

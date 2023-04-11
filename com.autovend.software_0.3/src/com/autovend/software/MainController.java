@@ -21,8 +21,8 @@ public class MainController {
         int x = 0;
        // for(int x = 0; x < 0; x++)
         {
-        customerIO[x] = new CustomerIO(this,
-        new SelfCheckoutStation(currency,billDenominations,coinDenominations,scaleMaximumWeight,scaleSensitivity), x);
+           customerIO[x] = new CustomerIO(this,
+            new SelfCheckoutStation(currency,billDenominations,coinDenominations,scaleMaximumWeight,scaleSensitivity), x);
            //shutdown(x);
         }
 

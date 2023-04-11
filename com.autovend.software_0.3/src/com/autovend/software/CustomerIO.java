@@ -23,28 +23,34 @@ public class CustomerIO {
 	private SelfCheckoutStation scs;
 	int stationNum;
     public CustomerIO(MainController parent, SelfCheckoutStation scs, int stationNum){
+
         this.parent = parent;
         itemsbought = new PurchasedItems();
-        preventAccessGUI = new PreventAccessGUI(this);
+        //preventAccessGUI = new PreventAccessGUI(this);
         customerMainGUI = new CustomerMainGUI(this,scs, stationNum);
-
+        customerMainGUI.setVisible(false);
         closedGUI = new ClosedGUI(this);
-    	addItemBrowse = new AddItemBrowseGUI(this,scs);
-    	addItemPLU = new AddItemPLUGUI(this,scs);
-    	addItemText = new AddItemTextCustomer(this,scs);
-        payIO = new PayIO(itemsbought,scs,this);
+    	//addItemBrowse = new AddItemBrowseGUI(this,scs);
+    	//addItemPLU = new AddItemPLUGUI(this,scs);
+    	//addItemText = new AddItemTextCustomer(this,scs);
+        //payIO = new PayIO(itemsbought,scs,this);
         this.scs = scs;
         this.stationNum = stationNum;
+
+
     }
     private void setAllInvisible()
     {
     	customerMainGUI.setVisible(false);
-    	preventAccessGUI.setVisible(false);
+    	/*
+        preventAccessGUI.setVisible(false);
     	closedGUI.setVisible(false);
     	addItemBrowse.setVisible(false);
     	addItemPLU.setVisible(false);
     	addItemText.setVisible(false);
     	payIO.setVisible(false);
+
+    	 */
     }
     private void restore() {
     	
@@ -68,8 +74,8 @@ public class CustomerIO {
     }
     public void close()
     {
-    	//setAllInvisible();
-    	//closedGUI.setVisible(true);
+    	setAllInvisible();
+    	closedGUI.setVisible(true);
     }
     public void open()
     {
@@ -85,7 +91,7 @@ public class CustomerIO {
     	setAllInvisible();
     	customerMainGUI.setVisible(true);
     }
-    public void ShowPayScreen()
+    public void showPayScreen()
     {
     	setAllInvisible();
     	payIO.setVisible(true);
