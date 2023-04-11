@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.swing.JLabel;
+
 import com.autovend.Bill;
 import com.autovend.Coin;
 import com.autovend.devices.*;
@@ -34,29 +36,40 @@ import com.autovend.devices.SelfCheckoutStation;
 
 public class WeightDiscrepancy implements ElectronicScaleObserver{
     private SelfCheckoutStation selfCheckoutStation;
-    private PurchasedItems itemsBought;
-    
-    public WeightDiscrepancy(SelfCheckoutStation selfCheckoutStation, PurchasedItems list)
+    private AttendantMainGUI Agui;
+    private CustomerMainGUI Cgui;
+
+    public WeightDiscrepancy(SelfCheckoutStation selfCheckoutStation, AttendantMainGUI Agui, CustomerMainGUI Cgui)
     {
         this.selfCheckoutStation = selfCheckoutStation;
+        this.Agui = Agui;
+        this.Cgui = Cgui;
         selfCheckoutStation.baggingArea.register(this);
-        itemsBought = list;
     }
     @Override
     public void reactToWeightChangedEvent(ElectronicScale scale, double weightInGrams) {
         // Exception 1. Weight Discrepancy
         // stays disabled if the weight of the bagging area does not match the expected weight
-            if(itemsBought.getTotalExpectedWeight() == weightInGrams) {
+            if(PurchasedItems.getTotalExpectedWeight() == weightInGrams) {
                 selfCheckoutStation.handheldScanner.enable();
                 selfCheckoutStation.mainScanner.enable();
             }
             else
-            {
+            {	
+            	//Block System
                 selfCheckoutStation.handheldScanner.disable();
                 selfCheckoutStation.mainScanner.disable();
-                // throw exception to IO?
+                //Needs to disable gui **except for DoNotPlaceItemInBaggingArea option
+                Agui.showAlert("Weight discrepancy");
+                	
             }
 
+    }
+    
+    public void accept() {
+    	selfCheckoutStation.handheldScanner.enable();
+        selfCheckoutStation.mainScanner.enable();
+        Agui.showAlert("");
     }
 
     @Override
