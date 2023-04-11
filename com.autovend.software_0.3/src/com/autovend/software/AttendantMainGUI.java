@@ -63,8 +63,7 @@ public class AttendantMainGUI extends JFrame {
         startButton = new JButton("Start");
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //removeItemFrame removeItem = new removeItemFrame();
-                //removeItemframe.display();
+                parent.startup(stationSelected);
              }
             
         });
@@ -72,8 +71,7 @@ public class AttendantMainGUI extends JFrame {
         premitButton = new JButton("Permit");
         premitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //removeItemFrame removeItem = new removeItemFrame();
-                //removeItemframe.display();
+                parent.approve(stationSelected);
              }
             
         });
@@ -81,8 +79,7 @@ public class AttendantMainGUI extends JFrame {
         stopButton = new JButton("Stop");
         stopButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //removeItemFrame removeItem = new removeItemFrame();
-                //removeItemframe.display();
+                parent.shutDown(stationSelected);
              }
             
         });
@@ -90,7 +87,7 @@ public class AttendantMainGUI extends JFrame {
         preventButton = new JButton("Prevent");
         preventButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
+                parent.disable(stationSelected);
              }
             
         });
@@ -122,7 +119,7 @@ public class AttendantMainGUI extends JFrame {
         allowPersonalBagButton = new JButton("Allow Personal Bag");
         allowPersonalBagButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                parent.approveBag();
+                parent.approveBag(stationSelected);
              }
             
         });
@@ -130,7 +127,7 @@ public class AttendantMainGUI extends JFrame {
         approveExceptionButton = new JButton("Approve");
         approveExceptionButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                parent.attendantApprove();
+                parent.attendantApprove(stationSelected);
              }
             
         });

@@ -12,7 +12,6 @@ public class CustomerIO {
     private CustomerMainGUI customerMainGUI;
 
 	private PreventAccessGUI preventAccessGUI;
-    
     // we might need this to restore the correct screen
     // private String state;
 
@@ -28,7 +27,7 @@ public class CustomerIO {
     {
     	customerMainGUI.setVisible(false);
     	
-    	preventAccessGUI = new PreventAccessGUI();
+    	preventAccessGUI.setVisble(true);
         
     }
     public void showPermitScreen()
