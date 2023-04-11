@@ -17,7 +17,7 @@ package com.autovend.software.observers;
 import com.autovend.devices.BillDispenser;
 import com.autovend.devices.BillSlot;
 import com.autovend.devices.observers.AbstractDeviceObserver;
-import com.autovend.software.Pay;
+import com.autovend.software.PayGUI;
 
 public interface PayObserver extends AbstractDeviceObserver {
 
@@ -28,7 +28,7 @@ public interface PayObserver extends AbstractDeviceObserver {
      * @param payObject
      *             The payment processor that has processed these funds.
      */
-    void reactToSufficientPaymentEvent(Pay payObject);
+    void reactToSufficientPaymentEvent(PayGUI payObject);
 
 
     /**
@@ -40,7 +40,7 @@ public interface PayObserver extends AbstractDeviceObserver {
      * @param slot
      *             The slot from which the bill was emitted.
      */
-    void reactToBillChangeProducedEvent(Pay payObject, BillSlot slot);
+    void reactToBillChangeProducedEvent(PayGUI payObject, BillSlot slot);
 
 
     /**
@@ -52,5 +52,5 @@ public interface PayObserver extends AbstractDeviceObserver {
      * @param dispenser
      *             The dispenser that is out of change.
      */
-    void reactToInsufficientChangeEvent(Pay payObject, BillDispenser dispenser);
+    void reactToInsufficientChangeEvent(PayGUI payObject, BillDispenser dispenser);
 }

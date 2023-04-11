@@ -119,7 +119,7 @@ public class AttendantMainGUI extends JFrame {
         allowPersonalBagButton = new JButton("Allow Personal Bag");
         allowPersonalBagButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                parent.approveBag(stationSelected);
+                parent.approve(stationSelected);
              }
             
         });

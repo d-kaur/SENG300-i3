@@ -11,8 +11,8 @@ import com.autovend.devices.SelfCheckoutStation;
  */
 public class AddItemByBrowsing extends AddItem {
 
-	public AddItemByBrowsing(SelfCheckoutStation scs) {
-		super(scs);
+	public AddItemByBrowsing(SelfCheckoutStation scs, PurchasedItems list) {
+		super(scs, list);
 		// TODO Auto-generated constructor stub
 	}
 

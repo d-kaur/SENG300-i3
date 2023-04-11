@@ -1,27 +1,37 @@
 
 package com.autovend.software;
 
+import java.math.BigDecimal;
+import java.util.Currency;
+
+import com.autovend.devices.SelfCheckoutStation;
+
 public class MainController {
     private AttendantIO attendantIO;
     private CustomerIO[] customerIO;
+    private Currency currency = Currency.getInstance("CAD");
+    private	int[] billDenominations = {5,10,20,50};
+    private BigDecimal[] coinDenominations = {new BigDecimal(0.05),new BigDecimal(0.1),
+    		new BigDecimal(0.25),
+    		new BigDecimal(1), new BigDecimal(2)};
+    private		int scaleMaximumWeight = 300;
+    private		int scaleSensitivity = 1;
     public MainController()
     {   
-        for(int x = 0; x < 5; x++)
-        {
-        	customerIO[x] = new CustomerIO(this, new SelfCheckoutStation(), x);
-        }
+        //for(int x = 0; x < 5; x++)
+        //{
+        //	customerIO[x] = new CustomerIO(this,
+        //	new SelfCheckoutStation(currency,billDenominations,coinDenominations,scaleMaximumWeight,scaleSensitivity), x);
+          //  shutdown(x);
+        //}
         attendantIO = new AttendantIO(this);
+        populateDataBase();
     }
     // add methods that the customer IO needs to change the attendant screen, and vice versa
-    public void preventCustomer()
-    {
-    	this.customerIO.showPreventScreen();
-    	
-
-    }
+ 
     public void approve(int station)
     {
-    	customerIO[station].approve();
+    	customerIO[station].permit();
     }
     public void open(int station)
     {
@@ -37,15 +47,16 @@ public class MainController {
     }
     public void shutdown(int station)
     {
-    	customerIO[station].shutdown();
+    	customerIO[station].close();
     }
     public void finish(int station)
     {
-    	customerIO[station] = new CustomerIO(this, new SelfCheckoutStation(), station);
+    	customerIO[station] = new CustomerIO(this, 
+    	new SelfCheckoutStation(currency,billDenominations,coinDenominations,scaleMaximumWeight,scaleSensitivity), station);
     }
     public void populateDataBase()
     {
-    	
+    	LoginLogout.createAccount("victor","han");
     }
     public static void main(String args[])
     {

@@ -38,19 +38,17 @@ difference from credit and debit payment:
     private BigDecimal amountToPay;
     private GiftCard giftCard;
     private CardIssuer cardIssuer;
-    public PayWithGiftCard(SelfCheckoutStation station, GiftCard giftCard) {
+    public PayWithGiftCard(SelfCheckoutStation station, GiftCard giftCard, PurchasedItems list) {
 
-        super(station);
-        BigDecimal amountToPay = PurchasedItems.getAmountLeftToPay();
-
-        if(giftCard == null){
+        super(station,list);
+        /*if(giftCard == null){
             throw new SimulationException(new NullPointerException("No arguments may be null."));
         }
 
         if (amountToPay.compareTo(super.getAmountDue().subtract(PurchasedItems.getAmountPaid())) > 0) {
             this.amountToPay = super.getAmountDue().subtract(PurchasedItems.getAmountPaid());
         } else this.amountToPay = amountToPay;
-        this.giftCard = giftCard;
+        this.giftCard = giftCard;*/
     }
 
     @Override
@@ -85,10 +83,10 @@ difference from credit and debit payment:
 
     @Override
     public void reactToCardDataReadEvent(CardReader reader, Card.CardData data) {
-        int holdNumber = cardIssuer.authorizeHold(data.getNumber(), PurchasedItems.getAmountLeftToPay()); 						  	// Contact card issuer and attempt to place a hold
+        int holdNumber = cardIssuer.authorizeHold(data.getNumber(), itemsBought.getAmountLeftToPay()); 						  	// Contact card issuer and attempt to place a hold
         if (holdNumber == -1) return; 																		// Return if hold is unable to be placed
-        boolean transactionPosted = cardIssuer.postTransaction(data.getNumber(), holdNumber, PurchasedItems.getAmountLeftToPay()); 	// Contact card issuer to attempt to post transaction
-        if (transactionPosted) super.pay(PurchasedItems.getAmountLeftToPay());
+        boolean transactionPosted = cardIssuer.postTransaction(data.getNumber(), holdNumber, itemsBought.getAmountLeftToPay()); 	// Contact card issuer to attempt to post transaction
+        if (transactionPosted) super.pay(itemsBought.getAmountLeftToPay());
     }
 
 }

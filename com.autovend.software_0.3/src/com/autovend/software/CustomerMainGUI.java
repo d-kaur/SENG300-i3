@@ -4,13 +4,13 @@
 package com.autovend.software;
 
 
-public class CustomerMainGUI {
-    
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.JFrame;
+
+import com.autovend.devices.SelfCheckoutStation;
 
 
 
@@ -27,6 +27,7 @@ public class CustomerMainGUI extends JFrame{
 	private JPanel displayPanel;
 	private CustomerIO parent;
 	private PurchasedItems itemsbought;
+	private int stationNum;
 	
 	public CustomerMainGUI(CustomerIO customerIO , SelfCheckoutStation scs, int stationNum){
         parent = customerIO;
@@ -150,7 +151,7 @@ public class CustomerMainGUI extends JFrame{
     }
     
 	*/
-	public done()
+	public void done()
 	{
 		parent.done();
 	}
