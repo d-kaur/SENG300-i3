@@ -2,11 +2,6 @@
 //UCID 30152829
 
 package com.autovend.software;
-
-
-public class CustomerMainGUI {
-    
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -15,24 +10,13 @@ import javax.swing.JFrame;
 
 
 
-/**
- * @author turec
- *
- */
 public class CustomerMainGUI extends JFrame implements ActionListener{
 
 
-    private JPanel buttonPanel;
-	private JPanel payPanel;
-	private JPanel displayPanel;
-  private CustomerIO parent;
-
-
-	public CustomerMainGUI(CustomerIO customerIO){
-        parent s= customerIO;
-        buttonPanel = new JPanel();
-        payPanel = new JPanel();
-        displayPanel = new JPanel();
+    public CustomerMainGUI(){
+        JPanel buttonPanel = new JPanel();
+        JPanel payPanel = new JPanel();
+        JPanel displayPanel = new JPanel();
         setMinimumSize(new Dimension(650, 700)); //set the size of the frame
 
 
@@ -134,17 +118,17 @@ public class CustomerMainGUI extends JFrame implements ActionListener{
         
     }
     
-//	shows that the selfcheckout is not available for use
-    public static void preventScreen(CustomerMainGUI mainGui) {
-        parent.preventScreesetVisible(false);
-        mainGui.displayPanel.setVisible(false);
-        mainGui.payPanel.setVisible(false);
-        
-        
-        JLabel label = new JLabel("Checkout Disabled", SwingConstants.CENTER);
-        label.setFont(new Font("Arial", Font.BOLD, 54)); // set font size to 36
-        mainGui.add(label);
-        
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
-    
+        
+  
 
+    public static void main(String[] args){
+        new CustomerMainGUI();
+        }
+
+   
+}

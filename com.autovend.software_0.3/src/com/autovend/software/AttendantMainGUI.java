@@ -1,6 +1,3 @@
-
-
-
 package com.autovend.software;
 import javax.swing.*;
 import java.awt.*;
@@ -28,10 +25,10 @@ public class AttendantMainGUI extends JFrame {
     private JButton approveExceptionButton;
 
     private JButton addInkPaperButton;
-    private JLabel alert;
+    public JLabel alert;
     private boolean[] open = {false,false,false,false,false};
     private boolean[] permitted = {false,false,false,false,false};
-    private AttendantIO parent;
+    private static AttendantIO parent;
     
     public AttendantMainGUI(AttendantIO parent) {
         this.parent = parent;
@@ -90,7 +87,8 @@ public class AttendantMainGUI extends JFrame {
         preventButton = new JButton("Prevent");
         preventButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
+                //removeItemFrame removeItem = new removeItemFrame();
+                //removeItemframe.display();
              }
             
         });
@@ -98,7 +96,8 @@ public class AttendantMainGUI extends JFrame {
         removeItemButton = new JButton("Remove Item");
         removeItemButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                parent.displayRemoveItem();
+                //removeItemFrame removeItem = new removeItemFrame();
+                //removeItemframe.display();
              }
             
         });
@@ -106,7 +105,8 @@ public class AttendantMainGUI extends JFrame {
         addItemBySearchButton = new JButton("Add Item By Search");
         addItemBySearchButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                parent.displayAddItem();
+                //removeItemFrame removeItem = new removeItemFrame();
+                //removeItemframe.display();
              }
             
         });
@@ -114,7 +114,8 @@ public class AttendantMainGUI extends JFrame {
         adjustCoinsBillsButton = new JButton("Adjust Coins/Bills");
         adjustCoinsBillsButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                parent.displayBankNotes();
+                //removeItemFrame removeItem = new removeItemFrame();
+                //removeItemframe.display();
              }
             
         });
@@ -122,7 +123,8 @@ public class AttendantMainGUI extends JFrame {
         allowPersonalBagButton = new JButton("Allow Personal Bag");
         allowPersonalBagButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                parent.approveBag();
+                //removeItemFrame removeItem = new removeItemFrame();
+                //removeItemframe.display();
              }
             
         });
@@ -130,7 +132,8 @@ public class AttendantMainGUI extends JFrame {
         approveExceptionButton = new JButton("Approve");
         approveExceptionButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                parent.attendantApprove();
+                //removeItemFrame removeItem = new removeItemFrame();
+                //removeItemframe.display();
              }
             
         });
@@ -138,7 +141,8 @@ public class AttendantMainGUI extends JFrame {
         addInkPaperButton = new JButton("Add Ink/Paper");
         addInkPaperButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                parent.displayInkPaper();
+                //removeItemFrame removeItem = new removeItemFrame();
+                //removeItemframe.display();
              }
             
         });
@@ -190,5 +194,10 @@ public class AttendantMainGUI extends JFrame {
       JOptionPane.showMessageDialog(this, message, "Alert", JOptionPane.INFORMATION_MESSAGE);
   }
 
-}
+    public static void main(String[] args){
+      new AttendantMainGUI(parent);
+   }
 
+
+    
+}
