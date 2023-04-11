@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 
 public class PayIO extends JFrame
 {
-	private JFrame mainScreen = new JFrame("Pay") ;
 	private PayWithGiftCardIO giftCard;
 	private PayWithDebitIO debitCard;
 	private PayWithCashIO cash;
@@ -32,7 +31,7 @@ public class PayIO extends JFrame
 				parent.showMainScreen();
 			}
 		});
-		mainScreen.add(back);
+		add(back);
 		//add(mainScreen);
 		//add(giftCard);
 		//add(debitCard);
@@ -42,7 +41,7 @@ public class PayIO extends JFrame
 	}
 	private void setAllInvisble()
 	{
-		mainScreen.setVisible(false);
+		setVisible(false);
 		giftCard.setVisible(false);
 		debitCard.setVisible(false);
 		cash.setVisible(false);
@@ -50,7 +49,7 @@ public class PayIO extends JFrame
 	public void showMainScreen()
 	{
 		setAllInvisble();
-		mainScreen.setVisible(true);
+		setVisible(true);
 	}
 	public void showDebitScreen()
 	{
