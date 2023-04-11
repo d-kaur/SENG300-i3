@@ -11,5 +11,5 @@ import java.awt.event.ActionListener;
 
 public class PayWithCardIO extends JFrame
 {
-
+    private PayIO parent;
 }
