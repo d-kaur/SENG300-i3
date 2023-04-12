@@ -50,7 +50,7 @@ public class LoginLogoutTest {
 
    	@BeforeEach
    	public void setUp() {
-      	  attendantIO = new AttendantIO();
+      	  //attendantIO = new AttendantIO();
   	 }
 
    	@Test

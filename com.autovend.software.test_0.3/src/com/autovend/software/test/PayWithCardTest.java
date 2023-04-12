@@ -13,18 +13,6 @@
  * Sara Dhuka (30124117)
  * Robert (William) Engel (30119608)
  */
-
-/*
- * Testing for PayWithCredit and PayWithDebit, specifically, when paying with tap, insert and swipe
- * the test can all pass, but because of the hardwares randomize fail feature, such as magnetic strip
- * not working the test will fail, but all test are able to pass. if running the tests for the first time
- * and all of them do not pass, please keep running them until all of them pass, this mainly due to the given 
- * hardwares randomness as mentioned above. 
- * 
- * The testing for insufficient balance or credit the asserts are to assure that nothing changes and the card provider 
- * should negate the request
- */
-
 package com.autovend.software.test;
 import static org.junit.Assert.*;
 
@@ -80,7 +68,7 @@ public class PayWithCardTest{
 	private double expectedBaggingWeight;
 	private ScanItems scanItems;
 	private WeightDiscrepancy weightDiscrepancy;
-	private PurchasedItems itemsPurchased;
+	private PurchasedItems itemsBought;
 	private boolean scanFailed, cardFailed;
 
 	// initializing some barcodes to use during tests
@@ -90,6 +78,7 @@ public class PayWithCardTest{
 	Barcode b1 = new Barcode(n);
 	Barcode b2 = new Barcode(m);
 	Barcode b3 = new Barcode(k);
+
 	
 @Before
 public void setUp() {
@@ -142,11 +131,11 @@ public void setUp() {
 	sensitivity = 1;
 
 	// initialize purchased items constructor
-	itemsPurchased = new PurchasedItems();
+	itemsBought = new PurchasedItems();
 
 	// initialize constructor and add each product to the list of products being scanned
 	scanItems = new ScanItems(scs);
-	weightDiscrepancy = new WeightDiscrepancy(scs);
+	weightDiscrepancy = new WeightDiscrepancy(scs, itemsBought);
 
 
 
@@ -167,7 +156,7 @@ public void setUp() {
 @After
 public void tearDown() {
 
-	PurchasedItems.reset();
+	itemsBought.reset();
 }
 
 /*
@@ -176,7 +165,7 @@ public void tearDown() {
 @Test
 public void testDebitTap() throws IOException {
 
-	PayWithCard PayWithDebit = new PayWithCard(scs,company);
+	PayWithCard PayWithDebit = new PayWithCard(scs,company, itemsBought);
 	scs.cardReader.register(PayWithDebit);
 	while (scanFailed == false) {
 		scanFailed = scs.mainScanner.scan(unitItem1);
@@ -196,7 +185,7 @@ public void testDebitTap() throws IOException {
 		e.printStackTrace();
 	}
 
-	Assert.assertEquals(new BigDecimal(2), PurchasedItems.getAmountPaid());
+	Assert.assertEquals(new BigDecimal(2), itemsBought.getAmountPaid());
 	}
 
 /*
@@ -205,7 +194,7 @@ public void testDebitTap() throws IOException {
 @Test
 public void testDebitInsert() throws IOException {
 	
-	PayWithCard PayWithDebit = new PayWithCard(scs,company);
+	PayWithCard PayWithDebit = new PayWithCard(scs,company, itemsBought);
 	scs.cardReader.register(PayWithDebit);
 	while (scanFailed == false) {
 		scanFailed = scs.mainScanner.scan(unitItem1);
@@ -225,14 +214,14 @@ public void testDebitInsert() throws IOException {
 		e.printStackTrace();
 	}
 
-	Assert.assertEquals(new BigDecimal(2), PurchasedItems.getAmountPaid());
+	Assert.assertEquals(new BigDecimal(2), itemsBought.getAmountPaid());
 }
 /*
  * tests if paying with debit card insert throws InvalidPINException when invalid pin present
  */
 @Test(expected = InvalidPINException.class)
 public void testDebitInsertWrongPin() throws IOException {
-	PayWithCard PayWithDebit = new PayWithCard(scs,company);
+	PayWithCard PayWithDebit = new PayWithCard(scs,company, itemsBought);
 	scs.cardReader.register(PayWithDebit);
 	while (scanFailed == false) {
 		scanFailed = scs.mainScanner.scan(unitItem1);
@@ -251,7 +240,7 @@ public void testDebitInsertWrongPin() throws IOException {
  */
 @Test
 public void testDebitSwipe() throws IOException {
-	PayWithCard PayWithDebit = new PayWithCard(scs,company);
+	PayWithCard PayWithDebit = new PayWithCard(scs,company, itemsBought);
 	scs.cardReader.register(PayWithDebit);
 	while (scanFailed == false) {
 		scanFailed = scs.mainScanner.scan(unitItem1);
@@ -270,7 +259,7 @@ public void testDebitSwipe() throws IOException {
 		e.printStackTrace();
 	}
 
-	Assert.assertEquals(new BigDecimal(2), PurchasedItems.getAmountPaid());
+	Assert.assertEquals(new BigDecimal(2), itemsBought.getAmountPaid());
 }
 
 /*
@@ -278,7 +267,7 @@ public void testDebitSwipe() throws IOException {
  */
 @Test
 public void testDebitTapNotEnough() throws IOException {
-	PayWithCard PayWithDebit = new PayWithCard(scs,company);
+	PayWithCard PayWithDebit = new PayWithCard(scs,company, itemsBought);
 	scs.cardReader.register(PayWithDebit);
 	while (scanFailed == false) {
 		scanFailed = scs.mainScanner.scan(unitItem1);
@@ -298,8 +287,8 @@ public void testDebitTapNotEnough() throws IOException {
 		e.printStackTrace();
 	}
 	
-	Assert.assertEquals(new BigDecimal(2), PurchasedItems.getAmountLeftToPay());
-	Assert.assertEquals(new BigDecimal(0), PurchasedItems.getAmountPaid());
+	Assert.assertEquals(new BigDecimal(2), itemsBought.getAmountLeftToPay());
+	Assert.assertEquals(new BigDecimal(0), itemsBought.getAmountPaid());
 	
 }
 
@@ -308,7 +297,7 @@ public void testDebitTapNotEnough() throws IOException {
  */
 @Test
 public void testDebitInsertNotEnough() throws IOException {
-	PayWithCard PayWithDebit = new PayWithCard(scs,company);
+	PayWithCard PayWithDebit = new PayWithCard(scs,company, itemsBought);
 	scs.cardReader.register(PayWithDebit);
 	while (scanFailed == false) {
 		scanFailed = scs.mainScanner.scan(unitItem1);
@@ -328,8 +317,8 @@ public void testDebitInsertNotEnough() throws IOException {
 		e.printStackTrace();
 	}
 	
-	Assert.assertEquals(new BigDecimal(2), PurchasedItems.getAmountLeftToPay());
-	Assert.assertEquals(new BigDecimal(0), PurchasedItems.getAmountPaid());
+	Assert.assertEquals(new BigDecimal(2), itemsBought.getAmountLeftToPay());
+	Assert.assertEquals(new BigDecimal(0), itemsBought.getAmountPaid());
 	
 }
 
@@ -338,7 +327,7 @@ public void testDebitInsertNotEnough() throws IOException {
  */
 @Test
 public void testDebitSwipeNotEnough() throws IOException {
-	PayWithCard PayWithDebit = new PayWithCard(scs,company);
+	PayWithCard PayWithDebit = new PayWithCard(scs,company, itemsBought);
 	scs.cardReader.register(PayWithDebit);
 	while (scanFailed == false) {
 		scanFailed = scs.mainScanner.scan(unitItem1);
@@ -358,8 +347,8 @@ public void testDebitSwipeNotEnough() throws IOException {
 		e.printStackTrace();
 	}
 	
-	Assert.assertEquals(new BigDecimal(2), PurchasedItems.getAmountLeftToPay());
-	Assert.assertEquals(new BigDecimal(0), PurchasedItems.getAmountPaid());
+	Assert.assertEquals(new BigDecimal(2), itemsBought.getAmountLeftToPay());
+	Assert.assertEquals(new BigDecimal(0), itemsBought.getAmountPaid());
 	
 }
 
@@ -369,7 +358,7 @@ public void testDebitSwipeNotEnough() throws IOException {
  */
 @Test
 public void testCreditTap() throws IOException {
-	PayWithCard PayWithCredit = new PayWithCard(scs,company);
+	PayWithCard PayWithCredit = new PayWithCard(scs,company, itemsBought);
 	scs.cardReader.register(PayWithCredit);
 	while (scanFailed == false) {
 		scanFailed = scs.mainScanner.scan(unitItem1);
@@ -389,14 +378,14 @@ public void testCreditTap() throws IOException {
 		e.printStackTrace();
 	}
 
-	Assert.assertEquals(new BigDecimal(2), PurchasedItems.getAmountPaid());
+	Assert.assertEquals(new BigDecimal(2), itemsBought.getAmountPaid());
 }
 /*
  * tests if paying with credit card insert works with enough credit and valid pin
  */
 @Test 
 public void testCreditInsert() throws IOException {
-	PayWithCard PayWithCredit = new PayWithCard(scs,company);
+	PayWithCard PayWithCredit = new PayWithCard(scs,company, itemsBought);
 	scs.cardReader.register(PayWithCredit);
 	while (scanFailed == false) {
 		scanFailed = scs.mainScanner.scan(unitItem1);
@@ -416,7 +405,7 @@ public void testCreditInsert() throws IOException {
 		e.printStackTrace();
 	}
 
-	Assert.assertEquals(new BigDecimal(2), PurchasedItems.getAmountPaid());
+	Assert.assertEquals(new BigDecimal(2), itemsBought.getAmountPaid());
 }
 
 /*
@@ -424,7 +413,7 @@ public void testCreditInsert() throws IOException {
  */
 @Test (expected = InvalidPINException.class)
 public void testCreditInsertWrongPin() throws IOException {
-	PayWithCard PayWithCredit = new PayWithCard(scs,company);
+	PayWithCard PayWithCredit = new PayWithCard(scs,company, itemsBought);
 	scs.cardReader.register(PayWithCredit);
 	while (scanFailed == false) {
 		scanFailed = scs.mainScanner.scan(unitItem1);
@@ -443,7 +432,7 @@ public void testCreditInsertWrongPin() throws IOException {
  */
 @Test
 public void testCreditSwipe() throws IOException {
-	PayWithCard PayWithCredit = new PayWithCard(scs,company);
+	PayWithCard PayWithCredit = new PayWithCard(scs,company, itemsBought);
 	scs.cardReader.register(PayWithCredit);
 	while (scanFailed == false) {
 		scanFailed = scs.mainScanner.scan(unitItem1);
@@ -463,7 +452,7 @@ public void testCreditSwipe() throws IOException {
 		e.printStackTrace();
 	}
 
-	Assert.assertEquals(new BigDecimal(2), PurchasedItems.getAmountPaid());
+	Assert.assertEquals(new BigDecimal(2), itemsBought.getAmountPaid());
 }
 
 
@@ -472,7 +461,7 @@ public void testCreditSwipe() throws IOException {
  */
 @Test
 public void testCreditTapNotEnough() throws IOException {
-	PayWithCard PayWithCredit = new PayWithCard(scs,company);
+	PayWithCard PayWithCredit = new PayWithCard(scs,company, itemsBought);
 	scs.cardReader.register(PayWithCredit);
 	while (scanFailed == false) {
 		scanFailed = scs.mainScanner.scan(unitItem1);
@@ -492,8 +481,8 @@ public void testCreditTapNotEnough() throws IOException {
 		e.printStackTrace();
 	}
 	
-	Assert.assertEquals(new BigDecimal(2), PurchasedItems.getAmountLeftToPay());
-	Assert.assertEquals(new BigDecimal(0), PurchasedItems.getAmountPaid());
+	Assert.assertEquals(new BigDecimal(2), itemsBought.getAmountLeftToPay());
+	Assert.assertEquals(new BigDecimal(0), itemsBought.getAmountPaid());
 	
 }
 
@@ -502,7 +491,7 @@ public void testCreditTapNotEnough() throws IOException {
  */
 @Test
 public void testCreditInsertNotEnough() throws IOException {
-	PayWithCard PayWithCredit = new PayWithCard(scs,company);
+	PayWithCard PayWithCredit = new PayWithCard(scs,company, itemsBought);
 	scs.cardReader.register(PayWithCredit);
 	while (scanFailed == false) {
 		scanFailed = scs.mainScanner.scan(unitItem1);
@@ -522,8 +511,8 @@ public void testCreditInsertNotEnough() throws IOException {
 		e.printStackTrace();
 	}
 	
-	Assert.assertEquals(new BigDecimal(2), PurchasedItems.getAmountLeftToPay());
-	Assert.assertEquals(new BigDecimal(0), PurchasedItems.getAmountPaid());
+	Assert.assertEquals(new BigDecimal(2), itemsBought.getAmountLeftToPay());
+	Assert.assertEquals(new BigDecimal(0), itemsBought.getAmountPaid());
 }
 
 /*
@@ -531,7 +520,7 @@ public void testCreditInsertNotEnough() throws IOException {
  */
 @Test
 public void testCreditSwipeNotEnough() throws IOException {
-	PayWithCard PayWithCredit = new PayWithCard(scs,company);
+	PayWithCard PayWithCredit = new PayWithCard(scs,company, itemsBought);
 	scs.cardReader.register(PayWithCredit);
 	while (scanFailed == false) {
 		scanFailed = scs.mainScanner.scan(unitItem1);
@@ -551,9 +540,11 @@ public void testCreditSwipeNotEnough() throws IOException {
 		e.printStackTrace();
 	}
 	
-	Assert.assertEquals(new BigDecimal(2), PurchasedItems.getAmountLeftToPay());
-	Assert.assertEquals(new BigDecimal(0), PurchasedItems.getAmountPaid());
+	Assert.assertEquals(new BigDecimal(2), itemsBought.getAmountLeftToPay());
+	Assert.assertEquals(new BigDecimal(0), itemsBought.getAmountPaid());
 }
+
+
 
 
 

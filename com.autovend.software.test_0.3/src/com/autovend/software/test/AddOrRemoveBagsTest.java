@@ -41,7 +41,7 @@ public class AddOrRemoveBagsTest {
             bags[i] = new ReusableBag();
         }
         dispenser.load(bags);
-        addBags = new AddOrRemoveBags(scs,dispenser);
+        addBags = new AddOrRemoveBags(scs);
     }
     @After
     public void tearDown() {
@@ -53,7 +53,7 @@ public class AddOrRemoveBagsTest {
     public void AddOrRemoveBagsConstructorTest() {
         boolean flag;
         try {
-            AddOrRemoveBags testConstructor = new AddOrRemoveBags(scs, dispenser);
+            AddOrRemoveBags testConstructor = new AddOrRemoveBags(scs);
             flag = true;
         }
         catch (Exception e) {

@@ -14,28 +14,28 @@
  */
 package com.autovend.software;
 
-import com.autovend.ReusableBag;
 import com.autovend.products.BarcodedProduct;
+import com.autovend.products.PLUCodedProduct;
 import com.autovend.products.Product;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-
+//import java.lang.String.*;
 
 public class PurchasedItems{
 
-    private static ArrayList<BarcodedProduct> listOfProducts;
-    private static ArrayList<ReusableBag> listOfBags;
-    private static BigDecimal totalPrice;
-    private static double totalExpectedWeight;
-    private static BigDecimal change;
-    private static BigDecimal amountPaid;
-    private static boolean isPaid;
+    private ArrayList<Product> listOfProducts;
+    private BigDecimal totalPrice;
+    private double totalExpectedWeight;
+    private BigDecimal change;
+    private BigDecimal amountPaid;
+    private boolean isPaid;
+    private int bagCount;
     private static BigDecimal idealBagPriceInUSD = BigDecimal.valueOf(0.1);
 
-    static {
+    public PurchasedItems() {
         listOfProducts = new ArrayList<>();
-        listOfBags = new ArrayList<>();
+        bagCount = 0;
         totalPrice = new BigDecimal(0);
         amountPaid = new BigDecimal(0);
         totalExpectedWeight = 0;
@@ -43,7 +43,7 @@ public class PurchasedItems{
         isPaid = false;
     }
 
-    public static void addProduct(BarcodedProduct product){
+    public void addProduct(BarcodedProduct product){
         listOfProducts.add(product);
         totalPrice = totalPrice.add(product.getPrice());
         totalExpectedWeight += product.getExpectedWeight();
@@ -51,9 +51,18 @@ public class PurchasedItems{
             isPaid = false;
         }
     }
-
+    public void addPLUProduct(PLUCodedProduct p) {
+		// TODO Auto-generated method stub
+    	listOfProducts.add(p);
+        totalPrice = totalPrice.add(p.getPrice());
+        if (totalPrice.compareTo(amountPaid) >= 0) {
+            isPaid = false;
+        }
+		
+	}
+	
     public static void addBag(ReusableBag bag){
-        listOfBags.add(bag);
+        bagCount++;
         totalPrice = totalPrice.add(idealBagPriceInUSD);
         totalExpectedWeight += bag.getWeight();
         if (totalPrice.compareTo(amountPaid) >= 0) {
@@ -61,79 +70,115 @@ public class PurchasedItems{
         }
     }
 
-    public static ArrayList<BarcodedProduct> getListOfProducts(){
+    public ArrayList<Product> getListOfProducts(){
         return listOfProducts;
     }
 
-    public static ArrayList<ReusableBag> getListOfBags(){
-        return listOfBags;
-    }
+
 
     // I think this is not necessary for this iteration but will be useful for future ones
-    public static void removeProduct(BarcodedProduct product){
-        listOfProducts.remove(product);
-        totalPrice = totalPrice.subtract(product.getPrice());
-        totalExpectedWeight -= product.getExpectedWeight();
+    public void removeProduct(String product){
+        for(Product p : listOfProducts)
+        {
+            if(p instanceof PLUCodedProduct)
+            {
+                PLUCodedProduct a = (PLUCodedProduct)p;
+                if(product.compareTo(a.getDescription()) == 0){
+                    listOfProducts.remove(a);
+                    totalPrice = totalPrice.subtract(a.getPrice());
+                    //totalExpectedWeight -= a.getExpectedWeight();
+                    return;
+                }
+            }
+            if(p instanceof BarcodedProduct)
+            {
+                BarcodedProduct a = (BarcodedProduct) p;
+                if(product.compareTo(a.getDescription()) == 0){
+                    listOfProducts.remove(a);
+                    totalPrice = totalPrice.subtract(a.getPrice());
+                    totalExpectedWeight -= a.getExpectedWeight();
+                    return;
+                }
+            }
+        }
     }
 
-    public static void removeOtherProduct(Product product, double weight){
-        listOfBags.remove(product);
+    public void removeOtherProduct(Product product, double weight){
+        //listOfBags.remove(product);
         totalPrice = totalPrice.subtract(product.getPrice());
         totalExpectedWeight -= weight;
     }
-
-    public static BigDecimal getTotalPrice(){
+    public ArrayList<String> getNames()
+    {
+        ArrayList<String> names = new ArrayList<>();
+        for(Product p: listOfProducts)
+        {
+            if(p instanceof PLUCodedProduct)
+            {
+                PLUCodedProduct a = (PLUCodedProduct)p;
+                names.add(a.getDescription());
+            }
+            if(p instanceof BarcodedProduct)
+            {
+                BarcodedProduct a = (BarcodedProduct) p;
+                names.add(a.getDescription());
+            }
+        }
+        return names;
+    }
+    public BigDecimal getTotalPrice(){
         return totalPrice;
     }
 
-    public static double getTotalExpectedWeight(){
+    public double getTotalExpectedWeight(){
         return totalExpectedWeight;
     }
 
-    public static void setChange(BigDecimal amount){
+    public void setChange(BigDecimal amount){
         change = amount;
     }
 
-    public static BigDecimal getChange(){
+    public BigDecimal getChange(){
         return change;
     }
 
 
-    public static void addAmountPaid(BigDecimal amount) {
+    public void addAmountPaid(BigDecimal amount) {
         amountPaid = amountPaid.add(amount);
         if (amountPaid.compareTo(totalPrice) >= 0) {
         	isPaid = true;
         }
     }
 
-    public static boolean isPaid() {
+    public boolean isPaid() {
     	return isPaid;
     }
 
-    public static BigDecimal getAmountPaid(){
+    public BigDecimal getAmountPaid(){
         return amountPaid;
     }
 
-    public static BigDecimal getAmountLeftToPay() {
+    public BigDecimal getAmountLeftToPay() {
     	return totalPrice.subtract(amountPaid);
     }
 
 
     // This method is used for testing purposes ONLY
-    public static void setAmountPaid(BigDecimal amount) {
+    public void setAmountPaid(BigDecimal amount) {
     	amountPaid = amount;
         if (amountPaid.compareTo(totalPrice) >= 0) {
             isPaid = true;
         }
     }
 
-    public static void reset() {
+    public void reset() {
     	listOfProducts = new ArrayList<>();
-        listOfBags = new ArrayList<>();
+        bagCount = 0;
         totalPrice = new BigDecimal(0);
         amountPaid = new BigDecimal(0);
         totalExpectedWeight = 0;
         change = new BigDecimal(0);
         isPaid = false;
     }
+
 }

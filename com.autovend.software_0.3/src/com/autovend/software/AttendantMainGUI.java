@@ -1,4 +1,3 @@
-
 package com.autovend.software;
 import javax.swing.*;
 import java.awt.*;
@@ -26,10 +25,10 @@ public class AttendantMainGUI extends JFrame {
     private JButton approveExceptionButton;
 
     private JButton addInkPaperButton;
-    public JLabel alert;
+    private JLabel alert;
     private boolean[] open = {false,false,false,false,false};
     private boolean[] permitted = {false,false,false,false,false};
-    private static AttendantIO parent;
+    private AttendantIO parent;
     
     public AttendantMainGUI(AttendantIO parent) {
         this.parent = parent;
@@ -61,8 +60,7 @@ public class AttendantMainGUI extends JFrame {
         startButton = new JButton("Start");
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //removeItemFrame removeItem = new removeItemFrame();
-                //removeItemframe.display();
+                parent.startup(stationSelected);
              }
             
         });
@@ -70,8 +68,7 @@ public class AttendantMainGUI extends JFrame {
         premitButton = new JButton("Permit");
         premitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //removeItemFrame removeItem = new removeItemFrame();
-                //removeItemframe.display();
+                parent.approve(stationSelected);
              }
             
         });
@@ -79,8 +76,7 @@ public class AttendantMainGUI extends JFrame {
         stopButton = new JButton("Stop");
         stopButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //removeItemFrame removeItem = new removeItemFrame();
-                //removeItemframe.display();
+                parent.shutDown(stationSelected);
              }
             
         });
@@ -88,7 +84,7 @@ public class AttendantMainGUI extends JFrame {
         preventButton = new JButton("Prevent");
         preventButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
+                parent.prevent(stationSelected);
              }
             
         });
@@ -96,7 +92,7 @@ public class AttendantMainGUI extends JFrame {
         removeItemButton = new JButton("Remove Item");
         removeItemButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                parent.displayRemoveItem();
+                parent.displayRemoveItem(stationSelected);
              }
             
         });
@@ -120,7 +116,7 @@ public class AttendantMainGUI extends JFrame {
         allowPersonalBagButton = new JButton("Allow Personal Bag");
         allowPersonalBagButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                parent.approveBag();
+                parent.approve(stationSelected);
              }
             
         });
@@ -128,7 +124,7 @@ public class AttendantMainGUI extends JFrame {
         approveExceptionButton = new JButton("Approve");
         approveExceptionButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                parent.attendantApprove();
+                parent.attendantApprove(stationSelected);
              }
             
         });
@@ -136,7 +132,7 @@ public class AttendantMainGUI extends JFrame {
         addInkPaperButton = new JButton("Add Ink/Paper");
         addInkPaperButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                parent.displayInkPaper();
+                parent.displayInkPaper(stationSelected);
              }
             
         });
@@ -188,12 +184,5 @@ public class AttendantMainGUI extends JFrame {
       JOptionPane.showMessageDialog(this, message, "Alert", JOptionPane.INFORMATION_MESSAGE);
   }
 
-   // public static void main(String[] args){
-   //   new AttendantMainGUI(parent);
-   //}
-
-
-    
 }
-
 

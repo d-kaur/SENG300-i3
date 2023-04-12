@@ -2,23 +2,43 @@
 //UCID 30152829
 
 package com.autovend.software;
+
+
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.JFrame;
 
+import com.autovend.devices.SelfCheckoutStation;
 
 
 
-public class CustomerMainGUI extends JFrame implements ActionListener{
+
+/**
+ * @author turec
+ *
+ */
+public class CustomerMainGUI extends JFrame{
 
 
-    public CustomerMainGUI(){
-        JPanel buttonPanel = new JPanel();
-        JPanel payPanel = new JPanel();
-        JPanel displayPanel = new JPanel();
+    private JPanel buttonPanel;
+	private JPanel payPanel;
+	private JPanel displayPanel;
+	private CustomerIO parent;
+	private PurchasedItems itemsbought;
+	private int stationNum;
+	
+	public CustomerMainGUI(CustomerIO customerIO , SelfCheckoutStation scs, int stationNum){
+        parent = customerIO;
+        itemsbought = new PurchasedItems();
+        this.stationNum = stationNum;
+
+        buttonPanel = new JPanel();
+        payPanel = new JPanel();
+        displayPanel = new JPanel();
         setMinimumSize(new Dimension(650, 700)); //set the size of the frame
-
+       
 
         //set up the buttons
         JButton scanButton = new JButton("Add by Scanning");//add action listener to this button
@@ -26,23 +46,23 @@ public class CustomerMainGUI extends JFrame implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
-                //new ScanGUI();
+                parent.showAddPLU();
             }
         });        
         JButton pluButton = new JButton("Add by PLU Number");
         pluButton.addActionListener(new ActionListener() {    
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
+                parent.showAddPLU();
                 
             }
         });
+
         JButton searchButton = new JButton("Add by Search");
         searchButton.addActionListener(new ActionListener() {    
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-                
+                parent.showAddBrowse();
             }
         });
         JButton browseButton = new JButton("Add by Browsing Purchase Bags");
@@ -50,7 +70,6 @@ public class CustomerMainGUI extends JFrame implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
-                
             }
         });
         JButton purchaseButton = new JButton("Purchase Bags");
@@ -66,17 +85,15 @@ public class CustomerMainGUI extends JFrame implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
-                
+                parent.showPayScreen();
             }
         });
-        //payButton.setBounds();
-        AttendantMainGUI alert = new AttendantMainGUI(null);
         JButton useBag = new JButton("Use Personal Bag");
         useBag.addActionListener(new ActionListener() {    
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
-                alert.showAlert("Alert:Use Personal Bag");
+                //alert.showAlert("Alert:Use Personal Bag");
                 
             }
         });
@@ -112,23 +129,34 @@ public class CustomerMainGUI extends JFrame implements ActionListener{
 
         add(displayPanel, BorderLayout.WEST);
 
-        
+
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);   
+
+        setVisible(true);
+
+
+        
+    }
+    /*
+//	shows that the selfcheckout is not available for use
+    public static void preventScreen(CustomerMainGUI mainGui) {
+        parent.preventScreesetVisible(false);
+        mainGui.displayPanel.setVisible(false);
+        mainGui.payPanel.setVisible(false);
+        
+        
+        JLabel label = new JLabel("Checkout Disabled", SwingConstants.CENTER);
+        label.setFont(new Font("Arial", Font.BOLD, 54)); // set font size to 36
+        mainGui.add(label);
         
     }
     
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
-    }
-        
-  
+	*/
+	public void done()
+	{
+		parent.done();
+	}
+}	
+	
 
-   // public static void main(String[] args){
-       // new CustomerMainGUI();
-        //}
-
-   
-}
