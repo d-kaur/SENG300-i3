@@ -64,7 +64,7 @@ public class PayWithDebitIO extends PayGUI{
 		backButton = new JButton("Back");
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				
+				back();
 			}
 		});
 

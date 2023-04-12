@@ -108,7 +108,7 @@ public class PayIO extends JFrame
 		//showMainScreen();
 		
 	}
-	private void setAllInvisble()
+	public void setAllInvisble()
 	{
 		setVisible(false);
 		giftCard.setVisible(false);
@@ -139,7 +139,6 @@ public class PayIO extends JFrame
 	{
 		setAllInvisble();
 		reciept = new RecieptIO(itemsbought,this);
-		add(reciept);
 		reciept.setVisible(true);
 	}
 	public void done()

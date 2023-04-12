@@ -22,16 +22,20 @@ public class CustomerIO {
     // private String state;
 	private SelfCheckoutStation scs;
 	int stationNum;
-    public CustomerIO(MainController parent, SelfCheckoutStation scs, int stationNum){
+    public CustomerIO(MainController parent, SelfCheckoutStation scs, int stationNum, PurchasedItems list){
 
         this.parent = parent;
-        itemsbought = new PurchasedItems();
+        itemsbought = list;
+
         preventAccessGUI = new PreventAccessGUI(this);
         customerMainGUI = new CustomerMainGUI(this,scs, stationNum);
         customerMainGUI.setVisible(false);
+
         closedGUI = new ClosedGUI(this);
     	addItemBrowse = new AddItemBrowseGUI(this,scs);
-    	addItemPLU = new AddItemPLUGUI(this,scs);
+
+    	addItemPLU = new AddItemPLUGUI(this,scs, itemsbought);
+
     	addItemText = new AddItemTextCustomer(this,scs);
         payIO = new PayIO(itemsbought,scs,this);
         this.scs = scs;
@@ -48,7 +52,7 @@ public class CustomerIO {
     	addItemBrowse.setVisible(false);
     	addItemPLU.setVisible(false);
     	addItemText.setVisible(false);
-    	payIO.setVisible(false);
+    	payIO.setAllInvisble();
 
 
     }
@@ -90,7 +94,7 @@ public class CustomerIO {
     public void showPayScreen()
     {
     	setAllInvisible();
-    	payIO.setVisible(true);
+    	payIO.showMainScreen();
     }
     public void showAddBrowse()
     {

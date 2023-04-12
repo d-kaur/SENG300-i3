@@ -4,12 +4,15 @@ package com.autovend.software;
 import java.math.BigDecimal;
 import java.util.Currency;
 
+import com.autovend.Numeral;
+import com.autovend.PriceLookUpCode;
 import com.autovend.devices.SelfCheckoutStation;
+import com.autovend.external.ProductDatabases;
+import com.autovend.products.PLUCodedProduct;
 
 public class MainController {
     private AttendantIO attendantIO;
     private CustomerIO[] customerIO = {null,null,null,null,null};
-    private PurchasedItems[] everyList = {null,null,null,null,null};
     private SelfCheckoutStation[] stations = {null,null,null,null,null};
     private Currency currency = Currency.getInstance("CAD");
     private	int[] billDenominations = {5,10,20,50};
@@ -21,15 +24,14 @@ public class MainController {
     public MainController()
     {
        for(int x = 0; x < 1; x++)
-        {
-            everyList[x] = new PurchasedItems();
+       {
             stations[x] = new SelfCheckoutStation(currency,billDenominations,coinDenominations,scaleMaximumWeight,scaleSensitivity);
            customerIO[x] = new CustomerIO(this,
             stations[x], x);
            shutdown(x);
         }
 
-        attendantIO = new AttendantIO(this,everyList,stations);
+        attendantIO = new AttendantIO(this,stations);
 
         populateDataBase();
     }
@@ -57,12 +59,21 @@ public class MainController {
     }
     public void finish(int station)
     {
-    	customerIO[station] = new CustomerIO(this, 
-    	new SelfCheckoutStation(currency,billDenominations,coinDenominations,scaleMaximumWeight,scaleSensitivity), station);
+
+        everyList[station] = new PurchasedItems();
+        stations[station] = new SelfCheckoutStation(currency,billDenominations,coinDenominations,scaleMaximumWeight,scaleSensitivity);
+        customerIO[station] = new CustomerIO(this,
+                stations[station], station, everyList[station]);
+        shutdown(station);
     }
     public void populateDataBase()
     {
-    	LoginLogout.createAccount("victor","han");
+
+        LoginLogout.createAccount("victor","han");
+
+        PriceLookUpCode testCode = new PriceLookUpCode(Numeral.one,Numeral.two,Numeral.three,Numeral.four);
+        PLUCodedProduct testPLU = new PLUCodedProduct(testCode, "testPLU", new BigDecimal(2));
+        ProductDatabases.PLU_PRODUCT_DATABASE.put(testCode,testPLU);
     }
     public static void main(String args[])
     {

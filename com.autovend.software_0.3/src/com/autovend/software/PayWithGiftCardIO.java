@@ -45,7 +45,7 @@ public class PayWithGiftCardIO extends PayGUI {
 		 backButton = new JButton("Back");
 		 backButton.addActionListener(new ActionListener() {
 			 public void actionPerformed(ActionEvent e){
-
+				back();
 			 }
 		 });
 

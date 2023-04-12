@@ -2,11 +2,16 @@
 package com.autovend.software;
 import javax.swing.*;
 
+import com.autovend.Bill;
+import com.autovend.Coin;
+import com.autovend.devices.BillValidator;
+import com.autovend.devices.CoinValidator;
 import com.autovend.devices.SelfCheckoutStation;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 
 public class PayWithCashIO extends PayGUI
 {
@@ -22,10 +27,16 @@ public class PayWithCashIO extends PayGUI
 	private JButton fiftyDButton;
 	private TextField currentAmount;
 	private TextField amountDue;
-
+	private PayWithCash payer;
+	private BillValidator billacceptor;
+	private CoinValidator coinacceptor;
 	 public PayWithCashIO(String msg, SelfCheckoutStation station, PurchasedItems list, PayIO parent) {
 			super(msg,station,list,parent);
-
+			payer = new PayWithCash(station,list);
+			billacceptor = station.billValidator;
+			coinacceptor = station.coinValidator;
+			billacceptor.register(payer);
+			coinacceptor.register(payer);
 			JFrame frame = new JFrame();
 			
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,6 +52,12 @@ public class PayWithCashIO extends PayGUI
 			nickelButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e){
 					//parent.displayMainScreen();
+					Coin nickel = new Coin(new BigDecimal("0.05"), coinacceptor.currency);
+					coinacceptor.accept(nickel);
+					if(payer.getAmountDue().compareTo(new BigDecimal(0)) <= 0)
+					{
+						parent.showReciept();
+					}
 				}
 			});
 	
@@ -48,20 +65,35 @@ public class PayWithCashIO extends PayGUI
 			dimeButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e){
 					//parent.displayMainScreen();
+					Coin dime = new Coin(new BigDecimal("0.1"), coinacceptor.currency);
+					coinacceptor.accept(dime);
+					if(payer.getAmountDue().compareTo(new BigDecimal(0)) <= 0)
+					{
+						parent.showReciept();
+					}
 				}
 			});
 	
 			quarterButton = new JButton("$0.25");
 			quarterButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e){
-					//parent.displayMainScreen();
-				}
+					Coin quarter = new Coin(new BigDecimal("0.25"), coinacceptor.currency);
+					coinacceptor.accept(quarter);
+					if(payer.getAmountDue().compareTo(new BigDecimal(0)) <= 0)
+					{
+						parent.showReciept();
+					}}
 			});
 	
 			loonieButton = new JButton("$1.00");
 			loonieButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e){
-					//parent.displayMainScreen();
+					Coin one = new Coin(new BigDecimal(1), coinacceptor.currency);
+					coinacceptor.accept(one);
+					if(payer.getAmountDue().compareTo(new BigDecimal(0)) <= 0)
+					{
+						parent.showReciept();
+					}
 				}
 			});
 	
@@ -69,6 +101,12 @@ public class PayWithCashIO extends PayGUI
 			toonieButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e){
 					//parent.displayMainScreen();
+					Coin two = new Coin(new BigDecimal(2), coinacceptor.currency);
+					coinacceptor.accept(two);
+					if(payer.getAmountDue().compareTo(new BigDecimal(0)) <= 0)
+					{
+						parent.showReciept();
+					}
 				}
 			});
 	
@@ -76,6 +114,12 @@ public class PayWithCashIO extends PayGUI
 			fiveDButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e){
 					//parent.displayMainScreen();
+					Bill five = new Bill(5, coinacceptor.currency);
+					billacceptor.accept(five);
+					if(payer.getAmountDue().compareTo(new BigDecimal(0)) <= 0)
+					{
+						parent.showReciept();
+					}
 				}
 			});
 	
@@ -83,6 +127,12 @@ public class PayWithCashIO extends PayGUI
 			tenDButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e){
 					//parent.displayMainScreen();
+					Bill ten = new Bill(10, coinacceptor.currency);
+					billacceptor.accept(ten);
+					if(payer.getAmountDue().compareTo(new BigDecimal(0)) <= 0)
+					{
+						parent.showReciept();
+					}
 				}
 			});
 	
@@ -90,13 +140,24 @@ public class PayWithCashIO extends PayGUI
 			twentyDButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e){
 					//parent.displayMainScreen();
+					Bill twenty = new Bill(20, coinacceptor.currency);
+					billacceptor.accept(twenty);
+					if(payer.getAmountDue().compareTo(new BigDecimal(0)) <= 0)
+					{
+						parent.showReciept();
+					}
 				}
 			});
 	
 			fiftyDButton = new JButton("$50.00");
 			fiftyDButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e){
-					//parent.displayMainScreen();
+					Bill fifty = new Bill(50, coinacceptor.currency);
+					billacceptor.accept(fifty);
+					if(payer.getAmountDue().compareTo(new BigDecimal(0)) <= 0)
+					{
+						parent.showReciept();
+					}
 				}
 			});
 	
@@ -115,7 +176,7 @@ public class PayWithCashIO extends PayGUI
 
 			currentAmount = new TextField();
 			currentAmount.setPreferredSize(new Dimension(150, 30));
-			amountDue = new TextField();
+			amountDue = new TextField(itemsBought.getAmountLeftToPay().toString());
 			amountDue.setPreferredSize(new Dimension(150, 30));
 
 			amountPanel.add(currentAmountLabel);
@@ -126,7 +187,7 @@ public class PayWithCashIO extends PayGUI
 			backButton = new JButton("Back");
 			backButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e){
-					
+					back();
 				}
 			});
 			backPanel.add(backButton);
