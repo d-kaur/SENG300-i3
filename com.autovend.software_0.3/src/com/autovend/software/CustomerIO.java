@@ -17,13 +17,17 @@ public class CustomerIO {
 	private AddItemPLUGUI addItemPLU;
 	private AddItemTextCustomer addItemText;
 	private PayIO payIO;
+    
+
+    private ScanItemsGUI addScanItem;
+
     // we might need this to restore the correct screen
     // private String state;
 	private SelfCheckoutStation scs;
     public CustomerIO(MainController parent, SelfCheckoutStation scs){
 
         this.parent = parent;
-
+    
         preventAccessGUI = new PreventAccessGUI(this);
         customerMainGUI = new CustomerMainGUI(this,scs);
         customerMainGUI.setVisible(false);
@@ -32,7 +36,7 @@ public class CustomerIO {
     	addItemBrowse = new AddItemBrowseGUI(this,scs);
 
     	addItemPLU = new AddItemPLUGUI(this,scs);
-
+        addScanItem = new ScanItemsGUI(this, scs);
     	addItemText = new AddItemTextCustomer(this,scs);
         payIO = new PayIO(scs,this);
         this.scs = scs;
@@ -49,6 +53,7 @@ public class CustomerIO {
     	addItemPLU.setVisible(false);
     	addItemText.setVisible(false);
     	payIO.setAllInvisble();
+        addScanItem.setVisible(false);
 
 
     }
@@ -110,7 +115,7 @@ public class CustomerIO {
     public void showScanItem()
     {
         setAllInvisible();
-
+        addScanItem.setVisible(true);
     }
 }
 

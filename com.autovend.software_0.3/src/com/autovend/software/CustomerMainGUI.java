@@ -45,7 +45,7 @@ public class CustomerMainGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
-                parent.showAddPLU();
+                parent.showScanItem();;
             }
         });        
         JButton pluButton = new JButton("Add by PLU Number");
@@ -64,13 +64,6 @@ public class CustomerMainGUI extends JFrame{
                 parent.showAddBrowse();
             }
         });
-        JButton browseButton = new JButton("Add by Browsing");
-        browseButton.addActionListener(new ActionListener() {    
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-            }
-        });
         JButton purchaseButton = new JButton("Purchase Bags");
         purchaseButton.addActionListener(new ActionListener() {    
             @Override
@@ -83,7 +76,6 @@ public class CustomerMainGUI extends JFrame{
         payButton.addActionListener(new ActionListener() {    
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
                 parent.showPayScreen();
             }
         });
@@ -104,7 +96,6 @@ public class CustomerMainGUI extends JFrame{
         buttonPanel.add(scanButton);
         buttonPanel.add(pluButton);
         buttonPanel.add(searchButton);
-        buttonPanel.add(browseButton);
         buttonPanel.add(purchaseButton);
         buttonPanel.add(payButton); 
         buttonPanel.add(useBag);
