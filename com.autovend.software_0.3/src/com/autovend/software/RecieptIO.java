@@ -13,7 +13,7 @@ public class RecieptIO extends JFrame
 	private String recieptMessage;
 	private JLabel message;
 	private JButton back = new JButton("back");
-	public RecieptIO(PurchasedItems list, PayIO parent)
+	public RecieptIO( PayIO parent)
 	{
 		super("Reciept:");
 		back.addActionListener(new ActionListener() {
@@ -27,7 +27,6 @@ public class RecieptIO extends JFrame
 		add(message);
 		add(back);
 		this.parent = parent;
-		this.list = list;
 	}
 	
 	

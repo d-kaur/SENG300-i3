@@ -10,11 +10,10 @@ public class RemoveItem extends JFrame{
 private JButton backButton;
 private JButton deleteItemButton;
 private AttendantIO parent;
-private PurchasedItems[] everyList;
+
 int stationSelected;
-	public RemoveItem(AttendantIO parent, PurchasedItems[] everyList){
+	public RemoveItem(AttendantIO parent){
 		this.parent = parent;
-		this.everyList = everyList;
 		JFrame frame = new JFrame("Remove Item");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -42,7 +41,7 @@ int stationSelected;
 		deleteItemButton = new JButton("Delete Item");
 		deleteItemButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				everyList[stationSelected].removeProduct((String)comboBox.getSelectedItem());
+				PurchasedItems.removeProduct((String)comboBox.getSelectedItem());
 				pickStation(stationSelected);
 			}
 		});
@@ -66,7 +65,7 @@ int stationSelected;
 	{
 		JComboBox<String> comboBox = new JComboBox<>();
 		stationSelected = station;
-		ArrayList<String> items = everyList[station].getNames();
+		ArrayList<String> items = PurchasedItems.getNames();
 		for(String s: items)
 		{
 			comboBox.addItem(s);

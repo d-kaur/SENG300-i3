@@ -19,7 +19,7 @@ public class AttendantIO {
         attendantMainGUI = new AttendantMainGUI(this);
         addInkPaperIO = new AddInkPaperIO(this,stations);
         addItem = new AddItemAttendant(this); 
-        removeItem =  new RemoveItem(this, everyList);
+        removeItem =  new RemoveItem(this);
         changeBankNotes = new ChangeBankNotes(this);
         displayLogin();
     }
