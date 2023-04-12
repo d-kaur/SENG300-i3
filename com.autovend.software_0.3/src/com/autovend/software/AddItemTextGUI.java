@@ -47,7 +47,7 @@ public class AddItemTextGUI {
             pack();
         }
 
-        protected abstract void backButtonActionPerforme(ActionEvent evt);
+        protected abstract void backButtonActionPerformed(ActionEvent evt);
 
 
     }
