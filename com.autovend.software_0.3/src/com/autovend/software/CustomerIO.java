@@ -18,6 +18,7 @@ public class CustomerIO {
 	private AddItemTextCustomer addItemText;
 	private PayIO payIO;
 	private PurchasedItems itemsbought;
+    private ScanItemsGUI addScanItem;
     // we might need this to restore the correct screen
     // private String state;
 	private SelfCheckoutStation scs;
@@ -114,7 +115,7 @@ public class CustomerIO {
     public void showScanItem()
     {
         setAllInvisible();
-
+        addScanItem.setVisible(true);
     }
 }
 

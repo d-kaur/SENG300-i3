@@ -26,7 +26,7 @@ import com.autovend.software.observers.ElectronicScaleObserverStub;
  * Wasay Siddiqi
  *
  */
-public class ScanItemsGUI extends AddItem implements BarcodeScannerObserver{
+public class ScanItemsGUI extends AddItemGUI implements BarcodeScannerObserver{
 	private JFrame frame;
 	private BarcodeScanner scanner;
 	
