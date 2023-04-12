@@ -65,7 +65,7 @@ public class CustomerMainGUI extends JFrame{
                 parent.showAddBrowse();
             }
         });
-        JButton browseButton = new JButton("Add by Browsing Purchase Bags");
+        JButton browseButton = new JButton("Add by Browsing");
         browseButton.addActionListener(new ActionListener() {    
             @Override
             public void actionPerformed(ActionEvent e) {
