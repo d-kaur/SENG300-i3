@@ -31,6 +31,7 @@ public class PurchasedItems{
     private BigDecimal amountPaid;
     private boolean isPaid;
     private int bagCount;
+    private static BigDecimal idealBagPriceInUSD = BigDecimal.valueOf(0.1);
 
     public PurchasedItems() {
         listOfProducts = new ArrayList<>();
@@ -59,9 +60,10 @@ public class PurchasedItems{
         }
 		
 	}
-    public void addBag(Bag bag){
+	
+    public static void addBag(ReusableBag bag){
         bagCount++;
-        totalPrice = totalPrice.add(bag.getPrice());
+        totalPrice = totalPrice.add(idealBagPriceInUSD);
         totalExpectedWeight += bag.getWeight();
         if (totalPrice.compareTo(amountPaid) >= 0) {
             isPaid = false;
