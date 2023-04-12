@@ -54,7 +54,7 @@ public class PurchaseBagGUI {
 					try {
 						purchaseBags.purchaseBag(bagPurchase);
 						JOptionPane.showMessageDialog(new JPanel(),"Successfully Purchased Bag", "Success", JOptionPane.PLAIN_MESSAGE);
-						System.exit(0);
+						frame.setVisible(false);
 					} catch (EmptyException e1) {
 						// TODO Auto-generated catch block
 						JOptionPane.showMessageDialog(new JPanel(),"Invalid Input", "Failed to purchase bag", JOptionPane.ERROR_MESSAGE);
@@ -73,7 +73,7 @@ public class PurchaseBagGUI {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-				System.exit(0);
+				frame.setVisible(false);
 			}
 		
 		});
