@@ -37,7 +37,8 @@ public class ChangeBankNotes extends JFrame{
 		//Creating combo box
 		JLabel headerLabel = new JLabel("List Of Coins and Bank Notes:");
 		JComboBox<String> comboBox = new JComboBox<>();
-	
+		comboBox.setPreferredSize(new Dimension(150, 40));
+
 		listOfBC.add(headerLabel);
 		listOfBC.add(comboBox);
 

@@ -24,6 +24,7 @@ public AddItemAttendant(AttendantIO parent){
 	
 	JLabel headerLabel = new JLabel("Search:");
 	JComboBox<String> comboBox = new JComboBox<>();
+	comboBox.setPreferredSize(new Dimension(150, 40));
 
 	SearchPanel.add(headerLabel);
 	SearchPanel.add(comboBox);
