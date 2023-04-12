@@ -1,4 +1,6 @@
 package com.autovend.software;
+import com.autovend.Card;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,8 +13,7 @@ public class PayAndMembershipGUI extends JFrame {
     private JButton cash;
     private JButton enterMembership;
     private JButton back;
-    //private JLabel payLabel;
-
+    private JLabel payLabel;
 
     public PayAndMembershipGUI(){
         JFrame frame = new JFrame("Pay & Membership");
@@ -25,7 +26,7 @@ public class PayAndMembershipGUI extends JFrame {
 
         setMinimumSize(new Dimension(600, 400));
 
-        //payLabel = new JLabel("Choose payment Option:");
+        payLabel = new JLabel("Choose payment Option:");
 
         card = new JButton("Debit/Credit");
         card.addActionListener(e -> {
@@ -52,12 +53,24 @@ public class PayAndMembershipGUI extends JFrame {
 
         });
 
-       JPanel content = new JPanel(new GridLayout(3,2));
+        JPanel content = new JPanel();
+        content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
+        enterMembership.setAlignmentX(JButton.CENTER_ALIGNMENT);
         content.add(enterMembership);
-        //content.add(payLabel);
+
+        payLabel.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        content.add(payLabel);
+
+        card.setAlignmentX(JButton.CENTER_ALIGNMENT);
         content.add(card);
+
+        giftCard.setAlignmentX(JButton.CENTER_ALIGNMENT);
         content.add(giftCard);
+
+        cash.setAlignmentX(JButton.CENTER_ALIGNMENT);
         content.add(cash);
+
+        back.setAlignmentX(JButton.CENTER_ALIGNMENT);
         content.add(back);
 
         setContentPane(content);
@@ -66,6 +79,8 @@ public class PayAndMembershipGUI extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+
+
     } //PayAndMembershipGUI end
 
     public static void main(String[] args) {
