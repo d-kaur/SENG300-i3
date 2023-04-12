@@ -22,7 +22,6 @@ import com.autovend.software.AddItemPLUGUI;
  * Bheesha Kumari - 30158810
  */
 
-
 public class AddItemByTextSearchTest {
 
     Currency currency = Currency.getInstance("CAD");
@@ -92,7 +91,7 @@ public class AddItemByTextSearchTest {
         ProductDatabases.BARCODED_PRODUCT_DATABASE.put(b2, itemProduct2);
         ProductDatabases.BARCODED_PRODUCT_DATABASE.put(b3, itemProduct3);
 
-        maxScaleWeight = 10;
+        maxScaleWeight = 30;
         sensitivity = 1;
 
         // create the station
@@ -162,7 +161,7 @@ public class AddItemByTextSearchTest {
     }
 
     @Test
-    public void testAddItem_OneItem() {
+    public void testAddItem_OneItem() throws OverloadException {
         // add item1
         addItemByTextSearch.addItem("item1");
         List<BarcodedProduct> actual = PurchasedItems.getListOfProducts();
@@ -173,10 +172,15 @@ public class AddItemByTextSearchTest {
         // assert
         Assert.assertArrayEquals(expected.toArray(), actual.toArray());
 
+        // expected weight
+        double expected_weight = itemProduct1.getExpectedWeight();
+
+        // assert weight
+        Assert.assertEquals(expected_weight, selfCheckoutStation.baggingArea.getCurrentWeight(), 0.0);
     }
 
     @Test
-    public void testAddItem_TwoItems() {
+    public void testAddItem_TwoItems() throws OverloadException {
         // add item1
         addItemByTextSearch.addItem("item1");
         addItemByTextSearch.addItem("item2");
@@ -184,13 +188,17 @@ public class AddItemByTextSearchTest {
 
         // expected
         List<BarcodedProduct> expected = Arrays.asList(itemProduct1, itemProduct2);
+        // expected weight
+        double expected_weight = itemProduct1.getExpectedWeight() + itemProduct2.getExpectedWeight();
 
         // assert
         Assert.assertArrayEquals(expected.toArray(), actual.toArray());
+        // assert weight
+        Assert.assertEquals(expected_weight, selfCheckoutStation.baggingArea.getCurrentWeight(), 0.0);
     }
 
     @Test
-    public void testAddItem_ThreeItems() {
+    public void testAddItem_ThreeItems() throws OverloadException {
         // add item1
         addItemByTextSearch.addItem("item1");
         addItemByTextSearch.addItem("item2");
@@ -200,8 +208,13 @@ public class AddItemByTextSearchTest {
         // expected
         List<BarcodedProduct> expected = Arrays.asList(itemProduct1, itemProduct2, itemProduct3);
 
+        // expected weight
+        double expected_weight = itemProduct1.getExpectedWeight() + itemProduct2.getExpectedWeight() + itemProduct3.getExpectedWeight();
+
         // assert
         Assert.assertArrayEquals(expected.toArray(), actual.toArray());
+        // assert weight
+        Assert.assertEquals(expected_weight, selfCheckoutStation.baggingArea.getCurrentWeight(), 0.0);
 
     }
 
