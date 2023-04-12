@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="476c016a-8c0a-4a02-ac4f-259fa4098f3a" name="Changes" comment="RemoveItemIO">
+    <list default="true" id="476c016a-8c0a-4a02-ac4f-259fa4098f3a" name="Changes" comment="Add Item text GUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.autovend.software_0.3/src/com/autovend/software/AddItemTextGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.autovend.software_0.3/src/com/autovend/software/AddItemTextGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/com.autovend.software_0.3/src/com/autovend/software/AddItemTextCustomer.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.autovend.software_0.3/src/com/autovend/software/AddItemTextCustomer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,7 +230,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681299799791</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Add Item text GUI">
+      <created>1681322609050</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1681322609050</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -256,6 +263,7 @@
     <MESSAGE value="Add Item By Text GUI Updated" />
     <MESSAGE value="Add Item By Text Customer Updated" />
     <MESSAGE value="RemoveItemIO" />
-    <option name="LAST_COMMIT_MESSAGE" value="RemoveItemIO" />
+    <MESSAGE value="Add Item text GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Item text GUI" />
   </component>
 </project>

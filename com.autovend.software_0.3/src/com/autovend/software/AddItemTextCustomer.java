@@ -112,7 +112,5 @@ public class AddItemTextCustomer extends AddItemTextGUI {
 }
 
 
-}
 
-        }
 
