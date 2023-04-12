@@ -9,6 +9,8 @@ import com.autovend.devices.SelfCheckoutStation;
 public class MainController {
     private AttendantIO attendantIO;
     private CustomerIO[] customerIO = {null,null,null,null,null};
+    private PurchasedItems[] everyList = {null,null,null,null,null};
+    private SelfCheckoutStation[] stations = {null,null,null,null,null};
     private Currency currency = Currency.getInstance("CAD");
     private	int[] billDenominations = {5,10,20,50};
     private BigDecimal[] coinDenominations = {new BigDecimal(0.05),new BigDecimal(0.1),
@@ -18,15 +20,16 @@ public class MainController {
     private		int scaleSensitivity = 1;
     public MainController()
     {
-        int x = 0;
-       // for(int x = 0; x < 0; x++)
+       for(int x = 0; x < 1; x++)
         {
+            everyList[x] = new PurchasedItems();
+            stations[x] = new SelfCheckoutStation(currency,billDenominations,coinDenominations,scaleMaximumWeight,scaleSensitivity);
            customerIO[x] = new CustomerIO(this,
-            new SelfCheckoutStation(currency,billDenominations,coinDenominations,scaleMaximumWeight,scaleSensitivity), x);
+            stations[x], x);
            shutdown(x);
         }
 
-        attendantIO = new AttendantIO(this);
+        attendantIO = new AttendantIO(this,everyList,stations);
 
         populateDataBase();
     }

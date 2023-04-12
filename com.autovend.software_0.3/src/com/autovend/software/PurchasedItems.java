@@ -20,21 +20,21 @@ import com.autovend.products.Product;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-
+//import java.lang.String.*;
 
 public class PurchasedItems{
 
     private ArrayList<Product> listOfProducts;
-    private ArrayList<Product> listOfBags;
     private BigDecimal totalPrice;
     private double totalExpectedWeight;
     private BigDecimal change;
     private BigDecimal amountPaid;
     private boolean isPaid;
+    private int bagCount;
 
     public PurchasedItems() {
         listOfProducts = new ArrayList<>();
-        listOfBags = new ArrayList<>();
+        bagCount = 0;
         totalPrice = new BigDecimal(0);
         amountPaid = new BigDecimal(0);
         totalExpectedWeight = 0;
@@ -60,7 +60,7 @@ public class PurchasedItems{
 		
 	}
     public void addBag(Bag bag){
-        listOfBags.add(bag);
+        bagCount++;
         totalPrice = totalPrice.add(bag.getPrice());
         totalExpectedWeight += bag.getWeight();
         if (totalPrice.compareTo(amountPaid) >= 0) {
@@ -72,23 +72,58 @@ public class PurchasedItems{
         return listOfProducts;
     }
 
-    public ArrayList<Product> getListOfBags(){
-        return listOfBags;
-    }
+
 
     // I think this is not necessary for this iteration but will be useful for future ones
-    public void removeProduct(BarcodedProduct product){
-        listOfProducts.remove(product);
-        totalPrice = totalPrice.subtract(product.getPrice());
-        totalExpectedWeight -= product.getExpectedWeight();
+    public void removeProduct(String product){
+        for(Product p : listOfProducts)
+        {
+            if(p instanceof PLUCodedProduct)
+            {
+                PLUCodedProduct a = (PLUCodedProduct)p;
+                if(product.compareTo(a.getDescription()) == 0){
+                    listOfProducts.remove(a);
+                    totalPrice = totalPrice.subtract(a.getPrice());
+                    //totalExpectedWeight -= a.getExpectedWeight();
+                    return;
+                }
+            }
+            if(p instanceof BarcodedProduct)
+            {
+                BarcodedProduct a = (BarcodedProduct) p;
+                if(product.compareTo(a.getDescription()) == 0){
+                    listOfProducts.remove(a);
+                    totalPrice = totalPrice.subtract(a.getPrice());
+                    totalExpectedWeight -= a.getExpectedWeight();
+                    return;
+                }
+            }
+        }
     }
 
     public void removeOtherProduct(Product product, double weight){
-        listOfBags.remove(product);
+        //listOfBags.remove(product);
         totalPrice = totalPrice.subtract(product.getPrice());
         totalExpectedWeight -= weight;
     }
-
+    public ArrayList<String> getNames()
+    {
+        ArrayList<String> names = new ArrayList<>();
+        for(Product p: listOfProducts)
+        {
+            if(p instanceof PLUCodedProduct)
+            {
+                PLUCodedProduct a = (PLUCodedProduct)p;
+                names.add(a.getDescription());
+            }
+            if(p instanceof BarcodedProduct)
+            {
+                BarcodedProduct a = (BarcodedProduct) p;
+                names.add(a.getDescription());
+            }
+        }
+        return names;
+    }
     public BigDecimal getTotalPrice(){
         return totalPrice;
     }
@@ -136,7 +171,7 @@ public class PurchasedItems{
 
     public void reset() {
     	listOfProducts = new ArrayList<>();
-        listOfBags = new ArrayList<>();
+        bagCount = 0;
         totalPrice = new BigDecimal(0);
         amountPaid = new BigDecimal(0);
         totalExpectedWeight = 0;

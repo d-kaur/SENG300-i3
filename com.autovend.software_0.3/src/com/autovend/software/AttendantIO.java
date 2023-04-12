@@ -1,4 +1,5 @@
 package com.autovend.software;
+import com.autovend.devices.SelfCheckoutStation;
 import com.autovend.software.*;
 public class AttendantIO {
     private MainController parent;
@@ -8,15 +9,17 @@ public class AttendantIO {
     private AddItemAttendant addItem;
     private RemoveItem removeItem;
     private ChangeBankNotes changeBankNotes;
-    
-    public AttendantIO(MainController parent){
-    	
+    private PurchasedItems[] everyList;
+    private SelfCheckoutStation[] stations;
+    public AttendantIO(MainController parent, PurchasedItems[] everylist, SelfCheckoutStation[] stations){
+    	this.stations = stations;
+        this.everyList = everylist;
         this.parent = parent;
         loginLogoutIO = new LoginLogoutGUI(this);
         attendantMainGUI = new AttendantMainGUI(this);
         addInkPaperIO = new AddInkPaperIO(this);
         addItem = new AddItemAttendant(this); 
-        removeItem =  new RemoveItem(this);
+        removeItem =  new RemoveItem(this, everyList);
         changeBankNotes = new ChangeBankNotes(this);
         displayLogin();
     }
