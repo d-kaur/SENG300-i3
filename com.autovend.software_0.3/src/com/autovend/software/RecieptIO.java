@@ -9,11 +9,11 @@ import java.awt.event.ActionListener;
 public class RecieptIO extends JFrame
 {
 	private PayIO parent;
-	private PurchasedItems list;
+	
 	private String recieptMessage;
 	private JLabel message;
 	private JButton back = new JButton("back");
-	public RecieptIO( PayIO parent)
+	public RecieptIO(PayIO parent)
 	{
 		super("Reciept:");
 		back.addActionListener(new ActionListener() {

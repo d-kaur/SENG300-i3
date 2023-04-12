@@ -37,11 +37,10 @@ public class ScanItems extends AddItem implements BarcodeScannerObserver{
     /*
      * Constructor for ScanItems
      */
-    public ScanItems(SelfCheckoutStation station,PurchasedItems list) {
-        super(station, list);
+    public ScanItems(SelfCheckoutStation station) {
+        super(station);
         PurchasedItems purchasedItems = new PurchasedItems();
         this.selfCheckoutStation = station;
-        this.purchaseList = purchasedItems;
     }
 
     public PurchasedItems getPurchasedItems() {

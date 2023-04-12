@@ -10,7 +10,6 @@ public class RemoveItem extends JFrame{
 private JButton backButton;
 private JButton deleteItemButton;
 private AttendantIO parent;
-
 int stationSelected;
 	public RemoveItem(AttendantIO parent){
 		this.parent = parent;

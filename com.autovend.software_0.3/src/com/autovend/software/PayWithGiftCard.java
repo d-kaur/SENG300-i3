@@ -40,7 +40,7 @@ difference from credit and debit payment:
     private CardIssuer cardIssuer;
     public PayWithGiftCard(SelfCheckoutStation station, GiftCard giftCard) {
 
-        super(station;
+        super(station);
         /*if(giftCard == null){
             throw new SimulationException(new NullPointerException("No arguments may be null."));
         }

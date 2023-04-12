@@ -9,11 +9,9 @@ public class AttendantIO {
     private AddItemAttendant addItem;
     private RemoveItem removeItem;
     private ChangeBankNotes changeBankNotes;
-    private PurchasedItems[] everyList;
     private SelfCheckoutStation[] stations;
-    public AttendantIO(MainController parent, PurchasedItems[] everylist, SelfCheckoutStation[] stations){
+    public AttendantIO(MainController parent, SelfCheckoutStation[] stations){
     	this.stations = stations;
-        this.everyList = everylist;
         this.parent = parent;
         loginLogoutIO = new LoginLogoutGUI(this);
         attendantMainGUI = new AttendantMainGUI(this);

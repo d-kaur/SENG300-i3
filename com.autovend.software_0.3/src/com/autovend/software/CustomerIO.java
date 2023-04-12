@@ -17,15 +17,13 @@ public class CustomerIO {
 	private AddItemPLUGUI addItemPLU;
 	private AddItemTextCustomer addItemText;
 	private PayIO payIO;
-	private PurchasedItems itemsbought;
     // we might need this to restore the correct screen
     // private String state;
 	private SelfCheckoutStation scs;
 	int stationNum;
-    public CustomerIO(MainController parent, SelfCheckoutStation scs, int stationNum, PurchasedItems list){
+    public CustomerIO(MainController parent, SelfCheckoutStation scs, int stationNum){
 
         this.parent = parent;
-        itemsbought = list;
 
         preventAccessGUI = new PreventAccessGUI(this);
         customerMainGUI = new CustomerMainGUI(this,scs, stationNum);
@@ -34,10 +32,10 @@ public class CustomerIO {
         closedGUI = new ClosedGUI(this);
     	addItemBrowse = new AddItemBrowseGUI(this,scs);
 
-    	addItemPLU = new AddItemPLUGUI(this,scs, itemsbought);
+    	addItemPLU = new AddItemPLUGUI(this,scs);
 
     	addItemText = new AddItemTextCustomer(this,scs);
-        payIO = new PayIO(itemsbought,scs,this);
+        payIO = new PayIO(scs,this);
         this.scs = scs;
         this.stationNum = stationNum;
 
