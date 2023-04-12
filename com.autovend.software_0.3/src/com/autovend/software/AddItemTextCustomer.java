@@ -21,17 +21,22 @@ public class AddItemTextCustomer extends AddItemTextGUI {
 
         addItemByTextSearch = new AddItemByTextSearch(check);
 
+        // initialize the components
         itemsComboBox = new JComboBox<>();
         addItemBtn = new JButton();
         searchBar = new JTextField();
         searchBtn = new JButton();
         jSeparator1 = new JSeparator();
 
+        // jFrame size
         setPreferredSize(new Dimension(450, 350));
+
+        // on exit
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         itemsComboBox.setVisible(false);
 
+        // set button styles, and event listener
         addItemBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         addItemBtn.setText("Add Item");
         addItemBtn.addActionListener(new ActionListener() {
@@ -40,6 +45,7 @@ public class AddItemTextCustomer extends AddItemTextGUI {
             }
         });
 
+        // set button styles, and event listener
         searchBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         searchBtn.setText("Search");
         searchBtn.addActionListener(new ActionListener() {
@@ -48,6 +54,7 @@ public class AddItemTextCustomer extends AddItemTextGUI {
             }
         });
 
+        // layout creation
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout
@@ -79,12 +86,15 @@ public class AddItemTextCustomer extends AddItemTextGUI {
     }
 
     @Override
+    // when back button is clicked
+    // change frame to AddScanItemGUI
     protected void backButtonActionPerformed(ActionEvent evt) {
         JFrame f = new AddScanItemGUI();
         f.setVisible(true);
         dispose();
     }
 
+    // method which triggers when search button is pressed
     private void searchButtonActionPerformed(ActionEvent evt) {
         String keyword = searchBar.getText();
         String[] items = addItemByTextSearch.searchItems(keyword);
@@ -94,22 +104,11 @@ public class AddItemTextCustomer extends AddItemTextGUI {
         }
     }
 
+    // method which triggers when add item button is pressed
     private void addItemButtonActionPerformed(ActionEvent evt) {
         String selected = (String) itemsComboBox.getSelectedItem();
         addItemByTextSearch.addItem(selected);
     }
-
-    public static void main(String args[]) {
-        int[] temp = { 1, 2, 3, 4 };
-        SelfCheckoutStation s = new SelfCheckoutStation(Currency.getInstance(Locale.CANADA), temp,
-                new BigDecimal[] { BigDecimal.valueOf(2.6) }, 5, 5);
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AddItemTextCustomer(s).setVisible(true);
-            }
-        });
-    }
-
 }
 
 
