@@ -17,12 +17,11 @@ public abstract class Pay{
 
     protected BigDecimal amountPaid;
     protected PayIO parent;
-    public Pay( SelfCheckoutStation station) {
+    public Pay(SelfCheckoutStation station) {
     	if (station == null) {
             throw new SimulationException(new NullPointerException("Station cannot be null."));
         }
         this.station = station;
-        this.parent = parent;
         amountPaid = new BigDecimal(0);
         amountDue = PurchasedItems.getAmountLeftToPay();
     }

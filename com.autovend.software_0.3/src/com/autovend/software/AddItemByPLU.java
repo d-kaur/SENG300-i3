@@ -82,7 +82,7 @@ public class AddItemByPLU extends AddItem{
 			PriceLookUpCodedUnit unit = new PriceLookUpCodedUnit(p.getPLUCode(), 1.5);
 			station.scale.add(unit);
 			scaleObs.reactToWeightChangedEvent(station.scale, unit.getWeight());
-			addPLUProduct(p);
+			//addPLUProduct(p);
 			station.scale.disable();
 			scaleObs.reactToDisabledEvent(station.scale);
 			return true;

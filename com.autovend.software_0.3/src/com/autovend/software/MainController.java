@@ -12,8 +12,8 @@ import com.autovend.products.PLUCodedProduct;
 
 public class MainController {
     private AttendantIO attendantIO;
-    private CustomerIO[] customerIO = {null,null,null,null,null};
-    private SelfCheckoutStation[] stations = {null,null,null,null,null};
+    private CustomerIO customerIO = null;
+    private SelfCheckoutStation station = null;
     private Currency currency = Currency.getInstance("CAD");
     private	int[] billDenominations = {5,10,20,50};
     private BigDecimal[] coinDenominations = {new BigDecimal(0.05),new BigDecimal(0.1),
@@ -23,55 +23,54 @@ public class MainController {
     private		int scaleSensitivity = 1;
     public MainController()
     {
-       for(int x = 0; x < 1; x++)
-       {
-            stations[x] = new SelfCheckoutStation(currency,billDenominations,coinDenominations,scaleMaximumWeight,scaleSensitivity);
-           customerIO[x] = new CustomerIO(this,
-            stations[x], x);
-           shutdown(x);
-        }
 
-        attendantIO = new AttendantIO(this,stations);
+            station = new SelfCheckoutStation(currency,billDenominations,coinDenominations,scaleMaximumWeight,scaleSensitivity);
+           customerIO = new CustomerIO(this,
+            station );
+           shutdown();
+
+
+        attendantIO = new AttendantIO(this,station);
 
         populateDataBase();
     }
     // add methods that the customer IO needs to change the attendant screen, and vice versa
  
-    public void approve(int station)
+    public void approve()
     {
-    	customerIO[station].permit();
+    	customerIO.permit();
     }
-    public void open(int station)
+    public void open()
     {
-    	customerIO[station].open();
+    	customerIO.open();
     }
-    public void permit(int station)
+    public void permit()
     {
-    	customerIO[station].permit();
+    	customerIO.permit();
     }
-    public void prevent(int station)
+    public void prevent()
     {
-    	customerIO[station].prevent();
+    	customerIO.prevent();
     }
-    public void shutdown(int station)
+    public void shutdown()
     {
-    	customerIO[station].close();
+    	customerIO.close();
     }
-    public void finish(int station)
+    public void finish()
     {
 
  
-        stations[station] = new SelfCheckoutStation(currency,billDenominations,coinDenominations,scaleMaximumWeight,scaleSensitivity);
-        customerIO[station] = new CustomerIO(this,
-                stations[station], station);
-        shutdown(station);
+        station = new SelfCheckoutStation(currency,billDenominations,coinDenominations,scaleMaximumWeight,scaleSensitivity);
+        customerIO = new CustomerIO(this,
+                station);
+        shutdown();
     }
     public void populateDataBase()
     {
 
         LoginLogout.createAccount("victor","han");
 
-        PriceLookUpCode testCode = new PriceLookUpCode(Numeral.one,Numeral.two,Numeral.three,Numeral.four);
+        PriceLookUpCode testCode = new PriceLookUpCode(Numeral.one,Numeral.one,Numeral.one,Numeral.one);
         PLUCodedProduct testPLU = new PLUCodedProduct(testCode, "testPLU", new BigDecimal(2));
         ProductDatabases.PLU_PRODUCT_DATABASE.put(testCode,testPLU);
     }

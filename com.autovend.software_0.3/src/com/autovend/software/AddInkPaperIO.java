@@ -20,12 +20,12 @@ public class AddInkPaperIO extends JFrame {
 	private JPanel paperPanel;
 	private JPanel mainPanel;
 
-	private SelfCheckoutStation[] stations;
+	private SelfCheckoutStation station;
 	private ReceiptPrinter currentPrinter;
-	public AddInkPaperIO(AttendantIO parent, SelfCheckoutStation[] stations)
+	public AddInkPaperIO(AttendantIO parent, SelfCheckoutStation station)
 	{
 		this.parent = parent;
-		this.stations = stations;
+		this.station = station;
 		JFrame frame = new JFrame("Add Ink Paper");
 		JPanel paperPanel = new JPanel();
 		JPanel inkPanel = new JPanel();
@@ -94,9 +94,9 @@ public class AddInkPaperIO extends JFrame {
 		pack();
 
 	}
-	public void pickStation(int station)
+	public void pickStation()
 	{
 
-		currentPrinter = stations[station].printer;
+		currentPrinter = station.printer;
 	}
 }

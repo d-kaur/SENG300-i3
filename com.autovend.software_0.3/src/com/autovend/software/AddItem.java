@@ -31,8 +31,8 @@ public abstract class AddItem {
 		PurchasedItems.addProduct(unit);
 	}
 	
-	public void addPLUProduct(PLUCodedProduct unit) {
-		PurchasedItems.addPLUProduct(unit);
+	public void addPLUProduct(PLUCodedProduct unit, double weight) {
+		PurchasedItems.addPLUProduct(unit, weight);
 	}
 	
 }

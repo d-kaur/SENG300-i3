@@ -36,19 +36,20 @@ public class AddItemPLUGUI extends AddItemGUI{
 	private String PLU;
 	private boolean success;
 	private CustomerIO parent;
-	private AddItemByPLU adder;
+	//private AddItemByPLU adder;
+
 	/**
 	 * Constructor for adding an item using PLU
-	 * GUI is utilized 
+	 * GUI is utilized
 	 * @param scs: SelfCheckoutStation
 	 */
-	
+
 	public AddItemPLUGUI(CustomerIO parent,SelfCheckoutStation scs) {
 		super(parent,"Add Item by PLU",scs);
 
 		//success = false;
 		check.screen.enable();
-		adder = new AddItemByPLU(scs);
+		//adder = new AddItemByPLU(scs);
 
 		setSize(600,600);
 		PLU = "";
@@ -69,11 +70,10 @@ public class AddItemPLUGUI extends AddItemGUI{
 				// TODO Auto-generated method stub
 				PLU = (String) box.getSelectedItem();
 			}
-		
+
 		});
 
 		add(box);
-
 
 
 		backButton = new JButton("BACK");
@@ -87,20 +87,26 @@ public class AddItemPLUGUI extends AddItemGUI{
 		});
 
 		addButton = new JButton("Add");
-		/*
+
 		addButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
 				String pluSplit [] = PLU.split("");
+				char [] pluCharArray = PLU.toCharArray();
 				if(pluSplit.length == 4) {
 					Numeral [] pluArr = new Numeral[pluSplit.length];
 					for (int i=0; i<pluArr.length; i++) {
-						byte temp = (byte) Integer.parseInt(pluSplit[i]);
-						pluArr[i] = Numeral.valueOf(temp);
+						byte temp = (byte)pluCharArray[i];
+						//byte temp = (byte) Integer.parseInt(pluSplit[i]);
 					}
-					PriceLookUpCode pluObj = new PriceLookUpCode(pluArr);
+					//PriceLookUpCode pluObj = new PriceLookUpCode(Numeral.one,Numeral.one,Numeral.one,Numeral.one);
+					PriceLookUpCode pluObj = new PriceLookUpCode(Numeral.valueOf((byte)(pluCharArray[0]-'0')),
+							Numeral.valueOf((byte)(pluCharArray[1]-'0')),
+							Numeral.valueOf((byte)(pluCharArray[2]-'0')),
+							Numeral.valueOf((byte)(pluCharArray[3]-'0'))
+							);
 					if(ProductDatabases.PLU_PRODUCT_DATABASE.containsKey(pluObj)) {
 						check.scale.enable();
 						//scaleObs.reactToEnabledEvent(check.scale);
@@ -111,8 +117,8 @@ public class AddItemPLUGUI extends AddItemGUI{
 
 						check.scale.add(unit);
 						//scaleObs.reactToWeightChangedEvent(check.scale, unit.getWeight());
-
-						adder.addPLUProduct(p);
+						PurchasedItems.addPLUProduct(p,1.5);
+						//adder.addPLUProduct(p);
 						check.scale.remove(unit);
 						check.scale.disable();
 						//scaleObs.reactToDisabledEvent(check.scale);
@@ -127,7 +133,7 @@ public class AddItemPLUGUI extends AddItemGUI{
 
 
 		});
-*/
+
 		backButton.setBounds(x,y+65, 80,50);
 		addButton.setBounds(x,y+130, 80,50);
 		check.screen.setVisible(true);
@@ -137,18 +143,18 @@ public class AddItemPLUGUI extends AddItemGUI{
 		setLayout(null);
 
 	}
-	
+
 	/**
-	 * 
+	 *
 	 */
-	
+
 	public void setPLU() {
 		KeyBoardObserverStub obs = new KeyBoardObserverStub();
 		Keyboard keyboard = new Keyboard();
 		keyboard.enable();
 		keyboard.register(obs);
 		obs.reactToEnabledEvent(keyboard);
-		
+
 		ElectronicScaleObserverStub scaleObs = new ElectronicScaleObserverStub();
 		//addButton = new Button("ADD");
 		addButton.setBounds(x+45,y+25, 30,15);
@@ -156,28 +162,35 @@ public class AddItemPLUGUI extends AddItemGUI{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				String pluSplit [] = PLU.split("");
+				char [] pluCharArray = PLU.toCharArray();
 				if(pluSplit.length == 4) {
 					Numeral [] pluArr = new Numeral[pluSplit.length];
 					for (int i=0; i<pluArr.length; i++) {
-						byte temp = (byte) Integer.parseInt(pluSplit[i]);
+						byte temp = (byte)pluCharArray[i];
+						//byte temp = (byte) Integer.parseInt(pluSplit[i]);
 						pluArr[i] = Numeral.valueOf(temp);
 					}
-					PriceLookUpCode pluObj = new PriceLookUpCode(pluArr);
+					PriceLookUpCode pluObj = new PriceLookUpCode(Numeral.one,Numeral.one,Numeral.one,Numeral.one);
+					//PriceLookUpCode pluObj = new PriceLookUpCode(Numeral.valueOf((byte)(pluCharArray[0]-'0')),
+					//		Numeral.valueOf((byte)(pluCharArray[1]-'0')),
+					//		Numeral.valueOf((byte)(pluCharArray[2]-'0')),
+					//		Numeral.valueOf((byte)(pluCharArray[3]-'0'))
+					//		);
 					if(ProductDatabases.PLU_PRODUCT_DATABASE.containsKey(pluObj)) {
 						check.scale.enable();
 						scaleObs.reactToEnabledEvent(check.scale);
-						
+
 						PLUCodedProduct p = ProductDatabases.PLU_PRODUCT_DATABASE.get(pluObj);
 						box.addItem(p.getDescription() + " "+ PLU);
 						PriceLookUpCodedUnit unit = new PriceLookUpCodedUnit(p.getPLUCode(), 1.5);
-						
+
 						check.scale.add(unit);
 						scaleObs.reactToWeightChangedEvent(check.scale, unit.getWeight());
-						
-						adder.addPLUProduct(p);
-						check.scale.remove(unit); 
+
+						//adder.addPLUProduct(p);
+						check.scale.remove(unit);
 						check.scale.disable();
 						scaleObs.reactToDisabledEvent(check.scale);
 						success = true;
@@ -186,15 +199,15 @@ public class AddItemPLUGUI extends AddItemGUI{
 				}else {
 					success = false;
 				}
-				
+
 			}
 
-			
+
 		});
 		add(addButton);
 		//frame.setVisible(true);
 	}
-	
+
 	//public boolean getState() {
 	//	return success;
 	//}

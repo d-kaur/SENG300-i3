@@ -1,6 +1,6 @@
 package com.autovend.software;
 import com.autovend.devices.SelfCheckoutStation;
-import com.autovend.software.*;
+
 public class AttendantIO {
     private MainController parent;
     private AttendantMainGUI attendantMainGUI;
@@ -9,13 +9,13 @@ public class AttendantIO {
     private AddItemAttendant addItem;
     private RemoveItem removeItem;
     private ChangeBankNotes changeBankNotes;
-    private SelfCheckoutStation[] stations;
-    public AttendantIO(MainController parent, SelfCheckoutStation[] stations){
-    	this.stations = stations;
+    private SelfCheckoutStation station;
+    public AttendantIO(MainController parent, SelfCheckoutStation station){
+    	this.station = station;
         this.parent = parent;
         loginLogoutIO = new LoginLogoutGUI(this);
         attendantMainGUI = new AttendantMainGUI(this);
-        addInkPaperIO = new AddInkPaperIO(this,stations);
+        addInkPaperIO = new AddInkPaperIO(this,station);
         addItem = new AddItemAttendant(this); 
         removeItem =  new RemoveItem(this);
         changeBankNotes = new ChangeBankNotes(this);
@@ -46,16 +46,15 @@ public class AttendantIO {
     	setAllInvisible();
     	addItem.setVisible(true);
     }
-    public void displayRemoveItem(int station)
+    public void displayRemoveItem()
     {
     	setAllInvisible();
-        removeItem.pickStation(station);
     	removeItem.setVisible(true);
     	
     }
-    public void displayInkPaper(int station){
+    public void displayInkPaper(){
     	setAllInvisible();
-        addInkPaperIO.pickStation(station);
+        addInkPaperIO.pickStation();
     	addInkPaperIO.setVisible(true);
     }
     public void displayBankNotes()
@@ -63,24 +62,24 @@ public class AttendantIO {
     	setAllInvisible();
     	changeBankNotes.setVisible(true);
     }
-    public void approve(int station) 
+    public void approve()
     {
-    	parent.approve(station);
+    	parent.approve();
     }
-    public void shutDown(int station) {
-    	parent.shutdown(station);
+    public void shutDown() {
+    	parent.shutdown();
     }
-    public void startup(int station)
+    public void startup()
     {
-    	parent.open(station);
+    	parent.open();
     }
-    public void prevent(int station)
+    public void prevent()
     {
-    	parent.prevent(station);
+    	parent.prevent();
     }
-    public void attendantApprove(int station)
+    public void attendantApprove()
     {
-    	parent.approve(station);
+    	parent.approve();
     }
  
 }

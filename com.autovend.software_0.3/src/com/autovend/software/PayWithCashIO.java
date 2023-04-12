@@ -205,4 +205,8 @@ public class PayWithCashIO extends PayGUI
 			pack();
 
 		}
+		public void updatePrice()
+		{
+			amountDue.setText(PurchasedItems.getAmountLeftToPay().toString());
+		}
 }

@@ -27,12 +27,11 @@ public class CustomerMainGUI extends JFrame{
 	private JPanel displayPanel;
 	private CustomerIO parent;
 	private PurchasedItems itemsbought;
-	private int stationNum;
 	
-	public CustomerMainGUI(CustomerIO customerIO , SelfCheckoutStation scs, int stationNum){
+	public CustomerMainGUI(CustomerIO customerIO , SelfCheckoutStation scs){
         parent = customerIO;
         itemsbought = new PurchasedItems();
-        this.stationNum = stationNum;
+
 
         buttonPanel = new JPanel();
         payPanel = new JPanel();

@@ -52,10 +52,10 @@ public class PurchasedItems{
             isPaid = false;
         }
     }
-    public static void addPLUProduct(PLUCodedProduct p) {
+    public static void addPLUProduct(PLUCodedProduct p,double weight) {
 		// TODO Auto-generated method stub
     	listOfProducts.add(p);
-        totalPrice = totalPrice.add(p.getPrice());
+        totalPrice = totalPrice.add(p.getPrice().multiply(new BigDecimal(weight)));
         if (totalPrice.compareTo(amountPaid) >= 0) {
             isPaid = false;
         }

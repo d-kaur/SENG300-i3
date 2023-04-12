@@ -132,6 +132,7 @@ public class PayIO extends JFrame
 	{
 		setAllInvisble();
 		cash.setVisible(true);
+		cash.updatePrice();
 	}
 	public void showReciept()
 	{

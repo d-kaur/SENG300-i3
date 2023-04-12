@@ -20,13 +20,12 @@ public class CustomerIO {
     // we might need this to restore the correct screen
     // private String state;
 	private SelfCheckoutStation scs;
-	int stationNum;
-    public CustomerIO(MainController parent, SelfCheckoutStation scs, int stationNum){
+    public CustomerIO(MainController parent, SelfCheckoutStation scs){
 
         this.parent = parent;
 
         preventAccessGUI = new PreventAccessGUI(this);
-        customerMainGUI = new CustomerMainGUI(this,scs, stationNum);
+        customerMainGUI = new CustomerMainGUI(this,scs);
         customerMainGUI.setVisible(false);
 
         closedGUI = new ClosedGUI(this);
@@ -37,7 +36,6 @@ public class CustomerIO {
     	addItemText = new AddItemTextCustomer(this,scs);
         payIO = new PayIO(scs,this);
         this.scs = scs;
-        this.stationNum = stationNum;
 
 
     }
@@ -82,7 +80,7 @@ public class CustomerIO {
     }
     public void done()
     {
-    	parent.finish(stationNum);
+    	parent.finish();
     }
     public void showMainScreen()
     {
