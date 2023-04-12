@@ -30,9 +30,9 @@ public class PayWithCashIO extends PayGUI
 	private PayWithCash payer;
 	private BillValidator billacceptor;
 	private CoinValidator coinacceptor;
-	 public PayWithCashIO(String msg, SelfCheckoutStation station, PurchasedItems list, PayIO parent) {
-			super(msg,station,list,parent);
-			payer = new PayWithCash(station,list);
+	 public PayWithCashIO(String msg, SelfCheckoutStation station, PayIO parent) {
+			super(msg,station,parent);
+			payer = new PayWithCash(station);
 			billacceptor = station.billValidator;
 			coinacceptor = station.coinValidator;
 			billacceptor.register(payer);
@@ -176,7 +176,7 @@ public class PayWithCashIO extends PayGUI
 
 			currentAmount = new TextField();
 			currentAmount.setPreferredSize(new Dimension(150, 30));
-			amountDue = new TextField(itemsBought.getAmountLeftToPay().toString());
+			amountDue = new TextField(PurchasedItems.getAmountLeftToPay().toString());
 			amountDue.setPreferredSize(new Dimension(150, 30));
 
 			amountPanel.add(currentAmountLabel);

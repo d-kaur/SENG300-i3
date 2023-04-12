@@ -14,7 +14,6 @@ public class PayIO extends JFrame
 	private PayWithGiftCardIO giftCard;
 	private PayWithDebitIO debitCard;
 	private PayWithCashIO cash;
-	private PurchasedItems itemsbought;
 	private RecieptIO reciept;
 	private CustomerIO parent;
 	private JButton back;
@@ -22,13 +21,12 @@ public class PayIO extends JFrame
 	private JButton debitCreditButton;
 	private JButton cashButton;
 	private JButton giftCardButton;
-	public PayIO(PurchasedItems itemsbought, SelfCheckoutStation scs, CustomerIO parent)
+	public PayIO(SelfCheckoutStation scs, CustomerIO parent)
 	{
-		this.itemsbought = itemsbought;
 		this.parent = parent;
-		giftCard = new PayWithGiftCardIO("Pay Gift",scs,itemsbought,this);
-		debitCard = new PayWithDebitIO("Pay Card",scs,itemsbought,this);
-		cash = new PayWithCashIO("Pay Cash",scs,itemsbought,this);
+		giftCard = new PayWithGiftCardIO("Pay Gift",scs,this);
+		debitCard = new PayWithDebitIO("Pay Card",scs,this);
+		cash = new PayWithCashIO("Pay Cash",scs,this);
 
 		JFrame frame = new JFrame("Select Payment Type");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -138,7 +136,7 @@ public class PayIO extends JFrame
 	public void showReciept()
 	{
 		setAllInvisble();
-		reciept = new RecieptIO(itemsbought,this);
+		reciept = new RecieptIO(this);
 		reciept.setVisible(true);
 	}
 	public void done()

@@ -25,16 +25,15 @@ import com.autovend.devices.observers.ReusableBagDispenserObserver;
 public class AddOrRemoveBags implements ReusableBagDispenserObserver {
 
     private SelfCheckoutStation station;
-    private PurchasedItems purchased;
 
-    public AddOrRemoveBags(SelfCheckoutStation scs, PurchasedItems purchased) {
+    public AddOrRemoveBags(SelfCheckoutStation scs) {
         this.station = scs;
-        this.purchased = purchased;
+       
     }
 
     public void purchaseBag(int BagNum) throws EmptyException {
         for (int i = 0; i < BagNum; i++) {
-            this.purchased.addBag(this.station.bagDispenser.dispense());
+        	PurchasedItems.addBag(this.station.bagDispenser.dispense());
         }
     }
 
@@ -61,11 +60,10 @@ public class AddOrRemoveBags implements ReusableBagDispenserObserver {
 
     @Override
     public void reactToEnabledEvent(AbstractDevice<? extends AbstractDeviceObserver> device) {
-        this.station.bagDispenser.enable();
+        
     }
 
     @Override
     public void reactToDisabledEvent(AbstractDevice<? extends AbstractDeviceObserver> device) {
-        this.station.bagDispenser.disable();
     }
 }

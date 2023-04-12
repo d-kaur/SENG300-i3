@@ -23,18 +23,16 @@ import com.autovend.software.PurchasedItems;
 public abstract class AddItem {
 	
 	protected SelfCheckoutStation check;
-	protected PurchasedItems itemsBought;
-	public AddItem(SelfCheckoutStation scs, PurchasedItems list) {
+	public AddItem(SelfCheckoutStation scs) {
 		this.check = scs;
-		itemsBought = list;
 	}
 
 	public void addBarcodedProduct(BarcodedProduct unit) {
-		itemsBought.addProduct(unit);
+		PurchasedItems.addProduct(unit);
 	}
 	
 	public void addPLUProduct(PLUCodedProduct unit) {
-		itemsBought.addPLUProduct(unit);
+		PurchasedItems.addPLUProduct(unit);
 	}
 	
 }

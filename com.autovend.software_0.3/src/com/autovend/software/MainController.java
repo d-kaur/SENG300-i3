@@ -60,10 +60,10 @@ public class MainController {
     public void finish(int station)
     {
 
-        everyList[station] = new PurchasedItems();
+ 
         stations[station] = new SelfCheckoutStation(currency,billDenominations,coinDenominations,scaleMaximumWeight,scaleSensitivity);
         customerIO[station] = new CustomerIO(this,
-                stations[station], station, everyList[station]);
+                stations[station], station);
         shutdown(station);
     }
     public void populateDataBase()

@@ -30,17 +30,17 @@ public class PayWithCard extends Pay implements CardReaderObserver {
 	private CardIssuer cardIssuer;
 	
 	
-	public PayWithCard(SelfCheckoutStation station, CardIssuer cardIssuer, PurchasedItems list) {
-		super(station, list);
-		BigDecimal amountToPay = itemsBought.getAmountLeftToPay();
+	public PayWithCard(SelfCheckoutStation station, CardIssuer cardIssuer) {
+		super(station);
+		BigDecimal amountToPay = PurchasedItems.getAmountLeftToPay();
 		
 		if (cardIssuer == null) {
             throw new SimulationException(new NullPointerException("No argument may be null."));
         }
 		
 		// Ensure that no change is produced when paying with card
-		if (amountToPay.compareTo(super.getAmountDue().subtract(itemsBought.getAmountPaid())) > 0) {
-			this.amountToPay = super.getAmountDue().subtract(itemsBought.getAmountPaid());
+		if (amountToPay.compareTo(super.getAmountDue().subtract(PurchasedItems.getAmountPaid())) > 0) {
+			this.amountToPay = super.getAmountDue().subtract(PurchasedItems.getAmountPaid());
 		} else this.amountToPay = amountToPay;
 
 		this.cardIssuer = cardIssuer;
@@ -84,9 +84,9 @@ public class PayWithCard extends Pay implements CardReaderObserver {
 
 	@Override
 	public void reactToCardDataReadEvent(CardReader reader, CardData data) {
-		int holdNumber = cardIssuer.authorizeHold(data.getNumber(), itemsBought.getAmountLeftToPay()); 						  	// Contact card issuer and attempt to place a hold
+		int holdNumber = cardIssuer.authorizeHold(data.getNumber(), PurchasedItems.getAmountLeftToPay()); 						  	// Contact card issuer and attempt to place a hold
 		if (holdNumber == -1) return; 																		// Return if hold is unable to be placed
-		boolean transactionPosted = cardIssuer.postTransaction(data.getNumber(), holdNumber, itemsBought.getAmountLeftToPay()); 	// Contact card issuer to attempt to post transaction
-		if (transactionPosted) super.pay(itemsBought.getAmountLeftToPay()); 														// If transaction is posted, pay the amount
+		boolean transactionPosted = cardIssuer.postTransaction(data.getNumber(), holdNumber, PurchasedItems.getAmountLeftToPay()); 	// Contact card issuer to attempt to post transaction
+		if (transactionPosted) super.pay(PurchasedItems.getAmountLeftToPay()); 														// If transaction is posted, pay the amount
 	}
 }

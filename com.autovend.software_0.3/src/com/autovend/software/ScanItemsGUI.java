@@ -30,8 +30,8 @@ public class ScanItemsGUI extends AddItem implements BarcodeScannerObserver{
 	private JFrame frame;
 	private BarcodeScanner scanner;
 	
-	public ScanItemsGUI(SelfCheckoutStation scs,PurchasedItems list) {
-		super(scs,list);
+	public ScanItemsGUI(SelfCheckoutStation scs) {
+		super(scs);
 		frame = new JFrame("Add Item by Scanning");
 		JTextField txtBox = new JTextField(16);
 		JPanel panel = new JPanel();
