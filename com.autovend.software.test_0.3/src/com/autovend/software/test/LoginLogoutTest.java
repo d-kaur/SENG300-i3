@@ -9,41 +9,56 @@ import com.autovend.software.*;
 import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
+import org.junit.Assert;
 import java.util.HashMap;
 
 import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 public class LoginLogoutTest {
 	
-	private HashMap accountDatabase;
+	
 
 	@Before
 	public void setUp() {
-		accountDatabase = new HashMap<String, String>();
+		
         
-        LoginLogout.createAccount("username", "password", accountDatabase);
-		LoginLogout.createAccount("user", "1234", accountDatabase);
-		LoginLogout.createAccount("supervisor", "securepassword", accountDatabase);
-		LoginLogout.removeAccount("username", "password", accountDatabase);
+        LoginLogout.createAccount("username", "password");
+		LoginLogout.createAccount("user", "1234");
+		LoginLogout.createAccount("supervisor", "securepassword");
+		LoginLogout.removeAccount("username", "password");
+	}
+	@After
+	public void tearDown() {
+		LoginLogout.removeAccount("user", "1234");
+		LoginLogout.removeAccount("supervisor", "securepassword");
 	}
 	
 	@Test
-    public void validLogin() {
-		Boolean actual = LoginLogout.verifyLogin("user", "1234", accountDatabase);
+    public void validLogin1() {
+		Boolean actual = LoginLogout.verifyLogin("user", "1234");
 		Boolean expected = true;
 		assertEquals(actual, expected);
 	}
 	@Test
-	public void invalidLogin() {
-		Boolean actual = LoginLogout.verifyLogin("username", "password", accountDatabase);
+    public void validLogin2() {
+		Boolean actual = LoginLogout.verifyLogin("supervisor", "securepassword");
+		Boolean expected = true;
+		assertEquals(actual, expected);
+	}
+	@Test
+	public void invalidLogin1() {
+		Boolean actual = LoginLogout.verifyLogin("u", "p");
 		Boolean expected = false;
 		assertEquals(actual, expected);
 	}
-	
+	@Test
+	public void invalidLogin2() {
+		Boolean actual = LoginLogout.verifyLogin("username", "password");
+		Boolean expected = false;
+		assertEquals(actual, expected);
+	}
+	/*
      public class AttendantIOTest {
 
    	private AttendantIO attendantIO;
@@ -89,4 +104,7 @@ public class LoginLogoutTest {
           Assertions.assertEquals(expectedMessage, actualMessage);
        }
     }
+    /*
+     * 
+     */
 }

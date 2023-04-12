@@ -34,9 +34,9 @@ public class LoginLogout {
 	
 	public static void removeAccount(String username, String password) {
 		if (accountDatabase.containsKey(username)) {
-			String userpassword = accountDatabase.get(password);
+			String userpassword = accountDatabase.get(username);
 			if (Objects.equals(password, userpassword)) {
-				accountDatabase.remove(password, userpassword);
+				accountDatabase.remove(username, password);
 			}
 		}
 	}

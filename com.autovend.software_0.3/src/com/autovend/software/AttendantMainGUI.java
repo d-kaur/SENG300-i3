@@ -25,6 +25,7 @@ public class AttendantMainGUI extends JFrame {
     private JButton approveExceptionButton;
 
     private JButton addInkPaperButton;
+    private JButton logoutButton;
     private JLabel alert;
 
     private AttendantIO parent;
@@ -135,6 +136,14 @@ public class AttendantMainGUI extends JFrame {
              }
             
         });
+        
+        logoutButton = new JButton("Logout");
+        logoutButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                parent.displayLogin();
+             }
+            
+        });
 
         //Adding contents to Panel 
 
@@ -163,6 +172,8 @@ public class AttendantMainGUI extends JFrame {
         MiddleButtonsPanel.add(approveExceptionButton);
         addInkPaperButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
         MiddleButtonsPanel.add(addInkPaperButton);
+        logoutButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        MiddleButtonsPanel.add(logoutButton);
         MiddleButtonsPanel.add(Box.createVerticalGlue());
 
         //Orienting contents layout
