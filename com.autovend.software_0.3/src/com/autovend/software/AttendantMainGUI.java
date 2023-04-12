@@ -92,7 +92,7 @@ public class AttendantMainGUI extends JFrame {
         removeItemButton = new JButton("Remove Item");
         removeItemButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                parent.displayRemoveItem();
+                parent.displayRemoveItem(stationSelected);
              }
             
         });
@@ -132,7 +132,7 @@ public class AttendantMainGUI extends JFrame {
         addInkPaperButton = new JButton("Add Ink/Paper");
         addInkPaperButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                parent.displayInkPaper();
+                parent.displayInkPaper(stationSelected);
              }
             
         });

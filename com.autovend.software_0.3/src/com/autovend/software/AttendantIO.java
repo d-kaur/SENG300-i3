@@ -17,7 +17,7 @@ public class AttendantIO {
         this.parent = parent;
         loginLogoutIO = new LoginLogoutGUI(this);
         attendantMainGUI = new AttendantMainGUI(this);
-        addInkPaperIO = new AddInkPaperIO(this);
+        addInkPaperIO = new AddInkPaperIO(this,stations);
         addItem = new AddItemAttendant(this); 
         removeItem =  new RemoveItem(this, everyList);
         changeBankNotes = new ChangeBankNotes(this);
@@ -31,6 +31,7 @@ public class AttendantIO {
         addInkPaperIO.setVisible(false);
         addItem.setVisible(false);
         removeItem.setVisible(false);
+        changeBankNotes.setVisible(false);
     }
     public void displayLogin()
     {
@@ -47,14 +48,16 @@ public class AttendantIO {
     	setAllInvisible();
     	addItem.setVisible(true);
     }
-    public void displayRemoveItem()
+    public void displayRemoveItem(int station)
     {
     	setAllInvisible();
+        removeItem.pickStation(station);
     	removeItem.setVisible(true);
     	
     }
-    public void displayInkPaper(){
+    public void displayInkPaper(int station){
     	setAllInvisible();
+        addInkPaperIO.pickStation(station);
     	addInkPaperIO.setVisible(true);
     }
     public void displayBankNotes()

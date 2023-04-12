@@ -1,4 +1,7 @@
 package com.autovend.software;
+import com.autovend.devices.ReceiptPrinter;
+import com.autovend.devices.SelfCheckoutStation;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,11 +20,12 @@ public class AddInkPaperIO extends JFrame {
 	private JPanel paperPanel;
 	private JPanel mainPanel;
 
-	
-	public AddInkPaperIO(AttendantIO parent)
+	private SelfCheckoutStation[] stations;
+	private ReceiptPrinter currentPrinter;
+	public AddInkPaperIO(AttendantIO parent, SelfCheckoutStation[] stations)
 	{
 		this.parent = parent;
-
+		this.stations = stations;
 		JFrame frame = new JFrame("Add Ink Paper");
 		JPanel paperPanel = new JPanel();
 		JPanel inkPanel = new JPanel();
@@ -46,14 +50,26 @@ public class AddInkPaperIO extends JFrame {
 		inkButton = new JButton("Add Ink");
 		inkButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//parent.displayMainScreen();
+				try {
+					currentPrinter.addPaper(Integer.parseInt(ink.getText()));
+				}
+				catch(Exception exception)
+				{
+					int y = 0;
+				}
 			}
 		});
 
 		paperButton = new JButton("Add Paper"); 
 		paperButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//parent.displayMainScreen();
+				try {
+					currentPrinter.addPaper(Integer.parseInt(paper.getText()));
+				}
+				catch(Exception exception)
+				{
+					int y = 0;
+				}
 			}
 		});
 
@@ -77,5 +93,10 @@ public class AddInkPaperIO extends JFrame {
 		setContentPane(mainPanel);
 		pack();
 
+	}
+	public void pickStation(int station)
+	{
+
+		currentPrinter = stations[station].printer;
 	}
 }
