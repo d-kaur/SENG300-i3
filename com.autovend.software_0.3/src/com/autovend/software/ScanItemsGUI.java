@@ -30,7 +30,7 @@ public class ScanItemsGUI extends AddItemGUI implements BarcodeScannerObserver{
 	private BarcodeScanner scanner;
 	
 	public ScanItemsGUI(CustomerIO parent,SelfCheckoutStation scs) {
-		super(parent,"Scan,",scs);
+		super(parent,"Scan",scs);
 		JTextField txtBox = new JTextField(16);
 		JPanel panel = new JPanel();
 		JLabel labelAdded  = new JLabel("Item Added");
@@ -94,10 +94,13 @@ public class ScanItemsGUI extends AddItemGUI implements BarcodeScannerObserver{
 		panel.add(labelError);
 		panel.add(txtBox);
 		panel.add(addButton);
+		panel.add(back);
 		
 		add(panel);
 		setVisible(false);
 		setSize(800,640);
+
+		
 		
 	}
 

@@ -25,6 +25,7 @@ int stationSelected;
 
 		JLabel headerLabel = new JLabel("Items");
 		JComboBox<String> comboBox = new JComboBox<>();
+		comboBox.setPreferredSize(new Dimension(150, 40));
 
 		itemsPanel.add(headerLabel);
 		itemsPanel.add(comboBox);
