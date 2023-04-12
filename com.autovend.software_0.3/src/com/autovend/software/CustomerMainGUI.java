@@ -27,6 +27,7 @@ public class CustomerMainGUI extends JFrame{
 	private JPanel displayPanel;
 	private CustomerIO parent;
 	private PurchasedItems itemsbought;
+
 	
 	public CustomerMainGUI(CustomerIO customerIO , SelfCheckoutStation scs){
         parent = customerIO;
@@ -68,7 +69,7 @@ public class CustomerMainGUI extends JFrame{
         purchaseButton.addActionListener(new ActionListener() {    
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
                 // TODO Auto-generated method stub
                 
             }
@@ -89,6 +90,24 @@ public class CustomerMainGUI extends JFrame{
             }
         });
 
+        JButton audioButton = new JButton("Audio");
+        audioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            
+             }
+            
+        });
+
+        JButton languageButton = new JButton("Language");
+        languageButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            
+             }
+            
+        });
+
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         payPanel.setLayout(new BoxLayout(payPanel, BoxLayout.X_AXIS));
         displayPanel.setLayout(new BoxLayout(displayPanel, BoxLayout.Y_AXIS));
@@ -102,6 +121,8 @@ public class CustomerMainGUI extends JFrame{
 
         payPanel.add(payButton);
         payPanel.add(useBag);
+        payPanel.add(languageButton);
+        payPanel.add(audioButton);
 
         add(buttonPanel, BorderLayout.EAST);
         add(payPanel, BorderLayout.SOUTH);
