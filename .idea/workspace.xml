@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="476c016a-8c0a-4a02-ac4f-259fa4098f3a" name="Changes" comment="Add Item By Text GUI Updated">
-      <change beforePath="$PROJECT_DIR$/com.autovend.software_0.3/src/com/autovend/software/AddItemTextCustomer.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.autovend.software_0.3/src/com/autovend/software/AddItemTextCustomer.java" afterDir="false" />
+    <list default="true" id="476c016a-8c0a-4a02-ac4f-259fa4098f3a" name="Changes" comment="Add Item By Text Customer Updated">
+      <change afterPath="$PROJECT_DIR$/com.autovend.software_0.3/src/com/autovend/software/RemoveItemIO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -215,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681299241263</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Add Item By Text Customer Updated">
+      <created>1681299575250</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1681299575250</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -231,7 +239,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add Item By Text Search Class" />
-    <MESSAGE value="Add Item By Text Customer Updated" />
     <MESSAGE value="Add Item Text GUI" />
     <MESSAGE value="Add Item" />
     <MESSAGE value="Remove Item Updated" />
@@ -240,6 +247,7 @@
     <MESSAGE value="Add Item By Text Search Test Updated" />
     <MESSAGE value="Add Item By Text Search Updated" />
     <MESSAGE value="Add Item By Text GUI Updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Item By Text GUI Updated" />
+    <MESSAGE value="Add Item By Text Customer Updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Item By Text Customer Updated" />
   </component>
 </project>
