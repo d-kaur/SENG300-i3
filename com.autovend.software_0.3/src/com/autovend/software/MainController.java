@@ -4,10 +4,12 @@ package com.autovend.software;
 import java.math.BigDecimal;
 import java.util.Currency;
 
+import com.autovend.Barcode;
 import com.autovend.Numeral;
 import com.autovend.PriceLookUpCode;
 import com.autovend.devices.SelfCheckoutStation;
 import com.autovend.external.ProductDatabases;
+import com.autovend.products.BarcodedProduct;
 import com.autovend.products.PLUCodedProduct;
 
 public class MainController {
@@ -73,6 +75,9 @@ public class MainController {
         PriceLookUpCode testCode = new PriceLookUpCode(Numeral.one,Numeral.one,Numeral.one,Numeral.one);
         PLUCodedProduct testPLU = new PLUCodedProduct(testCode, "testPLU", new BigDecimal(2));
         ProductDatabases.PLU_PRODUCT_DATABASE.put(testCode,testPLU);
+        Barcode code = new Barcode(Numeral.two,Numeral.two,Numeral.two, Numeral.two,Numeral.two,Numeral.two );
+        BarcodedProduct testProd = new BarcodedProduct(code, "test barcode", new BigDecimal(5), 1);
+        ProductDatabases.BARCODED_PRODUCT_DATABASE.put(code, testProd);
     }
     public static void main(String args[])
     {

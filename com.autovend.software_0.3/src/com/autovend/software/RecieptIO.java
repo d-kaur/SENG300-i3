@@ -35,7 +35,7 @@ public class RecieptIO extends JFrame
 			messagePanel.add(new JLabel( s+ new String("\n")));
 
 		}
-		messagePanel.add(new JLabel( PurchasedItems.getTotalPrice().toString()));
+		messagePanel.add(new JLabel( new String("$") + PurchasedItems.getTotalPrice().toString()));
 		back.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
