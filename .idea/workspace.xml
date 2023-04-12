@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="476c016a-8c0a-4a02-ac4f-259fa4098f3a" name="Changes" comment="Add Item">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="476c016a-8c0a-4a02-ac4f-259fa4098f3a" name="Changes" comment="Remove Item Updated">
       <change beforePath="$PROJECT_DIR$/com.autovend.software_0.3/src/com/autovend/software/RemoveItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.autovend.software_0.3/src/com/autovend/software/RemoveItem.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -160,7 +159,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681297015977</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Remove Item Updated">
+      <created>1681297406784</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1681297406784</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -180,6 +186,7 @@
     <MESSAGE value="Add Item By Text Customer Updated" />
     <MESSAGE value="Add Item Text GUI" />
     <MESSAGE value="Add Item" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Item" />
+    <MESSAGE value="Remove Item Updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove Item Updated" />
   </component>
 </project>
