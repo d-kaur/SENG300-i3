@@ -113,11 +113,11 @@ public class AddItemPLUGUI extends AddItemGUI{
 
 						PLUCodedProduct p = ProductDatabases.PLU_PRODUCT_DATABASE.get(pluObj);
 						box.addItem(p.getDescription() + " "+ PLU);
-						PriceLookUpCodedUnit unit = new PriceLookUpCodedUnit(p.getPLUCode(), 1.5);
+						PriceLookUpCodedUnit unit = new PriceLookUpCodedUnit(p.getPLUCode(), 1);
 
 						check.scale.add(unit);
 						//scaleObs.reactToWeightChangedEvent(check.scale, unit.getWeight());
-						PurchasedItems.addPLUProduct(p,1.5);
+						PurchasedItems.addPLUProduct(p,1);
 						//adder.addPLUProduct(p);
 						check.scale.remove(unit);
 						check.scale.disable();
@@ -184,7 +184,7 @@ public class AddItemPLUGUI extends AddItemGUI{
 
 						PLUCodedProduct p = ProductDatabases.PLU_PRODUCT_DATABASE.get(pluObj);
 						box.addItem(p.getDescription() + " "+ PLU);
-						PriceLookUpCodedUnit unit = new PriceLookUpCodedUnit(p.getPLUCode(), 1.5);
+						PriceLookUpCodedUnit unit = new PriceLookUpCodedUnit(p.getPLUCode(), 1);
 
 						check.scale.add(unit);
 						scaleObs.reactToWeightChangedEvent(check.scale, unit.getWeight());

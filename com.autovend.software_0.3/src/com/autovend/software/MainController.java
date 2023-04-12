@@ -24,9 +24,8 @@ public class MainController {
     public MainController()
     {
 
-            station = new SelfCheckoutStation(currency,billDenominations,coinDenominations,scaleMaximumWeight,scaleSensitivity);
-           customerIO = new CustomerIO(this,
-            station );
+        station = new SelfCheckoutStation(currency,billDenominations,coinDenominations,scaleMaximumWeight,scaleSensitivity);
+           customerIO = new CustomerIO(this, station );
            shutdown();
 
 
@@ -61,8 +60,7 @@ public class MainController {
 
  
         station = new SelfCheckoutStation(currency,billDenominations,coinDenominations,scaleMaximumWeight,scaleSensitivity);
-        customerIO = new CustomerIO(this,
-                station);
+        customerIO = new CustomerIO(this, station);
         shutdown();
     }
     public void populateDataBase()

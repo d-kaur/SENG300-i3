@@ -10,6 +10,7 @@ public class RemoveItem extends JFrame{
 private JButton backButton;
 private JButton deleteItemButton;
 private AttendantIO parent;
+private JComboBox<String> comboBox = new JComboBox<>();
 int stationSelected;
 	public RemoveItem(AttendantIO parent){
 		this.parent = parent;
@@ -24,7 +25,7 @@ int stationSelected;
 		setMinimumSize(new Dimension(600,400));
 
 		JLabel headerLabel = new JLabel("Items");
-		JComboBox<String> comboBox = new JComboBox<>();
+	
 		comboBox.setPreferredSize(new Dimension(150, 40));
 
 		itemsPanel.add(headerLabel);
@@ -42,7 +43,7 @@ int stationSelected;
 		deleteItemButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				PurchasedItems.removeProduct((String)comboBox.getSelectedItem());
-				pickStation(stationSelected);
+				update();
 			}
 		});
 
@@ -61,10 +62,9 @@ int stationSelected;
 		pack();
 
 	}
-	public void pickStation(int station)
+	public void update()
 	{
-		JComboBox<String> comboBox = new JComboBox<>();
-		stationSelected = station;
+		comboBox.removeAllItems();
 		ArrayList<String> items = PurchasedItems.getNames();
 		for(String s: items)
 		{

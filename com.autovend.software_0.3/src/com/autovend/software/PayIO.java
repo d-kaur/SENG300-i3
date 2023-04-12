@@ -142,7 +142,8 @@ public class PayIO extends JFrame
 	}
 	public void done()
 	{
-		parent.done();
+		PurchasedItems.reset();
+		parent.showMainScreen();
 	}
 	private void back()
 	{

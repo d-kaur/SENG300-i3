@@ -64,10 +64,11 @@ public class CustomerMainGUI extends JFrame{
                 parent.showAddBrowse();
             }
         });
-        JButton purchaseButton = new JButton("Purchase Bags");
+        JButton purchaseButton = new JButton("Purchase a Bag");
         purchaseButton.addActionListener(new ActionListener() {    
             @Override
             public void actionPerformed(ActionEvent e) {
+                
                 // TODO Auto-generated method stub
                 
             }
@@ -83,8 +84,7 @@ public class CustomerMainGUI extends JFrame{
         useBag.addActionListener(new ActionListener() {    
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-                //alert.showAlert("Alert:Use Personal Bag");
+                parent.prevent();
                 
             }
         });
