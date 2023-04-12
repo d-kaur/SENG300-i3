@@ -15,9 +15,14 @@ public class AddItemTextGUI {
         private JButton backButton;
 
         AddItemTextGUI() {
+
+            // initialize the component
             backButton = new JButton();
 
+            // on exit
             setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+            // set button styles, and event listener
 
             backButton.setFont(new Font("Segoe UI", 0, 18));
             backButton.setText("Back");
@@ -26,6 +31,8 @@ public class AddItemTextGUI {
                     backButtonActionPerformed(evt);
                 }
             });
+
+            // layout creation
 
             GroupLayout layout = new GroupLayout(getContentPane());
             getContentPane().setLayout(layout);
@@ -47,6 +54,7 @@ public class AddItemTextGUI {
             pack();
         }
 
+        // method which triggers when back button is pressed
         protected abstract void backButtonActionPerformed(ActionEvent evt);
 
 
