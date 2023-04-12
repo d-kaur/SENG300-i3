@@ -14,6 +14,7 @@
  */
 package com.autovend.software;
 
+import com.autovend.ReusableBag;
 import com.autovend.products.BarcodedProduct;
 import com.autovend.products.PLUCodedProduct;
 import com.autovend.products.Product;
@@ -31,7 +32,7 @@ public class PurchasedItems{
     private BigDecimal amountPaid;
     private boolean isPaid;
     private int bagCount;
-    private static BigDecimal idealBagPriceInUSD = BigDecimal.valueOf(0.1);
+    private BigDecimal idealBagPriceInUSD = BigDecimal.valueOf(0.1);
 
     public PurchasedItems() {
         listOfProducts = new ArrayList<>();
@@ -61,7 +62,7 @@ public class PurchasedItems{
 		
 	}
 	
-    public static void addBag(ReusableBag bag){
+    public void addBag(ReusableBag bag){
         bagCount++;
         totalPrice = totalPrice.add(idealBagPriceInUSD);
         totalExpectedWeight += bag.getWeight();
@@ -141,6 +142,8 @@ public class PurchasedItems{
     public BigDecimal getChange(){
         return change;
     }
+
+    public int getBagcount(){return bagCount;}
 
 
     public void addAmountPaid(BigDecimal amount) {

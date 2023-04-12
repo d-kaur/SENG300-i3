@@ -26,6 +26,7 @@ import com.autovend.software.*;
 public class AddOrRemoveBagsTest {
     AddOrRemoveBags addBags;
     SelfCheckoutStation scs;
+    PurchasedItems purchased;
     ArrayList<ReusableBag> listOfStoreBags = new ArrayList<ReusableBag>();
 
     ReusableBag bag = new ReusableBag();
@@ -41,19 +42,19 @@ public class AddOrRemoveBagsTest {
             bags[i] = new ReusableBag();
         }
         dispenser.load(bags);
-        addBags = new AddOrRemoveBags(scs);
+        addBags = new AddOrRemoveBags(scs,purchased);
     }
     @After
     public void tearDown() {
         addBags = null;
-        PurchasedItems.reset();
+        purchased.reset();
     }
     //tests if the class is constructed correctly
     @Test
     public void AddOrRemoveBagsConstructorTest() {
         boolean flag;
         try {
-            AddOrRemoveBags testConstructor = new AddOrRemoveBags(scs);
+            AddOrRemoveBags testConstructor = new AddOrRemoveBags(scs,purchased);
             flag = true;
         }
         catch (Exception e) {
@@ -65,7 +66,7 @@ public class AddOrRemoveBagsTest {
     @Test
     public void PurchaseFewBag() throws EmptyException {
         addBags.purchaseBag(5);
-        assertEquals(5, PurchasedItems.getListOfBags().size());
+        assertEquals(5, purchased.getBagcount());
     }
 
     @Test

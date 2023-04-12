@@ -14,24 +14,27 @@
  */
 package com.autovend.software;
 
-import com.autovend.devices.*;
+import com.autovend.devices.AbstractDevice;
+import com.autovend.devices.EmptyException;
+import com.autovend.devices.ReusableBagDispenser;
+import com.autovend.devices.SelfCheckoutStation;
 import com.autovend.devices.observers.AbstractDeviceObserver;
 import com.autovend.devices.observers.ReusableBagDispenserObserver;
-
-import static com.autovend.software.PurchasedItems.addBag;
 
 // extend the Parent class
 public class AddOrRemoveBags implements ReusableBagDispenserObserver {
 
     private SelfCheckoutStation station;
+    private PurchasedItems purchased;
 
-    public AddOrRemoveBags(SelfCheckoutStation scs) {
+    public AddOrRemoveBags(SelfCheckoutStation scs, PurchasedItems purchased) {
         this.station = scs;
+        this.purchased = purchased;
     }
 
     public void purchaseBag(int BagNum) throws EmptyException {
         for (int i = 0; i < BagNum; i++) {
-            addBag(this.station.bagDispenser.dispense());
+            this.purchased.addBag(this.station.bagDispenser.dispense());
         }
     }
 

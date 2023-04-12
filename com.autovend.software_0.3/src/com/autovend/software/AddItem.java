@@ -29,10 +29,6 @@ public abstract class AddItem {
 		itemsBought = list;
 	}
 
-	public void addBag(Bag bag) {
-		itemsBought.addBag(bag);
-	}
-
 	public void addBarcodedProduct(BarcodedProduct unit) {
 		itemsBought.addProduct(unit);
 	}
