@@ -65,7 +65,7 @@ public class AddItemByTextSearch extends AddItem {
 		CustomerIOStub.itemHasBeenScannedEvent(this.selfCheckoutStation, scannedUnit);
 
 		// 6. Signals to the system that the weight has changed.
-
+		selfCheckoutStation.baggingArea.add(scannedUnit);
 
 		// 9. unblock the station
 		selfCheckoutStation.handheldScanner.enable();
