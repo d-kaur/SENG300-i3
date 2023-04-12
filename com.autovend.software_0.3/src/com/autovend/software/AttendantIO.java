@@ -49,6 +49,7 @@ public class AttendantIO {
     public void displayRemoveItem()
     {
     	setAllInvisible();
+        removeItem.update();
     	removeItem.setVisible(true);
     	
     }

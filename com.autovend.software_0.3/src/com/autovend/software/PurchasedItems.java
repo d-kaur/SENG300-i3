@@ -167,14 +167,14 @@ public class PurchasedItems{
 
 
     // This method is used for testing purposes ONLY
-    public void setAmountPaid(BigDecimal amount) {
+    public static void setAmountPaid(BigDecimal amount) {
     	amountPaid = amount;
         if (amountPaid.compareTo(totalPrice) >= 0) {
             isPaid = true;
         }
     }
 
-    public void reset() {
+    public static void reset() {
     	listOfProducts = new ArrayList<>();
         bagCount = 0;
         totalPrice = new BigDecimal(0);

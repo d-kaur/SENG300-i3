@@ -85,6 +85,7 @@ public class CustomerIO {
     }
     public void done()
     {
+        setAllInvisible();
     	parent.finish();
     }
     public void showMainScreen()
