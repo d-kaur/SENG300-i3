@@ -17,6 +17,7 @@ package com.autovend.software;
 import com.autovend.devices.SelfCheckoutStation;
 import com.autovend.products.BarcodedProduct;
 import com.autovend.products.PLUCodedProduct;
+import com.autovend.products.Product;
 import com.autovend.software.observers.AddItemObserver;
 import com.autovend.software.PurchasedItems;
 

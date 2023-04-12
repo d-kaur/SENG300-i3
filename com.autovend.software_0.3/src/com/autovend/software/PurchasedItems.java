@@ -59,6 +59,7 @@ public class PurchasedItems{
         }
 		
 	}
+		
     public void addBag(Bag bag){
         listOfBags.add(bag);
         totalPrice = totalPrice.add(bag.getPrice());
