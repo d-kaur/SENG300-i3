@@ -19,19 +19,23 @@ public class RecieptIO extends JFrame
 	private JButton back = new JButton("back");
 	public RecieptIO(PayIO parent)
 	{
-
-
 		super("Reciept:");
+		JFrame frame = new JFrame();
+		JPanel messagePanel = new JPanel();
+		JPanel mainPanel = new JPanel();
+		JPanel backPanel = new JPanel();
+		setMinimumSize(new Dimension(600,400));
 
 		ArrayList<String> products = PurchasedItems.getNames();
-		
+		messagePanel.setLayout(new BoxLayout(messagePanel, BoxLayout.Y_AXIS));
+
 		String all = "";
 		for(String s: products)
 		{
-			all += s + new String("\n");
+			messagePanel.add(new JLabel( s+ new String("\n")));
 
 		}
-		all += PurchasedItems.getTotalPrice().toString();
+		messagePanel.add(new JLabel( PurchasedItems.getTotalPrice().toString()));
 		back.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -42,9 +46,22 @@ public class RecieptIO extends JFrame
 
 
 
-		add(message);
-		add(back);
+
+
+		messagePanel.add(message);
+		backPanel.add(back);
+
+		mainPanel.setLayout(new BorderLayout());
+		mainPanel.add(messagePanel, BorderLayout.CENTER);
+		mainPanel.add(backPanel, BorderLayout.SOUTH);
 		this.parent = parent;
+
+		frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
+
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+		setContentPane(mainPanel);
+		pack();
 	}
 	
 	
