@@ -43,13 +43,12 @@ public class AddItemPLUGUI extends AddItemGUI{
 	 * @param scs: SelfCheckoutStation
 	 */
 	
-	public AddItemPLUGUI(CustomerIO parent,SelfCheckoutStation scs, PurchasedItems list) {
-
+	public AddItemPLUGUI(CustomerIO parent,SelfCheckoutStation scs) {
 		super(parent,"Add Item by PLU",scs);
 
 		//success = false;
 		check.screen.enable();
-		adder = new AddItemByPLU(scs,list);
+		adder = new AddItemByPLU(scs);
 
 		setSize(600,600);
 		PLU = "";

@@ -27,19 +27,17 @@ import com.autovend.software.observers.ElectronicScaleObserverStub;
  *
  */
 public class ScanItemsGUI extends AddItemGUI implements BarcodeScannerObserver{
-	private JFrame frame;
 	private BarcodeScanner scanner;
 	
-	public ScanItemsGUI(SelfCheckoutStation scs,PurchasedItems list) {
-		super(scs,list);
-		frame = new JFrame("Add Item by Scanning");
+	public ScanItemsGUI(CustomerIO parent,SelfCheckoutStation scs) {
+		super(parent,"Scan,",scs);
 		JTextField txtBox = new JTextField(16);
 		JPanel panel = new JPanel();
 		JLabel labelAdded  = new JLabel("Item Added");
 		JLabel labelError  = new JLabel("Error");
 		labelAdded.setVisible(false);
 		labelError.setVisible(false);
-		frame.enable();
+		
 		check.scale.enable();
 		scanner = new BarcodeScanner ();
 		ElectronicScaleObserverStub scaleObs = new ElectronicScaleObserverStub();
@@ -71,7 +69,7 @@ public class ScanItemsGUI extends AddItemGUI implements BarcodeScannerObserver{
 						check.scale.add(unit);
 						scaleObs.reactToWeightChangedEvent(check.scale, unit.getWeight());
 						
-						addBarcodedProduct(p);
+						PurchasedItems.addProduct(p);
 						check.scale.remove(unit); 
 						check.scale.disable();
 						scaleObs.reactToDisabledEvent(check.scale);
@@ -97,10 +95,9 @@ public class ScanItemsGUI extends AddItemGUI implements BarcodeScannerObserver{
 		panel.add(txtBox);
 		panel.add(addButton);
 		
-		frame.add(panel);
-		frame.setVisible(true);
-		frame.setSize(1280,800);
-		frame.show();
+		add(panel);
+		setVisible(false);
+		setSize(800,640);
 		
 	}
 

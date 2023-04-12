@@ -11,8 +11,8 @@ import com.autovend.devices.SelfCheckoutStation;
  */
 public class AddItemByTextSearch extends AddItem {
 
-	public AddItemByTextSearch(SelfCheckoutStation scs, PurchasedItems list) {
-		super(scs,list);
+	public AddItemByTextSearch(SelfCheckoutStation scs) {
+		super(scs);
 		// TODO Auto-generated constructor stub
 	}
 

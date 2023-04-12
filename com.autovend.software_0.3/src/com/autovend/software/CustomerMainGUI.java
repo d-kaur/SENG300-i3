@@ -46,7 +46,7 @@ public class CustomerMainGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
-                parent.showAddPLU();
+                parent.showScanItem();;
             }
         });        
         JButton pluButton = new JButton("Add by PLU Number");
@@ -77,7 +77,6 @@ public class CustomerMainGUI extends JFrame{
         payButton.addActionListener(new ActionListener() {    
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
                 parent.showPayScreen();
             }
         });

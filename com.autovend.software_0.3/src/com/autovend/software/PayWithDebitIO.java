@@ -14,8 +14,8 @@ public class PayWithDebitIO extends PayGUI{
 	private JButton swipeButton;
 	private JButton backButton;
 
-    public PayWithDebitIO(String msg, SelfCheckoutStation station, PurchasedItems list, PayIO parent) {
-		super(msg,station,list,parent);
+    public PayWithDebitIO(String msg, SelfCheckoutStation station, PayIO parent) {
+		super(msg,station,parent);
 
 		JFrame frame = new JFrame("Add Item By Search");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

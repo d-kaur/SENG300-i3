@@ -28,24 +28,22 @@ import com.autovend.software.observers.PayObserver;
 public abstract class PayGUI extends JFrame{
     protected SelfCheckoutStation station;
     protected BigDecimal amountDue;
-    protected PurchasedItems itemsBought;
     protected BigDecimal amountPaid;
     protected PayIO parent;
-    public PayGUI(String msg, SelfCheckoutStation station, PurchasedItems list, PayIO parent) {
+    public PayGUI(String msg, SelfCheckoutStation station, PayIO parent) {
         super(msg);
     	if (station == null) {
             throw new SimulationException(new NullPointerException("Station cannot be null."));
         }
         this.station = station;
         this.parent = parent;
-        itemsBought = list;
         amountPaid = new BigDecimal(0);
-        amountDue = itemsBought.getAmountLeftToPay();
+        amountDue = PurchasedItems.getAmountLeftToPay();
     }
 
     protected void pay(BigDecimal amountToPay) {
-        itemsBought.addAmountPaid(amountToPay);
-        BigDecimal amountPaid = itemsBought.getAmountPaid();
+    	PurchasedItems.addAmountPaid(amountToPay);
+        BigDecimal amountPaid = PurchasedItems.getAmountPaid();
     	if (amountPaid.equals(amountDue)) {
     		//for (PayObserver observer : observers) {
     		//	observer.reactToSufficientPaymentEvent(this);
@@ -60,6 +58,6 @@ public abstract class PayGUI extends JFrame{
     	parent.done();
     }
     public BigDecimal getAmountDue() {
-        return itemsBought.getAmountLeftToPay();
+        return PurchasedItems.getAmountLeftToPay();
     }
 }
