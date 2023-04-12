@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="476c016a-8c0a-4a02-ac4f-259fa4098f3a" name="Changes" comment="Add Item By Text Customer Updated">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com.autovend.software_0.3/src/com/autovend/software/AddItemTextGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/com.autovend.software_0.3/src/com/autovend/software/AddItemTextGUI.java" afterDir="false" />
-    </list>
+    <list default="true" id="476c016a-8c0a-4a02-ac4f-259fa4098f3a" name="Changes" comment="Add Item Text GUI" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -118,7 +115,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681275886818</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Add Item Text GUI">
+      <created>1681276294996</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1681276294996</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -134,10 +138,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add Item" />
-    <MESSAGE value="Add Item Text GUI" />
     <MESSAGE value="Add Item By Text Search Class" />
     <MESSAGE value="Add Item By Text Search Updated" />
     <MESSAGE value="Add Item By Text Customer Updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Item By Text Customer Updated" />
+    <MESSAGE value="Add Item Text GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Item Text GUI" />
   </component>
 </project>
