@@ -124,8 +124,7 @@ public class WeightDiscrepancyTest {
         discrepancy.reactToDisabledEvent(null);
     }
 
-    // Tests the state (enabled/disabled) of the scanners in overload and
-    // outofoverload events
+    // Tests the state (disabled) of the scanners in overload event
     @Test
     public void reactToOverloadEventTest() {
         WeightDiscrepancy discrepancy = new WeightDiscrepancy(station, itemsBought);
@@ -137,15 +136,16 @@ public class WeightDiscrepancyTest {
         assertTrue(station.mainScanner.isDisabled());
     }
 
+    // Tests the state (enabled) of the scanners outofoverload event
     @Test
     public void reactToOutOfOverloadEventTest() {
         WeightDiscrepancy discrepancy = new WeightDiscrepancy(station, itemsBought);
         itemsBought.addProduct(product);
         itemsBought.addProduct(product);
+        // Cause overload
         station.baggingArea.add(item1);
         station.baggingArea.add(item2);
-        assertTrue(station.handheldScanner.isDisabled());
-        assertTrue(station.mainScanner.isDisabled());
+        // should remove overload
         itemsBought.removeProduct(product);
         station.baggingArea.remove(item1);
         assertFalse(station.handheldScanner.isDisabled());
