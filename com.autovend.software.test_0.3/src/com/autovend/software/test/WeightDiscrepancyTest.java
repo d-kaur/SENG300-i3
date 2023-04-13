@@ -146,11 +146,10 @@ public class WeightDiscrepancyTest {
         station.baggingArea.add(item1);
         station.baggingArea.add(item2);
         // should remove overload
-        itemsBought.removeProduct(product);
+        itemsBought.removeProduct(product.toString());
         station.baggingArea.remove(item1);
         assertFalse(station.handheldScanner.isDisabled());
         assertFalse(station.mainScanner.isDisabled());
-
     }
 
 }
