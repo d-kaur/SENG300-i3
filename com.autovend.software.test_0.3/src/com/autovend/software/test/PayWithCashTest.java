@@ -60,7 +60,6 @@ public class PayWithCashTest {
     private CoinDispenser twoDollarDispenser;
     private BillDispenser fiveDollarDispenser;
     private PayWithCash payWithCash;
-    private PurchasedItems itemsBought;
     
     @Before
     public void setup() {
@@ -84,7 +83,7 @@ public class PayWithCashTest {
         Barcode barcode = new Barcode(Numeral.zero, Numeral.two, Numeral.three, Numeral.two, Numeral.seven);
         product = new BarcodedProduct(barcode,"product name", new BigDecimal("12.95"),1);
         anotherProduct = new BarcodedProduct(barcode,"product name", new BigDecimal("1.95"),1);
-        itemsBought = new PurchasedItems();
+
 
     }
 
@@ -92,13 +91,13 @@ public class PayWithCashTest {
     public void teardown() {
         station = null;
         product = null;
-        itemsBought.reset();
+        PurchasedItems.reset();
     }
 
     //Test completing a purchase using bills
     @Test
     public void testEntirePaymentWithBill() throws SimulationException, OverloadException {
-        PayWithCash payWithCash = new PayWithCash(station, itemsBought);
+        PayWithCash payWithCash = new PayWithCash(station);
         fiveCentDispenser = station.coinDispensers.get(new BigDecimal("0.05"));
         twoDollarDispenser = station.coinDispensers.get(new BigDecimal("2"));
         fiveDollarDispenser = station.billDispensers.get(5);
@@ -110,7 +109,7 @@ public class PayWithCashTest {
         payWithCash.reactToBillsLoadedEvent(fiveDollarDispenser,bill,bill);
         payWithCash.reactToCoinsLoadedEvent(twoDollarDispenser,coinTwo,coinTwo);
         payWithCash.reactToCoinsLoadedEvent(fiveCentDispenser,coin,coin,coin,coin,coin,coin,coin,coin,coin,coin);
-        itemsBought.addProduct(product);
+        PurchasedItems.addProduct(product);
         station.billValidator.accept(billTwenty);
         //For some reason, when the accept method is called, it never calls reactToValidBillDetectedEvent/reactToCoinDetectedEvent
         //So in this test we call it manually
@@ -126,7 +125,7 @@ public class PayWithCashTest {
     //Test completing a purchase using coins
     @Test
     public void testEntirePaymentWithCoin() throws SimulationException, OverloadException {
-        PayWithCash payWithCash = new PayWithCash(station, itemsBought);
+        PayWithCash payWithCash = new PayWithCash(station);
         fiveCentDispenser = station.coinDispensers.get(new BigDecimal("0.05"));
         fiveDollarDispenser = station.billDispensers.get(5);
         fiveDollarDispenser.load(bill,bill);
@@ -135,7 +134,7 @@ public class PayWithCashTest {
         //So in this test we call it manually
         payWithCash.reactToBillsLoadedEvent(fiveDollarDispenser,bill,bill);
         payWithCash.reactToCoinsLoadedEvent(fiveCentDispenser,coin,coin,coin,coin,coin,coin,coin,coin,coin,coin);
-        itemsBought.addProduct(anotherProduct);
+        PurchasedItems.addProduct(anotherProduct);
         station.coinValidator.accept(coinTwo);
         //For some reason, when the accept method is called, it never calls reactToValidBillDetectedEvent/reactToCoinDetectedEvent
         //So in this test we call it manually
@@ -164,37 +163,37 @@ public class PayWithCashTest {
     //Test to see if the functionality works if not paid all at once
     @Test
     public void testPartialCashPayment() {
-        PayWithCash payWithCash = new PayWithCash(station, itemsBought);
-        itemsBought.addProduct(product);
+        PayWithCash payWithCash = new PayWithCash(station);
+        PurchasedItems.addProduct(product);
         station.billValidator.accept(bill);
         BigDecimal expectedResult = new BigDecimal("7.95");
         //For some reason, when the accept method is called, it never calls reactToValidBillDetectedEvent/reactToCoinDetectedEvent
         //So in this test we call it manually
         payWithCash.reactToValidBillDetectedEvent(station.billValidator,currency, 5);
-        BigDecimal actualResult = itemsBought.getAmountLeftToPay();
+        BigDecimal actualResult = PurchasedItems.getAmountLeftToPay();
         assertEquals(expectedResult,actualResult);
     }
 
     //Test to make sure that the class correctly receives bills
     @Test
     public void testReactToValidBillDetectedEvent() {
-        PayWithCash payWithCash = new PayWithCash(station, itemsBought);
+        PayWithCash payWithCash = new PayWithCash(station);
         BigDecimal five = new BigDecimal("5");
-        itemsBought.setAmountPaid(five);
+        PurchasedItems.setAmountPaid(five);
         station.billValidator.accept(bill);
-        BigDecimal actualAmountPaid = itemsBought.getAmountPaid();
+        BigDecimal actualAmountPaid = PurchasedItems.getAmountPaid();
         assertEquals(five,actualAmountPaid);
     }
 
     //Test to make sure that the class correctly receives coins
     @Test
     public void testReactToValidCoinDetectedEvent() {
-        PayWithCash payWithCash = new PayWithCash(station, itemsBought);
+        PayWithCash payWithCash = new PayWithCash(station);
         BigDecimal coinValue = new BigDecimal("0.05");
         BigDecimal expectedAmountPaid = coinValue;
-        itemsBought.setAmountPaid(expectedAmountPaid);
+        PurchasedItems.setAmountPaid(expectedAmountPaid);
         station.coinValidator.accept(coin);
-        BigDecimal actualAmountPaid = itemsBought.getAmountPaid();
+        BigDecimal actualAmountPaid = PurchasedItems.getAmountPaid();
         assertEquals(expectedAmountPaid, actualAmountPaid);
     }
 
@@ -202,67 +201,67 @@ public class PayWithCashTest {
 
     @Test
     public void dummyReactToEnabledEvent() {
-        PayWithCash payWithCash = new PayWithCash(station, itemsBought);
+        PayWithCash payWithCash = new PayWithCash(station);
         payWithCash.reactToEnabledEvent(null);
     }
 
     @Test
     public void dummyReactToDisabledEvent() {
-        PayWithCash payWithCash = new PayWithCash(station, itemsBought);
+        PayWithCash payWithCash = new PayWithCash(station);
         payWithCash.reactToDisabledEvent(null);
     }
 
     @Test
     public void dummyReactToCoinsUnloadedEvent() {
-        PayWithCash payWithCash = new PayWithCash(station, itemsBought);
+        PayWithCash payWithCash = new PayWithCash(station);
         payWithCash.reactToCoinsUnloadedEvent(fiveCentDispenser,coin,coin,coin);
     }
 
     @Test
     public void dummyReactToInvalidCoinDetectedEvent() {
-        PayWithCash payWithCash = new PayWithCash(station, itemsBought);
+        PayWithCash payWithCash = new PayWithCash(station);
         payWithCash.reactToInvalidCoinDetectedEvent(station.coinValidator);
     }
 
     @Test
     public void dummyReactToCoinsFullEvent() {
-        PayWithCash payWithCash = new PayWithCash(station, itemsBought);
+        PayWithCash payWithCash = new PayWithCash(station);
         payWithCash.reactToCoinsFullEvent(fiveCentDispenser);
     }
 
     @Test
     public void dummyReactToCoinsEmptyEvent() {
-        PayWithCash payWithCash = new PayWithCash(station, itemsBought);
+        PayWithCash payWithCash = new PayWithCash(station);
         payWithCash.reactToCoinsEmptyEvent(fiveCentDispenser);
     }
 
     @Test
     public void dummyReactToBillsFullEvent() {
-        PayWithCash payWithCash = new PayWithCash(station, itemsBought);
+        PayWithCash payWithCash = new PayWithCash(station);
         payWithCash.reactToBillsFullEvent(fiveDollarDispenser);
     }
 
     @Test
     public void dummyReactToBillsEmptyEvent(){
-        PayWithCash payWithCash = new PayWithCash(station, itemsBought);
+        PayWithCash payWithCash = new PayWithCash(station);
         payWithCash.reactToBillsEmptyEvent(fiveDollarDispenser);
     }
 
     @Test
     public void dummyReactToBillAddedEvent() {
-        PayWithCash payWithCash = new PayWithCash(station, itemsBought);
+        PayWithCash payWithCash = new PayWithCash(station);
         payWithCash.reactToBillAddedEvent(fiveDollarDispenser,bill);
     }
 
     @Test
     public void dummyReactToBillsUnloadedEvent() {
-        PayWithCash payWithCash = new PayWithCash(station, itemsBought);
+        PayWithCash payWithCash = new PayWithCash(station);
         payWithCash.reactToBillsUnloadedEvent(fiveDollarDispenser,bill,bill,bill);
     }
 
     @Test
     public void dummyReactToInvalidBillDetectedEvent() {
-        PayWithCash payWithCash = new PayWithCash(station, itemsBought);
+        PayWithCash payWithCash = new PayWithCash(station);
         payWithCash.reactToInvalidBillDetectedEvent(station.billValidator);
     }
 }

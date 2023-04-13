@@ -68,7 +68,6 @@ public class PartiallyPaidTest {
 	private double expectedBaggingWeight;
 	private ScanItems scanItems;
 	private WeightDiscrepancy weightDiscrepancy;
-	private PurchasedItems itemsPurchased;
 	private ArrayList<BarcodedProduct> itemList;
 	private boolean scanFailed1, scanFailed2, scanFailed3;
 
@@ -78,13 +77,11 @@ public class PartiallyPaidTest {
 	Barcode b1 = new Barcode(n);
 	Barcode b2 = new Barcode(m);
 	Barcode b3 = new Barcode(k);
-	private PurchasedItems itemsBought;
 	// initializing some barcodes to use during tests
 
 @Before
 public void setUp() {
 
-	itemsBought = new PurchasedItems();
 	Currency currency = Currency.getInstance("CAD");
 	int[] billDom = {5,10,20};
 	BigDecimal[] coinDom = {BigDecimal.valueOf(0.05), BigDecimal.valueOf(0.10),BigDecimal.valueOf(0.25)};
@@ -135,12 +132,11 @@ public void setUp() {
 	maxScaleWeight = 10;
 	sensitivity = 1;
 
-	// initialize purchased items constructor
-	itemsPurchased = new PurchasedItems();
+
 
 	// initialize constructor and add each product to the list of products being scanned
 	scanItems = new ScanItems(scs);
-	weightDiscrepancy = new WeightDiscrepancy(scs, itemsBought);
+	weightDiscrepancy = new WeightDiscrepancy(scs);
 
 
 
@@ -161,13 +157,13 @@ public void setUp() {
 	@After
 	public void tearDown() {
 
-		itemsBought.reset();
+		PurchasedItems.reset();
 	}
 
 
 	@Test
 	public void testPartiallyWithCard() {
-		PayWithCard PayWithCredit = new PayWithCard(scs,company, itemsBought);
+		PayWithCard PayWithCredit = new PayWithCard(scs,company);
 		scs.cardReader.register(PayWithCredit);
 		scs.mainScanner.scan(unitItem1);
 		scs.baggingArea.add(unitItem1);
@@ -183,17 +179,17 @@ public void setUp() {
 			throw new RuntimeException(e);
 		}
 
-		assertTrue(itemsBought.isPaid());
+		assertTrue(PurchasedItems.isPaid());
 
 		scs.mainScanner.scan(unitItem2);
 		scs.baggingArea.add(unitItem2);
 
-		assertFalse(itemsBought.isPaid());
+		assertFalse(PurchasedItems.isPaid());
 	}
 
 	@Test
 	public void testPartiallyWithCard2() {
-		PayWithCard PayWithCredit2 = new PayWithCard(scs,company, itemsBought);
+		PayWithCard PayWithCredit2 = new PayWithCard(scs,company);
 		scs.cardReader.register(PayWithCredit2);
 		scs.mainScanner.scan(unitItem1);
 		scs.baggingArea.add(unitItem1);
@@ -209,12 +205,12 @@ public void setUp() {
 			throw new RuntimeException(e);
 		}
 
-		assertTrue(itemsBought.isPaid());
+		assertTrue(PurchasedItems.isPaid());
 
 		scs.mainScanner.scan(unitItem2);
 		scs.baggingArea.add(unitItem2);
 
-		assertFalse(itemsBought.isPaid());
+		assertFalse(PurchasedItems.isPaid());
 
 		try {
 			scs.cardReader.tap(CreditTap2);
@@ -224,7 +220,7 @@ public void setUp() {
 			throw new RuntimeException(e);
 		}
 
-		assertTrue(itemsBought.isPaid());
+		assertTrue(PurchasedItems.isPaid());
 	}
 
 

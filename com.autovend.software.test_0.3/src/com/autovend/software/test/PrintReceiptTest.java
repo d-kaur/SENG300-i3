@@ -56,7 +56,6 @@ public class PrintReceiptTest {
     private ScanItems scanItems;
     private WeightDiscrepancy weightDiscrepancy;
     private ReceiptPrinterObserverStub observer;
-    private PurchasedItems itemsBought;
 
     // initializing some barcodes to use during tests
     Numeral[] n = {Numeral.one, Numeral.two, Numeral.three};
@@ -115,7 +114,7 @@ public class PrintReceiptTest {
 
         // initialize constructor and add each product to the list of products being scanned
         scanItems = new ScanItems(station);
-        weightDiscrepancy = new WeightDiscrepancy(station, itemsBought);
+        weightDiscrepancy = new WeightDiscrepancy(station);
 
         //register the observer and enable scanners
         observer = new ReceiptPrinterObserverStub();
@@ -127,7 +126,7 @@ public class PrintReceiptTest {
 
         station.baggingArea.register(weightDiscrepancy);
 
-        receiptController = new PrinterController(station, itemsBought);
+        receiptController = new PrinterController(station);
     }
 
     @After
@@ -135,7 +134,7 @@ public class PrintReceiptTest {
         receiptController = null;
         observer = null;
         station = null;
-        itemsBought.reset();
+        PurchasedItems.reset();
     }
 
     @Test
@@ -171,8 +170,8 @@ public class PrintReceiptTest {
             expectedReceipt.append(String.format("%-10s %18s$\n", description, price));
         }
 
-        expectedReceipt.append(String.format("\n%-10s %18s$\n", "TOTAL:",itemsBought.getTotalPrice().toString()));
-        expectedReceipt.append(String.format("%-10s %17s$", "Change Due:", itemsBought.getChange().toString()));
+        expectedReceipt.append(String.format("\n%-10s %18s$\n", "TOTAL:",PurchasedItems.getTotalPrice().toString()));
+        expectedReceipt.append(String.format("%-10s %17s$", "Change Due:", PurchasedItems.getChange().toString()));
         String expectedReceiptString = expectedReceipt.toString();
 
         receiptController.printReceipt();

@@ -116,7 +116,7 @@ public class ScanItemsTest {
 		
 		// initialize constructor and add each product to the list of products being scanned
 		scanItems = new ScanItems(selfCheckoutStation);
-		weightDiscrepancy = new WeightDiscrepancy(selfCheckoutStation, itemsBought);
+		weightDiscrepancy = new WeightDiscrepancy(selfCheckoutStation);
 		
 		//register the observer and enable scanners
 		selfCheckoutStation.mainScanner.enable();
