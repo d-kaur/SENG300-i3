@@ -43,7 +43,7 @@ public class AddItemBrowseGUI extends AddItemGUI{
 		JLabel headerLabel = new JLabel("Search:");
 		JComboBox<String> comboBox = new JComboBox<>();
 		comboBox.setPreferredSize(new Dimension(150, 40));
-
+		comboBox.setEditable(true);
 		comboPanel.add(headerLabel);
 		comboPanel.add(comboBox);
 	
@@ -76,7 +76,7 @@ public class AddItemBrowseGUI extends AddItemGUI{
 			if(foundBarcode != null && foundPLU == null)
 				PurchasedItems.addProduct(foundBarcode);
 			else if (foundPLU != null && foundBarcode == null)
-				PurchasedItems.addPLUProduct(foundPLU, 1.5);
+				PurchasedItems.addPLUProduct(foundPLU, 1);
 			
 			
 		}
