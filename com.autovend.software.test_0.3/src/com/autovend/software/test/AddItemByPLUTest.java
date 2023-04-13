@@ -1,10 +1,5 @@
 package com.autovend.software.test;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
 import java.util.Currency;
 
@@ -16,7 +11,6 @@ import com.autovend.devices.SelfCheckoutStation;
 import com.autovend.external.ProductDatabases;
 import com.autovend.products.PLUCodedProduct;
 import com.autovend.software.AddItemByPLU;
-import com.autovend.software.AddItemPLUGUI;
 
 /**
  * Wasay Siddiqi
@@ -38,7 +32,7 @@ public class AddItemByPLUTest {
 		};
 		station = new SelfCheckoutStation(cad, billDeno, coinDeno, 50, 1);
 		pluCode = new PriceLookUpCode(num);
-		String desc = "A_Test_Item";
+		String desc = "Banana";
 		PLUCodedProduct pluProduct = new PLUCodedProduct(pluCode, desc, BigDecimal.valueOf(2.99));
 		ProductDatabases.PLU_PRODUCT_DATABASE.put(pluCode, pluProduct);
 	}
