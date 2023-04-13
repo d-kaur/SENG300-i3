@@ -16,7 +16,10 @@ package com.autovend.software.test;
 
 
 import static org.junit.Assert.*;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Currency;
 
 import com.autovend.ReusableBag;
 import com.autovend.devices.*;
@@ -26,7 +29,6 @@ import com.autovend.software.*;
 public class AddOrRemoveBagsTest {
     AddOrRemoveBags addBags;
     SelfCheckoutStation scs;
-    PurchasedItems purchased;
     ArrayList<ReusableBag> listOfStoreBags = new ArrayList<ReusableBag>();
 
     ReusableBag bag = new ReusableBag();
@@ -42,19 +44,28 @@ public class AddOrRemoveBagsTest {
             bags[i] = new ReusableBag();
         }
         dispenser.load(bags);
-        addBags = new AddOrRemoveBags(scs,purchased);
+        addBags = new AddOrRemoveBags(scs);
+        Currency cad = Currency.getInstance("CAD");
+		int [] billDeno = {1,5,10,20,50};
+		BigDecimal [] coinDeno = {
+				BigDecimal.valueOf(0.01),
+				BigDecimal.valueOf(0.05),
+				BigDecimal.valueOf(0.10),
+				BigDecimal.valueOf(0.25),
+		};
+		scs = new SelfCheckoutStation(cad, billDeno, coinDeno, 50, 1);
     }
     @After
     public void tearDown() {
         addBags = null;
-        purchased.reset();
+        PurchasedItems.reset();
     }
     //tests if the class is constructed correctly
     @Test
     public void AddOrRemoveBagsConstructorTest() {
         boolean flag;
         try {
-            AddOrRemoveBags testConstructor = new AddOrRemoveBags(scs,purchased);
+            AddOrRemoveBags testConstructor = new AddOrRemoveBags(scs);
             flag = true;
         }
         catch (Exception e) {
@@ -66,7 +77,7 @@ public class AddOrRemoveBagsTest {
     @Test
     public void PurchaseFewBag() throws EmptyException {
         addBags.purchaseBag(5);
-        assertEquals(5, purchased.getBagcount());
+        assertEquals(5, PurchasedItems.getBagcount());
     }
 
     @Test
