@@ -20,11 +20,12 @@ import com.autovend.products.PLUCodedProduct;
 import com.autovend.products.Product;
 
 /**
- * @author wasay
+ * @author w
  *
  */
 public class AddItemBrowseGUI extends AddItemGUI{
 	
+	private static final long serialVersionUID = 1L;
 	private JButton addButton;
 
 	public AddItemBrowseGUI(CustomerIO parent, SelfCheckoutStation scs)
@@ -49,29 +50,38 @@ public class AddItemBrowseGUI extends AddItemGUI{
 	
 		addButton = new JButton("Add");
 		addButton.addActionListener(new ActionListener() {
+			
 		public void actionPerformed(ActionEvent e){
 			//parent.displayMainScreen();
 			String name = (String) comboBox.getSelectedItem();
 			
-			ArrayList <Barcode> codes = (ArrayList<Barcode>) ProductDatabases.BARCODED_PRODUCT_DATABASE.keySet();
-			BarcodedProduct foundBarcode = null;
-			for (int i=0; i<codes.size(); i++) {
-				BarcodedProduct temp = ProductDatabases.BARCODED_PRODUCT_DATABASE.get(codes.get(i));
-				if(temp.getDescription().equals(name)) {
-					foundBarcode = temp;
-				}
-			}
+			ArrayList <Barcode> barcodes = new ArrayList<Barcode>(); 
+			barcodes.addAll(ProductDatabases.BARCODED_PRODUCT_DATABASE.keySet());
 			
-			ArrayList <PriceLookUpCode> PLUcodes = (ArrayList<PriceLookUpCode>) ProductDatabases.PLU_PRODUCT_DATABASE.keySet();
+			ArrayList <PriceLookUpCode> PLUcodes = new ArrayList<PriceLookUpCode>(); 
+			PLUcodes.addAll(ProductDatabases.PLU_PRODUCT_DATABASE.keySet());
+
+			BarcodedProduct foundBarcode = null;
 			PLUCodedProduct foundPLU = null;
-			if(!name.isBlank()) {
-				for (int i=0; i<codes.size(); i++) {
-					PLUCodedProduct temp = ProductDatabases.PLU_PRODUCT_DATABASE.get(codes.get(i));
+			
+			if(!(name.isEmpty())) {
+				
+				for (int i=0; i<barcodes.size(); i++) {
+					BarcodedProduct temp = ProductDatabases.BARCODED_PRODUCT_DATABASE.get(barcodes.get(i));
 					if(temp.getDescription().equals(name)) {
-						foundPLU = temp;
-	
+						foundBarcode = temp;
 					}
 				}
+			
+				for (int i=0; i<PLUcodes.size(); i++) {
+					PLUCodedProduct temp = ProductDatabases.PLU_PRODUCT_DATABASE.get(PLUcodes.get(i));
+
+					if(temp.getDescription().equals(name)) {
+						foundPLU = temp;
+
+					}
+				}
+				
 			}
 			if(foundBarcode != null && foundPLU == null)
 				PurchasedItems.addProduct(foundBarcode);
