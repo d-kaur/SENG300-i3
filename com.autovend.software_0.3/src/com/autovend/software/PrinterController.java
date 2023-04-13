@@ -32,22 +32,20 @@ public class PrinterController {
     int inkUsed;
     int paperUsed;
     boolean canPrint;
-    private PurchasedItems itemsBought;
 
 
-    public PrinterController(SelfCheckoutStation station, PurchasedItems list) {
+    public PrinterController(SelfCheckoutStation station) {
         printer = station.printer;
         rpo = new ReceiptPrinterObserverStub();
         inkAdded = 0;
         paperAdded = 0;
         inkUsed = 0;
         paperUsed = 0;
-        itemsBought = list;
     }
 
 
     public void printReceipt() throws OverloadException, InsufficientResourcesException {
-        ArrayList<Product> items = itemsBought.getListOfProducts();
+        ArrayList<Product> items = PurchasedItems.getListOfProducts();
 
         // Give the receipt a title
         String receiptTitle = String.format("%23s\n", "-----RECEIPT-----") + String.format("%-9s %20s\n", "ITEMS", "PRICE");
@@ -68,8 +66,8 @@ public class PrinterController {
         }
 
         // End of the receipt, includes the total and change
-        String receiptChangeAndTotal = String.format("\n%-10s %18s$\n", "TOTAL:", itemsBought.getTotalPrice().toString()) +
-                String.format("%-10s %17s$", "Change Due:", itemsBought.getChange().toString());
+        String receiptChangeAndTotal = String.format("\n%-10s %18s$\n", "TOTAL:", PurchasedItems.getTotalPrice().toString()) +
+                String.format("%-10s %17s$", "Change Due:", PurchasedItems.getChange().toString());
 
         StringBuilder finalReceipt = new StringBuilder();
         finalReceipt.append(receiptTitle).append(receiptItems).append(receiptChangeAndTotal);
