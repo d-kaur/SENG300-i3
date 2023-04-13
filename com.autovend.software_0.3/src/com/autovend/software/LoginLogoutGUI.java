@@ -56,6 +56,8 @@ import javax.swing.*;
 				public void actionPerformed(ActionEvent e) {
 					if (LoginLogout.verifyLogin(new String(usernameField.getText()), new String(passwordField.getPassword()))) {
 						attendantIO.displayMainScreen();
+						usernameField.setText("");
+						passwordField.setText("");
 					} else {
 						errorButton.setVisible(true);
 					}
