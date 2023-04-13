@@ -14,6 +14,7 @@
  */
 
 package com.autovend.software.test;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -51,7 +52,7 @@ import com.autovend.software.WeightDiscrepancy;
 //Test the WeightDiscrepency class
 public class WeightDiscrepancyTest {
 
-    //Initialization of systems
+    // Initialization of systems
     private SelfCheckoutStation station;
     private BarcodedProduct product;
     private BarcodedUnit item1;
@@ -61,13 +62,13 @@ public class WeightDiscrepancyTest {
     @Before
     public void setup() {
         // Setup and create station
-        int[] billDenominations = {5, 10 , 15, 20, 50, 100};
+        int[] billDenominations = { 5, 10, 15, 20, 50, 100 };
         BigDecimal fiveCent = new BigDecimal("0.05");
         BigDecimal tenCent = new BigDecimal("0.10");
         BigDecimal twentyFiveCent = new BigDecimal("0.25");
         BigDecimal loonie = new BigDecimal("1");
         BigDecimal toonie = new BigDecimal("2");
-        BigDecimal[] coinDenominations = {fiveCent, tenCent, twentyFiveCent, loonie, toonie};
+        BigDecimal[] coinDenominations = { fiveCent, tenCent, twentyFiveCent, loonie, toonie };
         int scaleMaximumWeight = 50;
         int scaleSensitivity = 10;
         station = new SelfCheckoutStation(Currency.getInstance("CAD"),
@@ -76,21 +77,21 @@ public class WeightDiscrepancyTest {
         Barcode productBarcode = new Barcode(Numeral.zero, Numeral.one, Numeral.three, Numeral.five, Numeral.zero);
         // Create products
         product = new BarcodedProduct(productBarcode, "product name", new BigDecimal("9.99"), 40);
-        item1 = new BarcodedUnit(productBarcode,40);
-        item2 = new BarcodedUnit(productBarcode,20);
+        item1 = new BarcodedUnit(productBarcode, 40);
+        item2 = new BarcodedUnit(productBarcode, 20);
         itemsBought = new PurchasedItems();
     }
 
     @After
     public void teardown() {
-        //reset all the systems
+        // reset all the systems
         station = null;
         product = null;
         item1 = null;
         item2 = null;
     }
 
-    //Tests a weight change when the expected weight matches the actual weight
+    // Tests a weight change when the expected weight matches the actual weight
     @Test
     public void validWeightDiscrepancyTest() {
         WeightDiscrepancy discrepancy = new WeightDiscrepancy(station, itemsBought);
@@ -100,7 +101,8 @@ public class WeightDiscrepancyTest {
         assertFalse(station.mainScanner.isDisabled());
     }
 
-    //Tests a weight change when the expected weight does not match the actual weight
+    // Tests a weight change when the expected weight does not match the actual
+    // weight
     @Test
     public void invalidWeightDiscrepencyTest() {
         WeightDiscrepancy discrepancy = new WeightDiscrepancy(station, itemsBought);
@@ -111,20 +113,32 @@ public class WeightDiscrepancyTest {
     }
 
     @Test
-    public void dummyReactToEnabledEvent(){
+    public void dummyReactToEnabledEvent() {
         WeightDiscrepancy discrepancy = new WeightDiscrepancy(station, itemsBought);
         discrepancy.reactToEnabledEvent(null);
     }
 
     @Test
-    public void dummyReactToDisabledEvent(){
+    public void dummyReactToDisabledEvent() {
         WeightDiscrepancy discrepancy = new WeightDiscrepancy(station, itemsBought);
         discrepancy.reactToDisabledEvent(null);
     }
 
-    //Tests the state (enabled/disabled) of the scanners in overload and outofoverload events
+    // Tests the state (enabled/disabled) of the scanners in overload and
+    // outofoverload events
     @Test
-    public void reactToOverloadEventTest(){
+    public void reactToOverloadEventTest() {
+        WeightDiscrepancy discrepancy = new WeightDiscrepancy(station, itemsBought);
+        itemsBought.addProduct(product);
+        itemsBought.addProduct(product);
+        station.baggingArea.add(item1);
+        station.baggingArea.add(item2);
+        assertTrue(station.handheldScanner.isDisabled());
+        assertTrue(station.mainScanner.isDisabled());
+    }
+
+    @Test
+    public void reactToOutOfOverloadEventTest() {
         WeightDiscrepancy discrepancy = new WeightDiscrepancy(station, itemsBought);
         itemsBought.addProduct(product);
         itemsBought.addProduct(product);
@@ -136,6 +150,7 @@ public class WeightDiscrepancyTest {
         station.baggingArea.remove(item1);
         assertFalse(station.handheldScanner.isDisabled());
         assertFalse(station.mainScanner.isDisabled());
+
     }
 
 }
